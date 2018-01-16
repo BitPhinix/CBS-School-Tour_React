@@ -1,0 +1,63 @@
+.autoCompleteContainer {
+    list-style: none;
+    padding: 0;
+    cursor: pointer;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.autoCompleteContainer::-webkit-scrollbar-track
+{
+    visibility: hidden;
+}
+
+.autoCompleteContainer::-webkit-scrollbar
+{
+    width: 8px;
+    background-color: transparent;
+}
+
+.autoCompleteContainer::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    background-color: gray;
+}
+.autoCompleteContainerItem  {
+    display: inline-block;
+    width: 100%;
+    padding-top: 4px;
+    border-bottom: 1px solid lightgray;
+}
+
+.autoCompleteContainerItem:hover  {
+    background-color: lightgray;
+}
+
+.autoCompleteContainerItem:last-child {
+    border-bottom: none;
+}
+
+.autoCompleteContainerItem span {
+    vertical-align: top;
+    line-height: 35px;
+    margin: 0 10px 0 10px !important;
+    font-size: 25px !important;
+}
+
+.autoCompleteContainerItem div {
+    display: inline-block;
+    margin: 0 20px 0 0;
+    color: gray;
+}
+
+.autoCompleteContainerItem p {
+    margin: 0;
+}
+
+.autoCompleteContainerItem small {
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: top;
+    line-height: 10px;
+}

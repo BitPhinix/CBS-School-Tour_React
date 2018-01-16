@@ -1,0 +1,9 @@
+.navigationSelector {
+    height: 150px;
+    background-color: dodgerblue;
+}
+
+.navigationSelector input {
+    width: calc(100% - 20px);
+    padding: 10px;
+}

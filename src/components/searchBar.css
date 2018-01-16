@@ -1,0 +1,42 @@
+.searchBar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 400px;
+    width: calc(100vw - 20px);
+}
+
+.searchBar div.inputContainer {
+    height: 100%;
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+.searchBar div.iconContainer {
+    width: 70px;
+    float: right;
+    height: 100%;
+}
+
+.searchBar input{
+    outline: none;
+    border: none;
+    line-height: 30px;
+    padding-left: 10px;
+    width: calc(100% - 70px);
+}
+
+.searchBar span {
+    font-size: 28px;
+    padding: 1px 5px 0 5px;
+    color: gray;
+    cursor: pointer;
+}
+
+.searchBar span.navigationIcon {
+    color: dodgerblue;
+}
+
+.searchBar ul.autoCompleteContainer {
+    max-height: 50vh;
+}

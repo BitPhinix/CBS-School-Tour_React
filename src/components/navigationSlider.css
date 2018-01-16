@@ -1,0 +1,32 @@
+.navigationSlider {
+    position: fixed;
+    top: 0;
+    min-width: 270px;
+    max-width: 500px;
+    width: 50vw;
+    height: 100vh;
+    background-color: white;
+    overflow: hidden;
+    transition: transform 0.2s ease-in;
+}
+
+.navigationSlider.visible {
+    transform: translate(0vw, 0);
+}
+
+.navigationSlider.closed {
+    transform: translate(-200vw, 0);
+}
+
+.navigationSlider div.closeContainer {
+    background-color: dodgerblue;
+    height: 40px;
+}
+
+.navigationSlider div.closeContainer span {
+    color: white;
+    float: right;
+    padding: 5px;
+    font-size: 30px;
+    cursor: pointer;
+}
