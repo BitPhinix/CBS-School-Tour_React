@@ -20,34 +20,45 @@ class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (ro
     update(text: string) {
         const items = [];
 
+        //For each autoComplete result
         for (let room of NavigationHelper.getResults(text)) {
+
+            //Create new container item and add it to the result array
             items.push(new AutoCompleteContainerItem({
                 room: room,
                 onClick: this.onRecommendationClick
             }));
         }
 
+        //Add items, set visible to false
         this.setState({
            items, visible: true
         });
     }
 
     setVisibility(visible: boolean) {
+        //Set state to visible
         this.setState({visible});
     }
 
     onRecommendationClick(room: ClassRoom) {
+        //if onRecommendationClick is defined
         if(this.props.onRecommendationClick)
+            //Call onRecommendationClick
             this.props.onRecommendationClick(room.number);
     }
 
     render() {
         let renderedItems;
 
-        if(this.state.visible)
+        //If container is visible
+        if(this.state.visible) {
+            //For each element map rendered element
             renderedItems = this.state.items.map(function (element) {
+                //Render element
                 return element.render();
             });
+        }
 
         return(
             <ul className="autoCompleteContainer" style={Style}>
@@ -57,13 +68,12 @@ class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (ro
     }
 }
 
-class AutoCompleteContainerItem extends React.Component<{
-    room: ClassRoom,
-    onClick?: (roomNumber: ClassRoom) => any,
-}, {}> {
+class AutoCompleteContainerItem extends React.Component<{room: ClassRoom, onClick?: (roomNumber: ClassRoom) => any}, {}> {
 
     onClick() {
+        //If onClick is defined
         if(this.props.onClick)
+            //Call onClick
             this.props.onClick(this.props.room);
     }
 

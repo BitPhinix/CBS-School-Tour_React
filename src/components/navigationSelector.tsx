@@ -1,11 +1,9 @@
 import * as React from "react";
 import "./autoCompleteContainer.css";
 import navigationHelper from "../utils/navigationHelper";
-import {ClassRoom} from "../typings";
 import * as FontAwesome from "react-fontawesome";
 import AutoCompleteContainer from "./autoCompleteContainer";
-import {Simulate} from "react-dom/test-utils";
-import input = Simulate.input;
+import * as Toastr from "toastr";
 const Style = require("./navigationSelector.css");
 
 class NavigationSelector extends React.Component<{start?: string, destination?: string}, {}> {
@@ -63,20 +61,18 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     }
 
     tryNavigate(showErrors: boolean) {
-
         //Try to get start and destination room
         const start = navigationHelper.getRoom(this.startInput.value);
         const destination = navigationHelper.getRoom(this.destinationInput.value);
 
         if(!start && showErrors)
-            //TODO Toastr
-            return;
-        else if(!destination && showErrors)
-            //TODO Toastr
-            return;
-        else
+            Toastr.error("Start wurde nicht gefunden oder ist nicht eindeutig!");
+        if(!destination && showErrors)
+            Toastr.error("Ziel wurde nicht gefunden oder ist nicht eindeutig!");
+
+        if(destination && start)
             //TODO Navigate
-            return
+            return;
     }
 
     render() {

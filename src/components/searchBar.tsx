@@ -1,35 +1,48 @@
 import * as React from "react";
 import * as FontAwesome from "react-fontawesome";
 import AutoCompleteContainer from "./autoCompleteContainer";
-import navigationStore from "../stores/navigationStore";
+import * as Toastr from "toastr";
 import * as SliderActions from "../actions/sliderActions";
-import {ClassRoom} from "../typings";
+import navigationHelper from "../utils/navigationHelper";
 const Style = require("./searchBar.css");
 
 class SearchBar extends React.Component<{}, {value: string}> {
-
     input;
     container;
 
     constructor(props) {
         super(props);
-        document.addEventListener("click", () => this.hideContainer());
-    }
 
-    componentDidMount() {
-
-    }
-
-    showContainer() {
-        this.container.setVisibility(true);
-    }
-
-    hideContainer() {
-        this.container.setVisibility(false);
+        //Hide container on window click
+        window.addEventListener("click", () => this.container.setVisibility(false));
     }
 
     onRecommendationClick(number: number) {
+        //Update input value
         this.input.value = "Raum " + number;
+
+        //Zoom to recommendation
+        this.zoomToTarget();
+    }
+
+    onKeyDown(event) {
+        //If key is enter
+        if(event.keyCode === 13)
+            //Zoom to target
+            this.zoomToTarget();
+    }
+
+    zoomToTarget() {
+        //Try to get target
+        const target = navigationHelper.getRoom(this.input.value);
+
+        //If no target was found
+        if(!target)
+            //Alert
+            Toastr.error("Ort konnte nicht gefunden werden oder ist nicht eindeutig!");
+        else
+            //TODO zoom to target
+            return;
     }
 
     render() {
@@ -39,26 +52,21 @@ class SearchBar extends React.Component<{}, {value: string}> {
                     <input type="text"
                            placeholder="In CBS Mannheim suchen"
 
-                           //Show container when clicked
-                           onClick={(event) => {event.stopPropagation(); this.showContainer()}}
-
-                           //Update container on input
+                           //Stop event propagation, Show container when clicked
+                           onClick={(event) => {event.stopPropagation(); this.container.setVisibility(true)}}
                            onInput={() => this.container.update(this.input.value)}
-
-                           //Add ref to input
+                           onKeyDown={(event) => this.onKeyDown(event)}
                            ref={(input) => this.input = input}/>
                     <div className="iconContainer">
-                        <FontAwesome className="searchIcon" name="search"/>
+                        <FontAwesome className="searchIcon" name="search"
+                            onClick={() => this.zoomToTarget()}/>
                         <FontAwesome className="navigationIcon" name="location-arrow"
-                                     //Show navigation slider
-                                     onClick={() => SliderActions.showNavigation()}/>
+                            //Show navigation slider
+                            onClick={() => SliderActions.showNavigation()}/>
                     </div>
                 </div>
                 <AutoCompleteContainer
-                    //Call onRecommendationClick on recommendation click ^^
                     onRecommendationClick={(number) => this.onRecommendationClick(number)}
-
-                    //Add ref to container
                     ref={(container) => this.container = container}/>
             </div>
         );

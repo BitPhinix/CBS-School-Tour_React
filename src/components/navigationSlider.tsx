@@ -8,23 +8,32 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, components
 
     constructor(props) {
         super(props);
+
+        //Hook up change event
         sliderStore.on("change", () => this.updateState());
+
+        //Default state
         this.state = {visible: false, components: []};
     }
 
     componentDidMount() {
+        //Load state from store
         this.state = sliderStore.state;
     }
 
     updateState() {
+        //Update state from store
         this.setState(sliderStore.state);
     }
 
     render() {
+        //For each component map rendered one
         const renderedComponents = this.state.components.map(function (element) {
+            //Render element
             return element.render();
         });
 
+        //Get className for visible / invisible
         const visible = this.state.visible ? "visible" : "closed";
 
         return(

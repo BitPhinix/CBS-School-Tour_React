@@ -13,10 +13,6 @@ class App extends React.Component<{}, {}> {
         super(props);
     }
 
-    update() {
-        this.container.update("l");
-    }
-
     render() {
         return(
             <div className="App" style={Style}>
