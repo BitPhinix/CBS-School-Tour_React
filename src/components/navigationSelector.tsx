@@ -1,9 +1,8 @@
 import * as React from "react";
 import "./autoCompleteContainer.css";
-import NavigationHelper from "../utils/navigationHelper";
+import navigationHelper from "../utils/navigationHelper";
 import {ClassRoom} from "../typings";
 import * as FontAwesome from "react-fontawesome";
-import navigationStore from "../stores/navigationStore";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import {Simulate} from "react-dom/test-utils";
 import input = Simulate.input;
@@ -54,6 +53,32 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
         this.container.update(this.activeElement.value);
     }
 
+    onKeyDown(event) {
+        //If key isn´t Enter
+        if(event.keyCode != 13)
+            return;
+
+        //Try to navigate
+        this.tryNavigate(true);
+    }
+
+    tryNavigate(showErrors: boolean) {
+
+        //Try to get start and destination room
+        const start = navigationHelper.getRoom(this.startInput.value);
+        const destination = navigationHelper.getRoom(this.destinationInput.value);
+
+        if(!start && showErrors)
+            //TODO Toastr
+            return;
+        else if(!destination && showErrors)
+            //TODO Toastr
+            return;
+        else
+            //TODO Navigate
+            return
+    }
+
     render() {
         return(
             <div className="navigationSelector" style={Style}>
@@ -63,12 +88,14 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                         onSelect={(event) => this.onInputSelect(event)}
                         placeholder="Start"
                         onInput={() => this.updateContainer()}
+                        onKeyDown={(event) => this.onKeyDown(event)}
                         ref={(input) => this.startInput = input}/>
                     <input
                         className="destinationInput"
                         onSelect={(event) => this.onInputSelect(event)}
                         placeholder="Ziel"
                         onInput={() => this.updateContainer()}
+                        onKeyDown={(event) => this.onKeyDown(event)}
                         ref={(input) => this.destinationInput = input}/>
                 </div>
                 <div className="iconContainer">
