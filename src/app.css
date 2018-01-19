@@ -3,4 +3,9 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: dodgerblue;
+    z-index: 2;
+}
+
+* {
+    z-index: 2;
 }

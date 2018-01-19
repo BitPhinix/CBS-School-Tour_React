@@ -1,0 +1,10 @@
+.mapContainer {
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: red;
+}
+
+.map [role=toolbar], .map [role=navigation] {
+    display: none !important;
+}
