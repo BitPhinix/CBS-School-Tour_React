@@ -16,16 +16,12 @@
     "@types/react-bootstrap": "^0.31.9",
     "@types/react-dom": "^16.0.3",
     "@types/react-fontawesome": "^1.6.1",
-    "@types/react-svg-pan-zoom": "^2.5.4",
-    "@types/react-virtualized": "^9.7.10",
     "@types/toastr": "^2.1.35",
     "flux": "^3.1.3",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
     "react-fontawesome": "^1.6.1",
-    "react-svg-pan-zoom": "^2.14.1",
-    "react-virtualized": "^9.17.3",
     "toastr": "^2.1.4"
   },
   "devDependencies": {

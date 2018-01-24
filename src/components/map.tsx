@@ -1,27 +1,26 @@
-import * as React from "react"
-import {AutoSizer} from 'react-virtualized';
-import {ReactSVGPanZoom, TOOL_PAN} from "react-svg-pan-zoom";
+import * as React from "react";
 import SvgLoader from "./svgLoader";
 const Style = require("./map.css");
 
-class Map extends React.Component<{}, {}> {
-    /*render() {
-        return(
-            <div style={Style} className="mapContainer">
-                <AutoSizer>
-                    {(({width, height}) => width === 0 || height === 0 ? null : (
-                        <ReactSVGPanZoom
-                            className="map"
-                            width={width}
-                            height={height}
-                            tool={TOOL_PAN}>
+class Map extends React.Component<{onSvgLoaded?: () => any}, {filePath: string}> {
 
-                        </ReactSVGPanZoom>
-                    ))}
-                </AutoSizer>
-            </div>
-        );
-    }*/
+
+    constructor(props) {
+        super(props);
+
+        //Default state
+        this.state = {filePath: ""};
+    }
+
+    componentDidMount() {
+        //Load default svg
+        this.load("./svg/1.svg");
+    }
+
+    load(path: string) {
+        //Set filePath
+        this.setState({filePath: path});
+    }
 
     render() {
         return (
