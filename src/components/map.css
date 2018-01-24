@@ -2,7 +2,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 1;
-    background-color: red;
+    background-color: ghostwhite;
 }
 
 .map [role=toolbar], .map [role=navigation] {

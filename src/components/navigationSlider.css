@@ -19,10 +19,13 @@
 }
 
 .navigationSlider div.closeContainer {
-    background-color: dodgerblue;
+    background-color: #4897ff;
     height: 40px;
 }
 
+/*
+    cross top right
+*/
 .navigationSlider div.closeContainer span {
     color: white;
     float: right;
