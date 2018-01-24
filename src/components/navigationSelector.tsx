@@ -78,21 +78,34 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     render() {
         return(
             <div className="navigationSelector" style={Style}>
-                <div className="inputContainer">
-                    <input
-                        className="startInput"
-                        onSelect={(event) => this.onInputSelect(event)}
-                        placeholder="Start"
-                        onInput={() => this.updateContainer()}
-                        onKeyDown={(event) => this.onKeyDown(event)}
-                        ref={(input) => this.startInput = input}/>
-                    <input
-                        className="destinationInput"
-                        onSelect={(event) => this.onInputSelect(event)}
-                        placeholder="Ziel"
-                        onInput={() => this.updateContainer()}
-                        onKeyDown={(event) => this.onKeyDown(event)}
-                        ref={(input) => this.destinationInput = input}/>
+                <div className="inputContainer container">
+                    <form className="col-sm">
+                        <div className="group">
+                            <input
+                            className="startInput"
+                            onSelect={(event) => this.onInputSelect(event)}
+                            onInput={() => this.updateContainer()}
+                            onKeyDown={(event) => this.onKeyDown(event)}
+                            ref={(input) => this.startInput = input}
+                            type="text" required/>
+
+                            <span className="highlight"></span>
+                            <span className="bar"></span>
+                            <label>Start</label>
+                        </div>
+                        <div className="group">
+                            <input
+                                className="destinationInput"
+                                onSelect={(event) => this.onInputSelect(event)}
+                                onInput={() => this.updateContainer()}
+                                onKeyDown={(event) => this.onKeyDown(event)}
+                                ref={(input) => this.destinationInput = input}
+                                type="text" required/>
+                            <span className="highlight"></span>
+                            <span className="bar"></span>
+                            <label>Ziel</label>
+                        </div>
+                    </form>
                 </div>
                 <div className="iconContainer">
                     <FontAwesome name="exchange"/>

@@ -82,8 +82,8 @@ class AutoCompleteContainerItem extends React.Component<{room: ClassRoom, onClic
             <li key={this.props.room.number} className="autoCompleteContainerItem" onClick={() => this.onClick()} style={Style}>
                 <FontAwesome name="map-marker"/>
                 <div>
-                    <p>{"Raum " + this.props.room.number}</p>
-                    <small>{this.props.room.description}</small>
+                        <p>{"Raum " + this.props.room.number}</p>
+                        <small>{this.props.room.description}</small>
                 </div>
             </li>
         );
