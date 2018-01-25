@@ -4,6 +4,7 @@ import navigationHelper from "../utils/navigationHelper";
 import * as FontAwesome from "react-fontawesome";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
+import {Tooltip} from 'react-lightweight-tooltip';
 const Style = require("./navigationSelector.css");
 
 class NavigationSelector extends React.Component<{start?: string, destination?: string}, {}> {
@@ -76,9 +77,16 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     }
 
     render() {
+
         return(
             <div className="navigationSelector" style={Style}>
-                <div className="container">
+
+                    <div className="iconContainer leftContainer">
+                        <img className="beginingImg" src="./img/route/begining.PNG"/>
+                        <img className="dotImg" src="./img/route/dot.PNG"/>
+                        <img className="dotImg" src="./img/route/dot.PNG"/>
+                        <img className="destinationImg" src="./img/route/destination.PNG"/>
+                    </div>
 
                     <div className="inputContainer">
                         <div className="group">
@@ -108,11 +116,11 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                         </div>
                     </div>
 
-                    <div className="iconContainer">
-                        <img src="./svg/reverse.svg"/>
+
+                    <div className="iconContainer rightContainer">
+                        <img src="./img/reverse.PNG"/>
                     </div>
 
-                </div>
 
                 <AutoCompleteContainer
                     ref={(container) => this.container = container}

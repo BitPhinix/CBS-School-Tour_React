@@ -10,14 +10,49 @@
 }
 
 .navigationSelector .iconContainer{
-
+    width: 65px;
+    height: inherit;
+    align-content: center;
+    align-items: center;
+    vertical-align: center;
 }
 
-#reverseIcon{
+.navigationSelector .rightContainer{
+    float: right
+}
+
+.navigationSelector .rightContainer img{
+    margin-top: 95%;
+    margin-left: 15%;
+    height: 30%;
+    width: 60%;
+
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.navigationSelector .rightContainer img:hover{
+    -webkit-filter: brightness(130%);
+    filter: brightness(130%);
+}
+
+.navigationSelector .leftContainer{
+    float: left;
+}
+
+.navigationSelector .leftContainer img{
+    float:none;
+    width: 30%;
+}
+
+.navigationSelector .leftContainer .dotImg{
+    width: 10%;
 }
 
 .navigationSelector .inputContainer {
-
+    float: left;
+    width: calc(100% - 130px);
+    height: inherit;
 }
 
 .navigationSelector * {
@@ -168,4 +203,6 @@
     -moz-animation: inputHighlighter 0.3s ease;
     animation: inputHighlighter 0.3s ease;
 }
+
+
 
