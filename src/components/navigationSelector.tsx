@@ -78,8 +78,9 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     render() {
         return(
             <div className="navigationSelector" style={Style}>
-                <div className="inputContainer container">
-                    <form className="col-sm">
+                <div className="container">
+
+                    <div className="inputContainer">
                         <div className="group">
                             <input
                             className="startInput"
@@ -105,11 +106,14 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                             <span className="bar"></span>
                             <label>Ziel</label>
                         </div>
-                    </form>
+                    </div>
+
+                    <div className="iconContainer">
+                        <img src="./svg/reverse.svg"/>
+                    </div>
+
                 </div>
-                <div className="iconContainer">
-                    <FontAwesome name="exchange"/>
-                </div>
+
                 <AutoCompleteContainer
                     ref={(container) => this.container = container}
                     onRecommendationClick={(number) => this.onRecommendationClick(number)}/>
