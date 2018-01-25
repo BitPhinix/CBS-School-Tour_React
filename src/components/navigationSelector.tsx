@@ -75,8 +75,10 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     }
 
     reverseLocation() {
+        var holder = this.startInput.value
+
         this.startInput.value = this.destinationInput.value;
-        this.destinationInput.value = this.startInput.value;
+        this.destinationInput.value = holder;
     }
 
     render() {
