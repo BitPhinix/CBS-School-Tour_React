@@ -76,16 +76,35 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
             return;
     }
 
+    reverseLocation() {
+
+        var begining = this.startInput.value
+
+        this.startInput.value = this.destinationInput.value;
+        this.destinationInput.value = begining;
+    }
+
     render() {
 
         return(
             <div className="navigationSelector" style={Style}>
 
                     <div className="iconContainer leftContainer">
-                        <img className="beginingImg" src="./img/route/begining.PNG"/>
-                        <img className="dotImg" src="./img/route/dot.PNG"/>
-                        <img className="dotImg" src="./img/route/dot.PNG"/>
-                        <img className="destinationImg" src="./img/route/destination.PNG"/>
+
+                        <img onClick={() => this.startInput.focus()} className="beginingImg" src="./svg/nav/begining.svg"/>
+
+                        <div className="dotContainer">
+                            <img className="dotImg" src="./svg/nav/dot.svg"/>
+                        </div>
+                        <div className="dotContainer">
+                            <img className="dotImg" src="./svg/nav/dot.svg"/>
+                        </div>
+                        <div className="dotContainer">
+                            <img className="dotImg" src="./svg/nav/dot.svg"/>
+                        </div>
+
+                        <img onClick={() => this.destinationInput.focus()} className="destinationImg" src="./svg/nav/destination.svg"/>
+
                     </div>
 
                     <div className="inputContainer">
@@ -118,7 +137,7 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
 
 
                     <div className="iconContainer rightContainer">
-                        <img src="./img/reverse.PNG"/>
+                        <img onClick={() => this.reverseLocation()} src="./svg/nav/reverse.svg"/>
                     </div>
 
 

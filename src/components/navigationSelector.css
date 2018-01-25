@@ -2,13 +2,17 @@
     width: 100%;
     height: 150px;
     background-color: #4897ff;
-
+    font-family: 'Roboto' !important
 }
 
 .navigationSelector .container {
     width: 100%;
 }
 
+
+/*
+    icons
+ */
 .navigationSelector .iconContainer{
     width: 65px;
     height: inherit;
@@ -22,33 +26,71 @@
 }
 
 .navigationSelector .rightContainer img{
-    margin-top: 95%;
-    margin-left: 15%;
-    height: 30%;
-    width: 60%;
+    margin-top: 107%;
+    margin-left: 25%;
+    height: 20%;
+    width: 40%;
+    cursor: pointer;
 
     -webkit-transition: all 0.1s ease;
     transition: all 0.1s ease;
 }
 
 .navigationSelector .rightContainer img:hover{
-    -webkit-filter: brightness(130%);
-    filter: brightness(130%);
+    -webkit-filter: brightness(110%);
+    filter: brightness(110%);
 }
 
 .navigationSelector .leftContainer{
     float: left;
 }
 
-.navigationSelector .leftContainer img{
-    float:none;
+.navigationSelector .leftContainer .beginingImg{
     width: 30%;
+    margin-left: 35%;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.navigationSelector .leftContainer .beginingImg:hover{
+    -webkit-filter: brightness(110%);
+    filter: brightness(110%);
+}
+
+.navigationSelector .leftContainer .destinationImg{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 8px;
+    cursor: pointer;
+
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.navigationSelector .leftContainer .destinationImg:hover{
+    -webkit-filter: brightness(110%);
+    filter: brightness(110%);
+}
+
+.navigationSelector .leftContainer .dotContainer{
+    margin-top: -5px;
+    margin-bottom: -5px;
 }
 
 .navigationSelector .leftContainer .dotImg{
-    width: 10%;
+    height: 7px;
+    margin-left: calc((100% - 7px) / 2);
 }
 
+
+
+/*
+    input
+ */
 .navigationSelector .inputContainer {
     float: left;
     width: calc(100% - 130px);
@@ -154,15 +196,20 @@
 
 
 /* active state */
-.navigationSelector input:focus ~ label, input:valid ~ label 		{
-    top: -20px;
+.navigationSelector input:focus ~ label, input:valid ~ label {
+    top: -11px;
     font-size: 14px;
     color: white;
 }
 
 /* BOTTOM BARS ================================= */
-.navigationSelector .bar 	{ position: relative; display: block; width: inherit; }
-.navigationSelector .bar:before, .bar:after 	{
+.navigationSelector .bar 	{
+    position: relative;
+    display: block;
+    width: inherit;
+}
+
+.navigationSelector .bar:before, .bar:after {
     content: '';
     height: 2px;
     width: 0;
