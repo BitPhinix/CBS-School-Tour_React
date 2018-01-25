@@ -1,13 +1,14 @@
 .navigationSlider {
     position: fixed;
     top: 0;
-    min-width: 270px;
-    max-width: 500px;
-    width: 50vw;
+    min-width: 200px;
+    max-width: 420px;
+    width: 100vw;
     height: 100vh;
     background-color: white;
     overflow: hidden;
     transition: transform 0.2s ease-in;
+
 }
 
 .navigationSlider.visible {
@@ -18,18 +19,29 @@
     transform: translate(-200vw, 0);
 }
 
-.navigationSlider div.closeContainer {
+.navigationSlider .closeContainer {
     background-color: #4897ff;
     height: 40px;
 }
 
-/*
-    cross top right
-*/
-.navigationSlider div.closeContainer span {
-    color: white;
+
+.navigationSlider .closeContainer .imageContainer{
+    height: 40px;
     float: right;
-    padding: 5px;
-    font-size: 30px;
+    margin-right: 10px;
+}
+
+.navigationSlider .closeContainer .imageContainer img {
+    width: 25px;
+    height: 25px;
+    margin-top: 10px;
     cursor: pointer;
+
+    -webkit-transition: all 0.1s ease;
+    transition: all 0.1s ease;
+}
+
+.navigationSlider .closeContainer .imageContainer img:hover{
+    -webkit-filter: brightness(110%);
+    filter: brightness(110%);
 }

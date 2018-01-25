@@ -26,6 +26,7 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, components
         this.setState(sliderStore.state);
     }
 
+
     render() {
         //For each component map rendered one
         const renderedComponents = this.state.components.map(function (element) {
@@ -39,7 +40,9 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, components
         return(
             <div className={"navigationSlider " + visible} style={Style}>
                 <div className="closeContainer">
-                    <FontAwesome name="times" onClick={() => SliderActions.hide()}/>
+                    <div className="imageContainer">
+                        <img src="./svg/nav/cross.svg" onClick={() => SliderActions.hide()}/>
+                    </div>
                 </div>
                 {renderedComponents}
             </div>
