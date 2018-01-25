@@ -1,10 +1,8 @@
 import * as React from "react";
 import "./autoCompleteContainer.css";
 import navigationHelper from "../utils/navigationHelper";
-import * as FontAwesome from "react-fontawesome";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
-import {Tooltip} from 'react-lightweight-tooltip';
 const Style = require("./navigationSelector.css");
 
 class NavigationSelector extends React.Component<{start?: string, destination?: string}, {}> {
@@ -77,20 +75,15 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     }
 
     reverseLocation() {
-
-        var begining = this.startInput.value
-
         this.startInput.value = this.destinationInput.value;
-        this.destinationInput.value = begining;
+        this.destinationInput.value = this.startInput.value;
     }
 
     render() {
 
         return(
             <div className="navigationSelector" style={Style}>
-
                     <div className="iconContainer leftContainer">
-
                         <img onClick={() => this.startInput.focus()} className="beginingImg" src="./svg/nav/begining.svg"/>
 
                         <div className="dotContainer">
@@ -104,21 +97,19 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                         </div>
 
                         <img onClick={() => this.destinationInput.focus()} className="destinationImg" src="./svg/nav/destination.svg"/>
-
                     </div>
 
                     <div className="inputContainer">
                         <div className="group">
                             <input
-                            className="startInput"
-                            onSelect={(event) => this.onInputSelect(event)}
-                            onInput={() => this.updateContainer()}
-                            onKeyDown={(event) => this.onKeyDown(event)}
-                            ref={(input) => this.startInput = input}
-                            type="text" required/>
-
-                            <span className="highlight"></span>
-                            <span className="bar"></span>
+                                className="startInput"
+                                onSelect={(event) => this.onInputSelect(event)}
+                                onInput={() => this.updateContainer()}
+                                onKeyDown={(event) => this.onKeyDown(event)}
+                                ref={(input) => this.startInput = input}
+                                type="text" required/>
+                            <span className="highlight"/>
+                            <span className="bar"/>
                             <label>Start</label>
                         </div>
                         <div className="group">
@@ -129,17 +120,15 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                                 onKeyDown={(event) => this.onKeyDown(event)}
                                 ref={(input) => this.destinationInput = input}
                                 type="text" required/>
-                            <span className="highlight"></span>
-                            <span className="bar"></span>
+                            <span className="highlight"/>
+                            <span className="bar"/>
                             <label>Ziel</label>
                         </div>
                     </div>
 
-
                     <div className="iconContainer rightContainer">
                         <img onClick={() => this.reverseLocation()} src="./svg/nav/reverse.svg"/>
                     </div>
-
 
                 <AutoCompleteContainer
                     ref={(container) => this.container = container}

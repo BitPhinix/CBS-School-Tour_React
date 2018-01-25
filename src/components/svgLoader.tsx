@@ -53,14 +53,19 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
 
     onWheel(event) {
         //Calculate new scale an constrain it to min 1 max 3
-        const newScale = Math.min(Math.max(this.state.scale + event.deltaY / 400, 1), 3);
+        const newScale = Math.min(Math.max(this.state.scale - event.deltaY / 400, 0.7), 2.5);
 
-        //TODO: FIXING !!!!!
-        const scaleDelta = this.state.scale - newScale;
-        this.moveSvg(this.svg.clientWidth / 2 * scaleDelta * this.state.scale, this.svg.clientHeight / 2 * scaleDelta * this.state.scale);
+        let deltaX = (this.svg.clientWidth / 2) * (1 - newScale) / 2 - (this.svg.clientWidth / 2) * (1 - this.state.scale) / 2;
+        let deltaY = (this.svg.clientHeight / 2) * (1 - newScale) / 2 - (this.svg.clientHeight / 2) * (1 - this.state.scale) / 2;
 
         //Update state
-        this.setState({scale: newScale});
+        this.setState({
+            scale: newScale,
+            translation: {
+                x: this.state.translation.x + deltaX,
+                y: this.state.translation.y + deltaY
+            }
+        });
     }
 
     onMouseMove(event) {
