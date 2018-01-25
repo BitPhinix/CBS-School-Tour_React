@@ -43,9 +43,24 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
         xmlRequest.send(null);
     }
 
+    moveSvg(deltaX: number, deltaY: number) {
+        //Update state
+        this.setState({translation: {
+                x: this.state.translation.x - deltaX,
+                y: this.state.translation.y - deltaY
+            }});
+    }
+
     onWheel(event) {
-        //Calculate zoom and update state
-        this.setState({scale: this.state.scale + event.deltaY / 400});
+        //Calculate new scale an constrain it to min 1 max 3
+        const newScale = Math.min(Math.max(this.state.scale + event.deltaY / 400, 1), 3);
+
+        //TODO: FIXING !!!!!
+        const scaleDelta = this.state.scale - newScale;
+        this.moveSvg(this.svg.clientWidth / 2 * scaleDelta * this.state.scale, this.svg.clientHeight / 2 * scaleDelta * this.state.scale);
+
+        //Update state
+        this.setState({scale: newScale});
     }
 
     onMouseMove(event) {
@@ -57,17 +72,12 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
         const deltaX = (this.lastMouseXPos - event.screenX) / this.state.scale;
         const deltaY = (this.lastMouseYPos - event.screenY) / this.state.scale;
 
-        //Update state
-        this.setState({translation: {
-                x: this.state.translation.x - deltaX,
-                y: this.state.translation.y - deltaY
-            }});
+        //Move SVG
+        this.moveSvg(deltaX, deltaY);
 
         //Set lastMouseXPos, lastMouseYPos for delta calculations
         this.lastMouseXPos = event.screenX;
         this.lastMouseYPos = event.screenY;
-
-        return false;
     }
 
     onMouseDown(event) {
