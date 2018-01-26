@@ -1,7 +1,13 @@
 import * as React from "react";
 
-class SvgLoader extends React.Component<{}, {inlineElements: string, scale: number, translation: {x: number, y: number}, rotation: number}> {
-
+class SvgLoader extends React.Component<{}, {
+    inlineElements: string,
+    scale: number,
+    translation: {x: number, y: number},
+    rotation: number,
+    overlay: SVGElement[]
+}>
+{
     svg;
     mousePressed: boolean;
     lastMouseXPos: number;
@@ -11,7 +17,7 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
         super(props);
 
         //Default state
-        this.state = {inlineElements: "", scale: 1, rotation: 0, translation: {x: 0, y: 0}};
+        this.state = {inlineElements: "", scale: 1, rotation: 0, translation: {x: 0, y: 0}, overlay: []};
 
         //Add event listener
         document.body.addEventListener("mouseup", () => this.mousePressed = false);
@@ -53,7 +59,7 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
 
     zoomToScreenPoint(x: number, y: number, scaleDelta: number) {
         //Calculate new scale an constrain it
-        const newScale = Math.min(Math.max(this.state.scale + scaleDelta, 0.7), 3);
+        const newScale = Math.min(Math.max(this.state.scale + scaleDelta, 0.7), 5);
 
         //This formula was 3h of work ^^
         let deltaX = (x / newScale) * (1 - newScale) - (x / this.state.scale) * (1 - this.state.scale);
@@ -70,8 +76,12 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
     }
 
     onWheel(event) {
-        //Zoom to screen center
-        this.zoomToScreenPoint(this.svg.clientWidth / 2, this.svg.clientHeight / 2, event.deltaY / 400);
+        //Calculate mouse position relative to element
+        const deltaX = event.pageX - this.svg.getBoundingClientRect().left;
+        const deltaY = event.pageY - this.svg.getBoundingClientRect().top;
+
+        //Zoom to mouse position
+        this.zoomToScreenPoint(deltaX, deltaY, event.deltaY / 400);
     }
 
     onMouseMove(event) {
@@ -111,7 +121,7 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
                     "rotate(" + this.state.rotation + ")"}>
 
                     //Overlay
-                    <g/>
+                    <g>{this.state.overlay}</g>
                     //Svg contents
                     <g dangerouslySetInnerHTML={{__html: this.state.inlineElements}}/>
                 </g>

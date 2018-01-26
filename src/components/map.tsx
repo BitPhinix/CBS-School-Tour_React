@@ -1,31 +1,15 @@
 import * as React from "react";
-import SvgLoader from "./svgLoader";
+import SvgRenderer from "./svgRenderer";
 const Style = require("./map.css");
 
-class Map extends React.Component<{onSvgLoaded?: () => any}, {filePath: string}> {
+class Map extends React.Component<{}, {}> {
 
-
-    constructor(props) {
-        super(props);
-
-        //Default state
-        this.state = {filePath: ""};
-    }
-
-    componentDidMount() {
-        //Load default svg
-        this.load("./svg/1.svg");
-    }
-
-    load(path: string) {
-        //Set filePath
-        this.setState({filePath: path});
-    }
+    svgRenderer;
 
     render() {
         return (
             <div style={Style} className="mapContainer">
-                <SvgLoader/>
+                <SvgRenderer ref={(svgRenderer) => this.svgRenderer = svgRenderer}/>
             </div>
         );
     }
