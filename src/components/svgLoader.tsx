@@ -51,14 +51,15 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
             }});
     }
 
-    onWheel(event) {
-        //Calculate new scale an constrain it to min 1 max 3
-        const newScale = Math.min(Math.max(this.state.scale - event.deltaY / 400, 0.7), 2.5);
+    zoomToScreenPoint(x: number, y: number, scaleDelta: number) {
+        //Calculate new scale an constrain it
+        const newScale = Math.min(Math.max(this.state.scale + scaleDelta, 0.7), 3);
 
-        let deltaX = (this.svg.clientWidth / 2) * (1 - newScale) / 2 - (this.svg.clientWidth / 2) * (1 - this.state.scale) / 2;
-        let deltaY = (this.svg.clientHeight / 2) * (1 - newScale) / 2 - (this.svg.clientHeight / 2) * (1 - this.state.scale) / 2;
+        //This formula was 3h of work ^^
+        let deltaX = (x / newScale) * (1 - newScale) - (x / this.state.scale) * (1 - this.state.scale);
+        let deltaY = (y / newScale) * (1 - newScale) - (y / this.state.scale) * (1 - this.state.scale);
 
-        //Update state
+        //Update state (Don´t use moveSvg so we only re-render once)
         this.setState({
             scale: newScale,
             translation: {
@@ -66,6 +67,11 @@ class SvgLoader extends React.Component<{}, {inlineElements: string, scale: numb
                 y: this.state.translation.y + deltaY
             }
         });
+    }
+
+    onWheel(event) {
+        //Zoom to screen center
+        this.zoomToScreenPoint(this.svg.clientWidth / 2, this.svg.clientHeight / 2, event.deltaY / 400);
     }
 
     onMouseMove(event) {

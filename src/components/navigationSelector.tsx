@@ -74,11 +74,14 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
             return;
     }
 
-    reverseLocation() {
-        var holder = this.startInput.value
-
+    onSwapClick() {
+        //Swap text of the inputs
+        const holder = this.startInput.value;
         this.startInput.value = this.destinationInput.value;
         this.destinationInput.value = holder;
+
+        //Focus activeElement (this will also update the container)
+        this.activeElement.focus();
     }
 
     render() {
@@ -129,7 +132,7 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                     </div>
 
                     <div className="iconContainer rightContainer">
-                        <img onClick={() => this.reverseLocation()} src="./svg/nav/reverse.svg"/>
+                        <img onClick={() => this.onSwapClick()} src="./svg/nav/reverse.svg"/>
                     </div>
 
                 <AutoCompleteContainer
