@@ -1,14 +1,13 @@
 .navigationSlider {
     position: fixed;
     top: 0;
-    min-width: 200px;
+    min-width: 215px;
     max-width: 420px;
     width: 100vw;
     height: 100vh;
     background-color: white;
     overflow: hidden;
     transition: transform 0.2s ease-in;
-
 }
 
 .navigationSlider.visible {
