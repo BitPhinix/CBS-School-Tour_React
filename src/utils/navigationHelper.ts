@@ -1,5 +1,4 @@
 import {ClassRoom} from "../typings";
-
 const NavigationData = require("../../navData/data.json");
 
 class NavigationHelper {

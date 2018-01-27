@@ -5,10 +5,7 @@ import {ClassRoom} from "../typings";
 class NavigationStore extends EventEmitter {
 
     state: {
-        navigating: boolean,
-        destination: number,
-        start: number,
-        zoomTarget: number
+
     };
 
     constructor() {
@@ -16,17 +13,11 @@ class NavigationStore extends EventEmitter {
     }
 
     navigate(start: number, destination: number) {
-        this.state.start = start;
-        this.state.destination = destination;
-        this.state.navigating = true;
-        this.emit("navigate");
-        this.emit("change");
+
     }
 
     zoomTo(number: number) {
-        this.state.zoomTarget = number;
-        this.emit("zoom");
-        this.emit("change");
+
     }
 
     handleActions(action) {

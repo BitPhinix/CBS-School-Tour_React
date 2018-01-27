@@ -1,11 +1,12 @@
 import * as React from "react";
+import {ReactElement} from "react";
 
 class SvgLoader extends React.Component<{}, {
     inlineElements: string,
     scale: number,
     translation: Point,
     rotation: number,
-    overlay: SVGElement[]
+    overlay: ReactElement<SVGElement>[]
 }>
 {
     svg;
@@ -26,6 +27,18 @@ class SvgLoader extends React.Component<{}, {
 
         //Prevent all multi-touch events
         window.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
+    }
+
+    clearOverlay() {
+        //Clear overlay
+        this.setState({
+            overlay: []
+        });
+    }
+
+    addOverlayElement(element: ReactElement<SVGElement>) {
+        //Add element to overlay
+        this.state.overlay.push(element);
     }
 
     static onWindowTouch(event){
@@ -176,10 +189,10 @@ class SvgLoader extends React.Component<{}, {
                     "translate(" + this.state.translation.x + "," + this.state.translation.y + ") " +
                     "rotate(" + this.state.rotation + ")"}>
 
-                    //Overlay
-                    <g>{this.state.overlay}</g>
                     //Svg contents
                     <g dangerouslySetInnerHTML={{__html: this.state.inlineElements}}/>
+                    //Overlay
+                    <g>{this.state.overlay}</g>
                 </g>
             </svg>
         );
