@@ -53,7 +53,7 @@ class SearchBar extends React.Component<{}, {value: string}> {
                            placeholder="In CBS Mannheim suchen"
 
                            //Stop event propagation, Show container when clicked
-                           onClick={(event) => {event.stopPropagation(); this.container.setVisibility(true)}}
+                           onClick={(event) => {event.stopPropagation(); this.container.update(this.input.value)}}
                            onInput={() => this.container.update(this.input.value)}
                            onKeyDown={(event) => this.onKeyDown(event)}
                            ref={(input) => this.input = input}/>

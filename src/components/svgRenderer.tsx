@@ -101,7 +101,10 @@ class SvgLoader extends React.Component<{}, {
         const deltaY = event.pageY - this.svg.getBoundingClientRect().top;
 
         //Zoom to mouse position
-        this.zoomToScreenPoint({x: deltaX, y: deltaY}, event.deltaY / 400);
+        this.zoomToScreenPoint({x: deltaX, y: deltaY}, -event.deltaY / 400);
+
+        //Prevent default (otherwise entire page would zoom in)
+        event.preventDefault();
     }
 
     onMouseMove(event) {
