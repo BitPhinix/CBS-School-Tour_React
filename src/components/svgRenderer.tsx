@@ -29,13 +29,6 @@ class SvgLoader extends React.Component<{}, {
         window.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
     }
 
-    clearOverlay() {
-        //Clear overlay
-        this.setState({
-            overlay: []
-        });
-    }
-
     addOverlayElement(element: ReactElement<SVGElement>) {
         //Add element to overlay
         this.state.overlay.push(element);
@@ -186,7 +179,7 @@ class SvgLoader extends React.Component<{}, {
                 onTouchEnd={(event) => this.updateTouchState(event)}>
                 <g transform={
                     "scale(" + this.state.scale + ") " +
-                    "translate(" + this.state.translation.x + "," + this.state.translation.y + ") " +
+                    "translate(" + this.state.translation.x + ", " + this.state.translation.y + ") " +
                     "rotate(" + this.state.rotation + ")"}>
 
                     //Svg contents

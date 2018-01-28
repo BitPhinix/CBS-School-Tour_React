@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as FontAwesome from "react-fontawesome";
 import * as SliderActions from "../actions/sliderActions";
 import sliderStore from "../stores/sliderStore";
 const Style = require("./navigationSlider.css");

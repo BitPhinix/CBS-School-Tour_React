@@ -1,5 +1,6 @@
 import * as React from "react";
 import SvgRenderer from "./svgRenderer";
+import * as SliderActions from "../actions/sliderActions";
 const Style = require("./map.css");
 
 class Map extends React.Component<{}, {}> {
@@ -10,13 +11,10 @@ class Map extends React.Component<{}, {}> {
         this.svgRenderer.addOverlayElement(<path d="M150 0 L75 200 L225 200 Z" />);
     }
 
-    drawPath() {
-
-    }
-
     render() {
         return (
-            <div style={Style} className="mapContainer">
+            <div style={Style} className="mapContainer"
+                onClick={() => SliderActions.hide()}>
                 <SvgRenderer ref={(svgRenderer) => this.svgRenderer = svgRenderer}/>
             </div>
         );
