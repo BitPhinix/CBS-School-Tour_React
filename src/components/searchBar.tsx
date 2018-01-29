@@ -3,7 +3,7 @@ import * as FontAwesome from "react-fontawesome";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
 import * as SliderActions from "../actions/sliderActions";
-import navigationHelper from "../utils/navigationHelper";
+import autoComplete from "../utils/autoComplete";
 const Style = require("./searchBar.css");
 
 class SearchBar extends React.Component<{}, {value: string}> {
@@ -34,7 +34,7 @@ class SearchBar extends React.Component<{}, {value: string}> {
 
     zoomToTarget() {
         //Try to get target
-        const target = navigationHelper.getRoom(this.input.value);
+        const target = autoComplete.getRoom(this.input.value);
 
         //If no target was found
         if(!target)

@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./autoCompleteContainer.css";
-import navigationHelper from "../utils/navigationHelper";
+import autoComplete from "../utils/autoComplete";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
 const Style = require("./navigationSelector.css");
@@ -61,8 +61,8 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
 
     tryNavigate(showErrors: boolean) {
         //Try to get start and destination room
-        const start = navigationHelper.getRoom(this.startInput.value);
-        const destination = navigationHelper.getRoom(this.destinationInput.value);
+        const start = autoComplete.getRoom(this.startInput.value);
+        const destination = autoComplete.getRoom(this.destinationInput.value);
 
         if(!start && showErrors)
             Toastr.error("Start wurde nicht gefunden oder ist nicht eindeutig!");

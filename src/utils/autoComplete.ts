@@ -80,6 +80,4 @@ class NavigationHelper {
     }
 }
 
-
-const navigationHelper = new NavigationHelper();
-export default navigationHelper;
+export default new NavigationHelper();

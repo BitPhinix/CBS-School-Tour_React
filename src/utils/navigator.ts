@@ -1,14 +1,96 @@
-import {ClassRoom, Floor} from "../typings";
+import {ClassRoom, Point} from "../typings";
 const NavigationData = require("../../navData/data.json");
 
 interface NavigationMap {
     [roomId: number]: {predecessorId: string, distance: number, processed: boolean}
 }
 
+interface NavigationResult {
+    [floorId: number]: {
+        path: number[]
+    }
+}
+
 class Navigator {
 
+    toPointArray(navigationResult: NavigationResult, floorId): Point[] {
+        return Object.keys(navigationResult[floorId]).map((roomKey) => {
+            //Yeah, I know it´s ugly :(
+            return NavigationData[floorId][navigationResult[floorId][roomKey]].location;
+        });
+    }
+    
+    navigateGlobal(start: ClassRoom, destination: ClassRoom): NavigationResult {
+        //Get the floors of the start, destination
+        const startFloor = Navigator.getFloorId(start.number);
+        const destinationFloor = Navigator.getFloorId(destination.number);
+
+        //Calculate the difference of floors
+        const floorDiv = Math.abs(startFloor - destinationFloor);
+
+        //Check if we have to go downwards
+        const downwards = startFloor < destinationFloor;
+
+        //Set the current pos to start
+        let currentPos = start;
+
+        const result = {};
+
+        //For each floor that
+        for (let i = 0; i < floorDiv; i++) {
+            //Calculate the current floor
+            let floor = startFloor + (downwards ? i : -i);
+
+            //Get the staircase we have to go to
+            let stairCase = this.findStaircase(currentPos.number, floor, (downwards ? 1 : -1));
+
+            //Navigate to the staircase and put it in the result array
+            result[floor] = this.navigateFloor(currentPos.number, stairCase.number, floor);
+
+            //Update currentPos to Staircase
+            currentPos = stairCase;
+        }
+
+        //Navigate from staircase to destination
+        result[destinationFloor] = this.navigateFloor(currentPos.number, destination.number, destinationFloor);
+
+        //Return result
+        return result;
+    }
+
+    private findStaircase (currentNodeId: number, floorId: number, leadTo: number): ClassRoom {
+        //Get the floor
+        const floor = NavigationData.floors[floorId];
+        
+        //Get all Staircases that lead to the desired floor (1, -1)
+        const stairCaseIds = Object.keys(floor).filter(function (roomId) {
+            return floor[roomId].leadTo == leadTo;
+        });
+
+        let result;
+        let lowestCost = 0;
+
+        //For each staircase in the viable Staircases
+        for (let stairCaseId of stairCaseIds) {
+            //Get the cost it takes to get there
+            let cost = Navigator.getPathLength(floor[stairCaseId], floor[currentNodeId]);
+
+            //Check if it is cheaper than the cheapest one checked or if result was not initialized
+            if(!result || cost < lowestCost) {
+                //Set the result to the current staircase
+                result = stairCaseId;
+
+                //Update lowest cost
+                lowestCost = cost;
+            }
+        }
+
+        //Return the result
+        return floor[result];
+    }
+
     //Big thanks to https://www.youtube.com/watch?v=GazC3A4OQTE&t=278s
-    navigateFloor(startId: number, destinationId: number, floorId: number) {
+    private navigateFloor(startId: number, destinationId: number, floorId: number): number[] {
         const navigationMap: NavigationMap = {};
         const floor = NavigationData.floors[floorId];
 
@@ -58,12 +140,25 @@ class Navigator {
         return path;
     }
 
-    getCheapestNode(nodeId: number, map: NavigationMap) {
+    private getCheapestNode(nodeId: number, map: NavigationMap) {
+
+        //Find cheapest node and return it
         return Object.keys(map).reduce((current, lowest) => {
+            //If lowest is undefined or our current element isn´t processed and das a lower distance
             if(!lowest || !map[current].processed && map[current].distance < map[lowest].distance)
+                //Set lowest to current
                 return current;
+
+            //Keep our current lowest
             return lowest;
+
+           //lowest is undefined at the beginning
         }, undefined);
+    }
+
+    static getFloorId(roomId: number) {
+        //Rooms from 0-99 are in the first floor, 100-199 in the second etc.
+        return Math.floor(roomId / 100);
     }
 
     static getPathLength(room1: ClassRoom, room2: ClassRoom) {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import "./autoCompleteContainer.css";
-import NavigationHelper from "../utils/navigationHelper";
+import autoComplete from "../utils/autoComplete";
 import {ClassRoom} from "../typings";
 import * as FontAwesome from "react-fontawesome";
 const Style = require("./autoCompleteContainer.css");
@@ -21,7 +21,7 @@ class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (ro
         const items = [];
 
         //For each autoComplete result
-        for (let room of NavigationHelper.getResults(text)) {
+        for (let room of autoComplete.getResults(text)) {
 
             //Create new container item and add it to the result array
             items.push(new AutoCompleteContainerItem({
