@@ -4,3 +4,8 @@
     z-index: 10000;
     background-color: ghostwhite;
 }
+
+.navLine {
+    stroke: rgb(255,0,0);
+    stroke-width: 10px;
+}
