@@ -81,7 +81,7 @@ class AutoCompleteContainerItem extends React.Component<{room: ClassRoom, onClic
         return(
             <li key={this.props.room.number} className="autoCompleteContainerItem" onClick={() => this.onClick()} style={Style}>
 
-                <img src="./svg/auto/poi.svg"/>
+                <img src="./svg/icon/poi.svg"/>
 
                 <div className="textContainer">
                     <p>{"Raum " + this.props.room.number}</p>
