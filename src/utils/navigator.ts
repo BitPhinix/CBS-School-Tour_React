@@ -16,10 +16,10 @@ class Navigator {
     toPointArray(navigationResult: NavigationResult, floorId): Point[] {
         return Object.keys(navigationResult[floorId]).map((roomKey) => {
             //Yeah, I know it´s ugly :(
-            return NavigationData[floorId][navigationResult[floorId][roomKey]].location;
+            return NavigationData.floors[floorId][navigationResult[floorId][roomKey]].location;
         });
     }
-    
+
     navigateGlobal(start: ClassRoom, destination: ClassRoom): NavigationResult {
         //Get the floors of the start, destination
         const startFloor = Navigator.getFloorId(start.number);
@@ -100,12 +100,12 @@ class Navigator {
             navigationMap[roomId] = {distance: Infinity, predecessorId: null, processed: false};
 
         //Set the distance from the start node to 0 (it takes us nothing to stand still ^^) and predecessorId to null since it has none
-        navigationMap[startId] = {processed: true, distance: 0, predecessorId: null};
+        navigationMap[startId] = {processed: false, distance: 0, predecessorId: null};
 
         let currentNodeId;
 
         //While there are unprocessed nodes, get cheapest
-        while(currentNodeId = this.getCheapestNode(startId, navigationMap)) {
+        while(currentNodeId = this.getCheapestNode(navigationMap)) {
 
             //For each connected node
             for (let connectedId of floor[currentNodeId].connectedTo) {
@@ -140,12 +140,12 @@ class Navigator {
         return path;
     }
 
-    private getCheapestNode(nodeId: number, map: NavigationMap) {
-
+    private getCheapestNode(map: NavigationMap) {
         //Find cheapest node and return it
-        return Object.keys(map).reduce((current, lowest) => {
-            //If lowest is undefined or our current element isn´t processed and das a lower distance
-            if(!lowest || !map[current].processed && map[current].distance < map[lowest].distance)
+        return Object.keys(map).reduce((lowest, current) => {
+
+            //Check if our current node has a lower distance and hasn't been processed yet
+            if((!lowest || map[current].distance < map[lowest].distance) && !map[current].processed)
                 //Set lowest to current
                 return current;
 

@@ -29,9 +29,18 @@ class SvgLoader extends React.Component<{}, {
         window.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
     }
 
-    addOverlayElement(element: ReactElement<SVGElement>) {
-        //Add element to overlay
-        this.state.overlay.push(element);
+    setOverlay(overlay: ReactElement<SVGElement>[]) {
+        //If overlay is undefined
+        if(!overlay)
+            //Set overlay to an empty array
+            this.setState({
+                overlay: []
+            });
+        else
+            //Set overlay to overlay
+            this.setState({
+                overlay
+            });
     }
 
     static onWindowTouch(event){
@@ -50,7 +59,7 @@ class SvgLoader extends React.Component<{}, {
         //Crate new XMLHttpRequest
         const xmlRequest = new XMLHttpRequest();
 
-        //THis function will be called when call is complete
+        //This function will be called when call is complete
         xmlRequest.onreadystatechange = () => {
 
             //Remove enclosing svg tags (just get content)

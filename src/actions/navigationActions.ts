@@ -1,7 +1,7 @@
 import dispatcher from "../dispatcher";
 import {ClassRoom} from "../typings";
 
-export function navigate(start: number, destination: number) {
+export function navigate(start: ClassRoom, destination: ClassRoom) {
     dispatcher.dispatch({
        type: "NAVIGATE",
        start,

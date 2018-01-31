@@ -1,19 +1,32 @@
 import {EventEmitter} from "events";
 import dispatcher from "../dispatcher";
+import navigator from "../utils/navigator";
 import {ClassRoom} from "../typings";
+import {ReactElement} from "react";
+import svgDraw from "../utils/svgDraw";
 
+//TODO: Rewrite
 class NavigationStore extends EventEmitter {
 
     state: {
-
+        overlay: ReactElement<SVGElement>[][],
+        currentFloor: number
     };
 
     constructor() {
         super();
+
+        //Default state
+        this.state = {overlay: [], currentFloor: 1};
     }
 
-    navigate(start: number, destination: number) {
+    navigate(start: ClassRoom, destination: ClassRoom) {
+        const paths = navigator.navigateGlobal(start, destination);
 
+        for (let floorId of Object.keys(paths))
+            this.state.overlay[floorId] = svgDraw.getOverlay(navigator.toPointArray(paths, floorId));
+
+        this.emit("change");
     }
 
     zoomTo(number: number) {
@@ -22,13 +35,13 @@ class NavigationStore extends EventEmitter {
 
     handleActions(action) {
         switch(action.type) {
-            case "NAVIGATE": {
+            case "NAVIGATE":
                 this.navigate(action.start, action.destination);
-            }
+                break;
 
-            case "ZOOM_TO": {
+            case "ZOOM_TO":
                 this.zoomTo(action.room);
-            }
+                break;
         }
     }
 }

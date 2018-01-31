@@ -2,6 +2,8 @@ import * as React from "react";
 import "./autoCompleteContainer.css";
 import autoComplete from "../utils/autoComplete";
 import AutoCompleteContainer from "./autoCompleteContainer";
+import * as navigationActions from "../actions/navigationActions";
+import * as sliderActions from "../actions/sliderActions";
 import * as Toastr from "toastr";
 const Style = require("./navigationSelector.css");
 
@@ -69,9 +71,13 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
         if(!destination && showErrors)
             Toastr.error("Ziel wurde nicht gefunden oder ist nicht eindeutig!");
 
-        if(destination && start)
-            //TODO Navigate
-            return;
+        if(destination && start) {
+            //Navigate
+            navigationActions.navigate(start, destination);
+
+            //Close navigationSlider
+            sliderActions.hide();
+        }
     }
 
     onSwapClick() {
