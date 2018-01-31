@@ -1,36 +1,52 @@
 .autoCompleteContainer {
+
+    /* just for tweeking */
     list-style: none;
     background-color: transparent;
-    overflow-y: hidden;
     cursor: pointer;
     padding-left: 0 !important;
-    min-height: max-content !important;
+
+    /* hiding the overflow */
+    overflow-y: paged-y !important;
+    overflow-x: hidden !important;
 }
 
 .navigationSelector > .autoCompleteContainer {
+
     width: inherit;
+    height: calc(100vh - 150px - 40px);
 }
 
 .searchBar > .autoCompleteContainer {
-    max-width: 399px;
-    width: calc(100vw - 21px);
+    max-width: 400px;
+    width: calc(100vw - 20px);
+    min-width: 250px;
+    height: calc(45px * 6);
 }
 
+
 .autoCompleteContainer::-webkit-scrollbar-track {
-    visibility: hidden;
+    visibility: collapse;
+
 }
 
 .autoCompleteContainer::-webkit-scrollbar {
-    width: 8px;
+
+    /* just for tweeking */
+    width: 0px;
     background-color: transparent;
 }
 
 .autoCompleteContainer::-webkit-scrollbar-thumb {
+
+    /* just for tweeking */
     border-radius: 10px;
     background-color: #e8e8e8;
 }
 
 .autoCompleteContainerItem  {
+
+    /* just for tweeking */
     height: 45px;
     display: flex;
     width: inherit;
@@ -38,48 +54,57 @@
     background: white;
 }
 
-.autoCompleteContainerItem:hover  {
+.autoCompleteContainerItem:hover {
+
+    /* just for tweeking */
     background-color: #e8e8e8;
 }
 
-.autoCompleteContainerItem:last-child {
-    border-bottom: none;
+.autoCompleteContainerItem .iconContainer {
+
+    /* just for tweeking */
+
 }
 
-.autoCompleteContainerItem span {
-    margin-top: 7px;
-    height: 25px;
-    width: fit-content;
-    vertical-align: top;
-    margin-left: 30px !important;
-    margin-right: 30px !important;
-    font-size: 22px !important;
-    color: #9f9f9f;
+.autoCompleteContainerItem img {
+
+    /* just for tweeking */
+    height: 20px;
+    margin-top: 9px;
+    margin-left: 35px;
+    margin-right: 35px;
 }
 
-.autoCompleteContainerItem div {
-    font-family: 'Roboto' !important;
-    flex: 1;
-    display: inline-block;
+
+.autoCompleteContainerItem .textContainer {
+    flex: 1; /* for the gray line */
+    display: flex; /* to align the room and desc. properly */
+
+    /* just for tweeking */
     color: #9e9e9e;
     border-bottom: 1px solid lightgray;
 }
 
-.autoCompleteContainerItem p {
+.autoCompleteContainerItem div p {
+    width: max-content; /* so it doesnt deform */
+
+    /* just for tweeking */
     height: 25px;
-    float: left;
     margin-top: 8px;
     margin-left: 3px;
     color: black;
     font-size: 14px;
 }
 
+
 .autoCompleteContainerItem small {
-    position: absolute;
+    width: max-content; /* so it doesnt deform */
+
+    /* just for tweeking */
     height: 25px;
-    float: left;
     margin-top: 8px;
     margin-left: 6px;
     color: #919191;
     font-size: 14px;
+
 }

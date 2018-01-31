@@ -1,112 +1,131 @@
 .navigationSelector {
+    /* tweeking */
     width: 100%;
     height: 150px;
-    background-color: #4897ff;
-    font-family: 'Roboto' !important
+    background-color: #4791f7;
 }
 
-.navigationSelector .container {
+.navigationSelector .routingContainer {
+    display: flex; /* activating flex */
+    flex-flow: row; /* so the content gets aligned in a row */
+
+    /* tweeking */
     width: 100%;
+    height: 150px;
 }
 
-
-/*
-    icons
- */
-.navigationSelector .iconContainer{
-    width: 65px;
-    height: inherit;
-    align-content: center;
-    align-items: center;
-    vertical-align: center;
-}
-
-.navigationSelector .rightContainer{
-    float: right
-}
-
-.navigationSelector .rightContainer img{
-    margin-top: 107%;
-    margin-left: 25%;
-    height: 20%;
-    width: 40%;
+.navigationSelector .hover svg path{
+    /* tweeking */
     cursor: pointer;
-
-    -webkit-transition: all 0.1s ease;
-    transition: all 0.1s ease;
+    transition: all 0.15s ease;
 }
 
-.navigationSelector .rightContainer img:hover{
-    -webkit-filter: brightness(110%);
-    filter: brightness(110%);
+.navigationSelector .hover  svg:hover path {
+    /* tweeking */
+    fill: #ffffff;
 }
+.navigationSelector .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+/*#region leftContainer*/
 
 .navigationSelector .leftContainer{
-    float: left;
+    order: 0; /* to align it left */
+    flex-shrink: 0; /* to make it unshrinkable */
+
+    /* tweeking */
+    height: inherit;
+    width: 70px;
 }
 
-.navigationSelector .leftContainer .beginingImg{
-    width: 30%;
-    margin-left: 35%;
-    margin-bottom: 5px;
-    margin-top: 15px;
-    cursor: pointer;
-
-    -webkit-transition: all 0.1s ease;
-    transition: all 0.1s ease;
+.navigationSelector .leftContainer .beginningContainer{
+    /* tweeking */
+    margin-bottom: -6px;
 }
 
-.navigationSelector .leftContainer .beginingImg:hover{
-    -webkit-filter: brightness(110%);
-    filter: brightness(110%);
-}
+.navigationSelector .leftContainer .beginningContainer svg{
+    /* quick maths */
+    margin-left: 22px;
 
-.navigationSelector .leftContainer .destinationImg{
-    width: 30%;
-    margin-left: 35%;
-    margin-top: 8px;
-    cursor: pointer;
-
-    -webkit-transition: all 0.1s ease;
-    transition: all 0.1s ease;
-}
-
-.navigationSelector .leftContainer .destinationImg:hover{
-    -webkit-filter: brightness(110%);
-    filter: brightness(110%);
+    /* tweeking */
+    width: 26px;
+    margin-top: 11px;
 }
 
 .navigationSelector .leftContainer .dotContainer{
-    margin-top: -5px;
-    margin-bottom: -5px;
+    /* tweeking */
+    height: 20px;
 }
 
-.navigationSelector .leftContainer .dotImg{
-    height: 7px;
-    margin-left: calc((100% - 7px) / 2);
+.navigationSelector .leftContainer .dotContainer svg{
+
+    /* quick maths */
+    margin-top: 7px;
+    margin-left: 30px;
+
+    /* tweeking */
+    width: 10px;
 }
 
 
+.navigationSelector .leftContainer .destinationContainer{
+    /* tweeking */
+    margin-top: 3px;
+}
 
-/*
-    input
- */
+.navigationSelector .leftContainer .destinationContainer svg{
+    /* quick maths */
+    margin-left: 24px;
+
+    /* tweeking */
+    width: 22px;
+}
+
+/*#endregion leftContainer*/
+
+/*#region rightContainer*/
+
+.navigationSelector .rightContainer{
+    order: 2; /* to align it right */
+    flex-shrink: 0; /* to make it unshrinkable */
+
+    /* tweeking */
+    height: inherit;
+    width: 70px;
+}
+
+.navigationSelector .rightContainer svg{
+    /* quick maths */
+    margin-left: 20px;
+    margin-top: 59px;
+
+    /* tweeking */
+    width: 30px;
+}
+
+/*#endregion rightContainer*/
+
+/*#region inputContainer*/
+
 .navigationSelector .inputContainer {
-    float: left;
-    width: calc(100% - 130px);
+    flex-shrink: 1; /* to make it shrinkable */
+    flex-grow: 1; /* to make it growable */
+    order: 1; /* to align it in the middle */
     height: inherit;
 }
 
-.navigationSelector * {
-    box-sizing: border-box;
-}
-
-/* form starting stylings ------------------------------- */
 .navigationSelector .group 	{
     height: fit-content;
     position: relative;
     margin-bottom: 30px;
 }
+
+/*#region RegionName*/
 
 .navigationSelector input {
     width: 100%;
@@ -123,6 +142,68 @@
     outline: none;
 }
 
+
+.navigationSelector input:focus ~ .highlight {
+    -webkit-animation: inputHighlighter 0.3s ease;
+    -moz-animation: inputHighlighter 0.3s ease;
+    animation: inputHighlighter 0.3s ease;
+}
+
+
+.navigationSelector input:focus ~ label, input:valid ~ label {
+    top: -11px;
+    font-size: 14px;
+    color: white;
+}
+
+/*#endregion RegionName*/
+
+/*#region bar*/
+
+.navigationSelector .bar {
+    position: relative;
+    display: block;
+    width: inherit;
+}
+
+
+.navigationSelector .bar:before {
+    left: 50%;
+    left: 50%;
+}
+
+.navigationSelector .bar:after {
+    right: 50%;
+}
+
+.navigationSelector input:focus ~ .bar:before, input:focus ~ .bar:after {
+    width: 50%;
+}
+
+.navigationSelector .bar:before, .bar:after{
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: white;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+/*#endregion bar*/
+
+.navigationSelector .highlight {
+    position: absolute;
+    height: 60%;
+    width: 0;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
 .navigationSelector label {
     color: white;
     font-size: 18px;
@@ -136,120 +217,5 @@
     -webkit-transition: 0.2s ease all;
 }
 
-/* active state */
-.navigationSelector input:focus ~ label, input:valid ~ label{
-    top: -20px;
-    font-size: 14px;
-    color: white;
-}
 
-/* BOTTOM BARS ================================= */
-.navigationSelector .bar 	{
-    position: relative;
-    display: block;
-    width: inherit;
-}
-
-.navigationSelector .navigationSelector .bar:before, .bar:after{
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: white;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-
-.navigationSelector .bar:before {
-    left: 50%;
-    left: 50%;
-}
-
-.navigationSelector .bar:after {
-    right: 50%;
-}
-
-/* active state */
-.navigationSelector input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width: 50%;
-}
-
-/* HIGHLIGHTER ================================== */
-.navigationSelector .highlight {
-    position: absolute;
-    height: 60%;
-    width: 0;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-/* active state */
-.navigationSelector input:focus ~ .highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-}
-
-
-/* active state */
-.navigationSelector input:focus ~ label, input:valid ~ label {
-    top: -11px;
-    font-size: 14px;
-    color: white;
-}
-
-/* BOTTOM BARS ================================= */
-.navigationSelector .bar 	{
-    position: relative;
-    display: block;
-    width: inherit;
-}
-
-.navigationSelector .bar:before, .bar:after {
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: white;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-.navigationSelector .bar:before {
-    left: 50%;
-    left: 50%;
-}
-.navigationSelector .bar:after {
-    right: 50%;
-}
-
-/* active state */
-.navigationSelector input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width: 50%;
-}
-
-/* HIGHLIGHTER ================================== */
-.navigationSelector .highlight {
-    position: absolute;
-    height: 60%;
-    width: inherit;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-/* active state */
-.navigationSelector input:focus ~ .highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-}
-
-
-
+/*#endregion inputContainer*/

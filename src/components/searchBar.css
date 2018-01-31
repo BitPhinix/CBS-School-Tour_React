@@ -1,41 +1,96 @@
 .searchBar {
+
+    /*tweeking*/
     position: absolute;
     top: 10px;
     left: 10px;
+
+    /* to make it responsive */
     max-width: 400px;
+    min-width: 250px;
     width: calc(100vw - 20px);
 }
 
-.searchBar div.inputContainer {
+.searchBar .searchBarContainer {
+
     background-color: white;
-    border: 1px solid lightgray;
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
+
+    height: 45px;
+
+    display: flex; /* activating flex */
+    flex-flow: row; /* so the content gets aligned in a row */
 }
 
-.searchBar div.iconContainer {
-    width: 70px;
-    float: right;
-    height: 100%;
+.searchBar .searchBarContainer .inputContainer{
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 20px;
+
+    order: 0;
+    flex-shrink: 1;
+    flex-grow: 1;
 }
 
-.searchBar input{
-    outline: none;
+.searchBar .searchBarContainer .inputContainer input{
+    width: 100%;
+    height: 33px;
     border: none;
-    line-height: 30px;
-    padding-left: 10px;
-    width: calc(100% - 70px);
+    font-size: 15px;
+    outline: none;
 }
 
-.searchBar span {
-    font-size: 28px;
-    padding: 1px 5px 0 5px;
-    color: gray;
+.searchBar .searchBarContainer .interactContainer{
+    order: 1;
+
+    width: 120px;
+
+    display: flex; /* activating flex */
+    flex-flow: row; /* so the content gets aligned in a row */
+}
+
+.searchBar .searchBarContainer .interactContainer .iconContainer{
+    flex-grow: 1;
     cursor: pointer;
 }
 
-.searchBar span.navigationIcon {
-    color: dodgerblue;
+.searchBar .searchBarContainer .interactContainer .iconContainer svg{
+    margin-top: 11px;
+    margin-left: 18.25px;
+    width: 23px;
 }
 
-.searchBar ul.autoCompleteContainer {
-    max-height: 50vh;
+.searchBar .searchBarContainer .interactContainer .searchContainer{
+    order: 0;
 }
+
+.searchBar .searchBarContainer .interactContainer .barContainer{
+    order: 1;
+    width: 1px;
+}
+
+.searchBar .searchBarContainer .interactContainer .barContainer svg{
+    margin-top: 7px;
+    height: 31px;
+}
+
+.searchBar .searchBarContainer .interactContainer .barContainer svg rect{
+    width: 1px;
+    height: 31px;
+    fill: lightgrey;
+}
+
+.searchBar .searchBarContainer .interactContainer .navigationContainer{
+    order: 2;
+    flex-grow: 1;
+}
+
+.searchBar .searchBarContainer .interactContainer .navigationContainer svg path{
+    transition: all 0.15s ease;
+}
+
+.searchBar .searchBarContainer .interactContainer .navigationContainer:hover svg path{
+    /* tweeking */
+    fill: #6193e3;
+}
+

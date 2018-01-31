@@ -1,7 +1,7 @@
 .navigationSlider {
     position: fixed;
     top: 0;
-    min-width: 215px;
+    min-width: 250px;
     max-width: 420px;
     width: 100vw;
     height: 100vh;
@@ -19,28 +19,22 @@
 }
 
 .navigationSlider .closeContainer {
-    background-color: #4897ff;
+    background-color: #4791f7;
     height: 40px;
 }
 
 
-.navigationSlider .closeContainer .imageContainer{
+.navigationSlider .closeContainer .iconContainer{
     height: 40px;
     float: right;
     margin-right: 10px;
 }
 
-.navigationSlider .closeContainer .imageContainer img {
+.navigationSlider .closeContainer .iconContainer svg {
     width: 25px;
     height: 25px;
     margin-top: 10px;
     cursor: pointer;
-
-    -webkit-transition: all 0.1s ease;
-    transition: all 0.1s ease;
+    fill: #ffffff;
 }
 
-.navigationSlider .closeContainer .imageContainer img:hover{
-    -webkit-filter: brightness(110%);
-    filter: brightness(110%);
-}
