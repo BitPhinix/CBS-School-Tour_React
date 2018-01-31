@@ -3,7 +3,7 @@ import dispatcher from "../dispatcher";
 import navigator from "../utils/navigator";
 import {ClassRoom} from "../typings";
 import {ReactElement} from "react";
-import svgDraw from "../utils/svgDraw";
+import SvgDraw from "../utils/svgDraw";
 
 //TODO: Rewrite
 class NavigationStore extends EventEmitter {
@@ -24,7 +24,7 @@ class NavigationStore extends EventEmitter {
         const paths = navigator.navigateGlobal(start, destination);
 
         for (let floorId of Object.keys(paths))
-            this.state.overlay[floorId] = svgDraw.getOverlay(navigator.toPointArray(paths, floorId));
+            this.state.overlay[floorId] = SvgDraw.getOverlay(navigator.toPointArray(paths, floorId));
 
         this.emit("change");
     }
