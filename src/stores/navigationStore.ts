@@ -4,13 +4,11 @@ import navigator from "../utils/navigator";
 import {ClassRoom} from "../typings";
 import {ReactElement} from "react";
 import SvgDraw from "../utils/svgDraw";
-import {Simulate} from "react-dom/test-utils";
-import change = Simulate.change;
 
 class NavigationStore extends EventEmitter {
 
     state: {
-        overlay: ReactElement<SVGElement>[][],
+        overlay: {[floorId: number]: ReactElement<SVGElement>[]},
         currentFloor: number
     };
 
@@ -18,7 +16,7 @@ class NavigationStore extends EventEmitter {
         super();
 
         //Default state
-        this.state = {overlay: [], currentFloor: 1};
+        this.state = {overlay: {}, currentFloor: 1};
     }
 
     navigate(start: ClassRoom, destination: ClassRoom) {

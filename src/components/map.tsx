@@ -6,7 +6,7 @@ import {ReactElement} from "react";
 const Style = require("./map.css");
 
 class Map extends React.Component<{}, {
-    overlay: ReactElement<SVGElement>[][],
+    overlay: {[floorId: number]: ReactElement<SVGElement>[]},
     currentFloor: number
 }> {
 
@@ -16,7 +16,7 @@ class Map extends React.Component<{}, {
         super(props);
 
         //Default state
-        this.state = {overlay: [], currentFloor: 1};
+        this.state = {overlay: {}, currentFloor: 1};
 
         //Hook up change event
         navigationStore.on("change", () => this.updateState());
@@ -36,7 +36,7 @@ class Map extends React.Component<{}, {
         this.setState(navigationStore.state);
     }
 
-    componentWillUpdate() {
+    componentDidUpdate() {
         //Update overlay when map updates
         this.svgRenderer.setOverlay(this.state.overlay[this.state.currentFloor]);
     }
