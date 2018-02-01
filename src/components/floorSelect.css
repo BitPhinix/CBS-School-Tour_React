@@ -1,0 +1,39 @@
+.floorSelect {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 42px;
+}
+
+.floorSelect div {
+    text-align: center;
+    width: 42px;
+    border-bottom: 1px solid gray;
+}
+
+.floorSelect div.clicked {
+    background-color: lightgray;
+    cursor: default;
+}
+
+.floorSelect div:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.floorSelect div:last-child {
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.floorSelect i {
+    font-weight: 500;
+    cursor: pointer;
+    margin: auto;
+    font-style: normal;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

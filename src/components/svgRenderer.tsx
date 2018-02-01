@@ -26,7 +26,7 @@ class SvgLoader extends React.Component<{}, {
         window.addEventListener("mousemove", (event) => this.onMouseMove(event));
 
         //Prevent all multi-touch events
-        window.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
+        window.document.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
     }
 
     setOverlay(overlay: ReactElement<SVGElement>[]) {
@@ -180,9 +180,9 @@ class SvgLoader extends React.Component<{}, {
 
     render() {
         return (
-            <svg preserveAspectRatio="none" width="100%" height="100%" ref={(svg) => this.svg = svg}
-                onWheel={(event) => this.onWheel(event)}
-                onMouseDown={(event) => this.onMouseDown(event)}
+            <svg preserveAspectRatio="none" width="100%" height="100%"
+                ref={(svg) => this.svg = svg}
+                onWheel={(event) => this.onWheel(event)}                onMouseDown={(event) => this.onMouseDown(event)}
 
                 onTouchStart={(event) => this.updateTouchState(event)}
                 onTouchMove={(event) => this.onTouchMove(event)}

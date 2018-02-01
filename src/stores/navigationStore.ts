@@ -4,8 +4,9 @@ import navigator from "../utils/navigator";
 import {ClassRoom} from "../typings";
 import {ReactElement} from "react";
 import SvgDraw from "../utils/svgDraw";
+import {Simulate} from "react-dom/test-utils";
+import change = Simulate.change;
 
-//TODO: Rewrite
 class NavigationStore extends EventEmitter {
 
     state: {
@@ -21,16 +22,26 @@ class NavigationStore extends EventEmitter {
     }
 
     navigate(start: ClassRoom, destination: ClassRoom) {
+        //Calculate path
         const paths = navigator.navigateGlobal(start, destination);
 
+        //For each floor
         for (let floorId of Object.keys(paths))
+            //Draw overlay for path and store it
             this.state.overlay[floorId] = SvgDraw.getOverlay(navigator.toPointArray(paths, floorId));
 
+        //Emit change
         this.emit("change");
     }
 
     zoomTo(number: number) {
 
+    }
+
+    changeFloor(floorId: number) {
+        //Update currentFloor and emit change
+        this.state.currentFloor = floorId;
+        this.emit("change");
     }
 
     handleActions(action) {
@@ -41,6 +52,10 @@ class NavigationStore extends EventEmitter {
 
             case "ZOOM_TO":
                 this.zoomTo(action.room);
+                break;
+
+            case "CHANGE_FLOOR":
+                this.changeFloor(action.floorId);
                 break;
         }
     }

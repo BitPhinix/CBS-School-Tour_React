@@ -3,9 +3,10 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: 2;
+    touch-action: none;
 }
 
 * {
     z-index: 2;
-    font-family: 'Roboto' !important;
+    font-family: 'Roboto', serif !important;
 }
