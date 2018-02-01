@@ -4,7 +4,6 @@
     position: absolute;
     top: 10px;
     left: 10px;
-    height: 45px;
 
     /* to make it responsive */
     max-width: 400px;
@@ -16,7 +15,8 @@
 
     background-color: white;
     box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.2);
-    height: inherit;
+
+    height: 45px;
 
     display: flex; /* activating flex */
     flex-flow: row; /* so the content gets aligned in a row */
@@ -58,7 +58,6 @@
     margin-top: 11px;
     margin-left: 18.25px;
     width: 23px;
-    height: 23px;
 }
 
 .searchBar .searchBarContainer .interactContainer .searchContainer{
@@ -72,7 +71,7 @@
 
 .searchBar .searchBarContainer .interactContainer .barContainer svg{
     margin-top: 7px;
-    height: 31px !important;
+    height: 31px;
 }
 
 .searchBar .searchBarContainer .interactContainer .barContainer svg rect{

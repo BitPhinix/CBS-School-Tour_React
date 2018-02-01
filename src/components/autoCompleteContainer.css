@@ -8,7 +8,7 @@
     border-top: 1px solid lightgray;
 
     /* hiding the overflow */
-    overflow-y: paged-y !important;
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
     margin-bottom: 0px !important;
 }
@@ -16,18 +16,13 @@
 .navigationSelector > .autoCompleteContainer {
     width: inherit;
     height: calc(100vh - 150px - 40px);
-    cursor: pointer;
 }
 
 .searchBar > .autoCompleteContainer {
     max-width: 400px;
-    width: calc(100vw - 20px);
     min-width: 250px;
-    height: calc(45px * 6);
-}
-
-.searchBar > input:focus + .autoCompleteContainer {
-    height: 0px !important;
+    height: auto;
+    max-height: 270px;
 }
 
 .autoCompleteContainer::-webkit-scrollbar-track {
