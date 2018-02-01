@@ -3,7 +3,6 @@
     /* just for tweeking */
     list-style: none;
     background-color: transparent;
-    cursor: pointer;
     padding-left: 0 !important;
     color: #9e9e9e;
     border-top: 1px solid lightgray;
@@ -11,12 +10,13 @@
     /* hiding the overflow */
     overflow-y: paged-y !important;
     overflow-x: hidden !important;
+    margin-bottom: 0px !important;
 }
 
 .navigationSelector > .autoCompleteContainer {
-
     width: inherit;
     height: calc(100vh - 150px - 40px);
+    cursor: pointer;
 }
 
 .searchBar > .autoCompleteContainer {
@@ -26,6 +26,9 @@
     height: calc(45px * 6);
 }
 
+.searchBar > input:focus + .autoCompleteContainer {
+    height: 0px !important;
+}
 
 .autoCompleteContainer::-webkit-scrollbar-track {
     visibility: collapse;
