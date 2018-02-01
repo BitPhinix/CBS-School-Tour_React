@@ -2,7 +2,6 @@ import * as React from "react";
 import "./autoCompleteContainer.css";
 import autoComplete from "../utils/autoComplete";
 import {ClassRoom} from "../typings";
-import * as FontAwesome from "react-fontawesome";
 const Style = require("./autoCompleteContainer.css");
 
 class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (roomNumber: number) => any}, {items: AutoCompleteContainerItem[], visible: boolean}> {
