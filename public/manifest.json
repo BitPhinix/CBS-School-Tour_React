@@ -1,16 +1,18 @@
 {
   "name": "CBS Mannheim",
-  "short_name": "CBS",
-  "start_url": "/",
-  "scope": "/",
-  "display": "standalone",
-  "theme_color": "#c32b2e",
-  "background_color" : "#eee" ,
-  "Icons": [
+    "short_name": "CBS",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "theme_color": "#c32b2e",
+
+    "background_color" : "#eee" ,
+    "Icons": [
     {
-      "src": "./icon.png",
-      "sizes": "623x616",
-      "type": "image/png"
+    "src": "./icon.png",
+    "sizes": "623x616",
+    "type": "image/png"
     }
   ]
 }
+

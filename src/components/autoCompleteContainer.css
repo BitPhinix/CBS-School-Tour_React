@@ -13,37 +13,30 @@
     overflow-x: hidden !important;
 }
 
-.navigationSelector > .autoCompleteContainer {
-
-    width: inherit;
+.navigationSelector .autoCompleteContainer {
     height: calc(100vh - 150px - 40px);
 }
 
-.searchBar > .autoCompleteContainer {
-    max-width: 400px;
-    width: calc(100vw - 20px);
-    min-width: 250px;
-    height: calc(45px * 6);
+.searchBar .autoCompleteContainer {
+    max-height: calc(45px * 6);
+    height: auto;
 }
 
 
 .autoCompleteContainer::-webkit-scrollbar-track {
     visibility: collapse;
-
 }
 
 .autoCompleteContainer::-webkit-scrollbar {
-
     /* just for tweeking */
-    width: 0px;
-    background-color: transparent;
+    width: 10px;
+    background: #d0d0d0;
 }
 
 .autoCompleteContainer::-webkit-scrollbar-thumb {
-
     /* just for tweeking */
     border-radius: 10px;
-    background-color: #e8e8e8;
+    background-color: #787878;
 }
 
 .autoCompleteContainerItem  {
