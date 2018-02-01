@@ -15,3 +15,10 @@ export function zoomTo(room: ClassRoom) {
         room
     });
 }
+
+export function changeFloor(floorId: number) {
+    dispatcher.dispatch({
+        type: "CHANGE_FLOOR",
+        floorId
+    });
+}

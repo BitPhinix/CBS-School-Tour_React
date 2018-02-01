@@ -3,13 +3,12 @@ import dispatcher from "../dispatcher";
 import navigator from "../utils/navigator";
 import {ClassRoom} from "../typings";
 import {ReactElement} from "react";
-import svgDraw from "../utils/svgDraw";
+import SvgDraw from "../utils/svgDraw";
 
-//TODO: Rewrite
 class NavigationStore extends EventEmitter {
 
     state: {
-        overlay: ReactElement<SVGElement>[][],
+        overlay: {[floorId: number]: ReactElement<SVGElement>[]},
         currentFloor: number
     };
 
@@ -17,20 +16,30 @@ class NavigationStore extends EventEmitter {
         super();
 
         //Default state
-        this.state = {overlay: [], currentFloor: 1};
+        this.state = {overlay: {}, currentFloor: 1};
     }
 
     navigate(start: ClassRoom, destination: ClassRoom) {
+        //Calculate path
         const paths = navigator.navigateGlobal(start, destination);
 
+        //For each floor
         for (let floorId of Object.keys(paths))
-            this.state.overlay[floorId] = svgDraw.getOverlay(navigator.toPointArray(paths, floorId));
+            //Draw overlay for path and store it
+            this.state.overlay[floorId] = SvgDraw.getOverlay(navigator.toPointArray(paths, floorId));
 
+        //Emit change
         this.emit("change");
     }
 
     zoomTo(number: number) {
 
+    }
+
+    changeFloor(floorId: number) {
+        //Update currentFloor and emit change
+        this.state.currentFloor = floorId;
+        this.emit("change");
     }
 
     handleActions(action) {
@@ -41,6 +50,10 @@ class NavigationStore extends EventEmitter {
 
             case "ZOOM_TO":
                 this.zoomTo(action.room);
+                break;
+
+            case "CHANGE_FLOOR":
+                this.changeFloor(action.floorId);
                 break;
         }
     }

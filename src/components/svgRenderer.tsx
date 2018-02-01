@@ -21,12 +21,12 @@ class SvgLoader extends React.Component<{}, {
         this.state = {inlineElements: "", scale: 1, rotation: 0, translation: {x: 0, y: 0}, overlay: []};
 
         //Add event listener
-        document.body.addEventListener("mouseup", () => this.mousePressed = false);
-        document.body.addEventListener("mouseleave", () => this.mousePressed = false);
-        document.body.addEventListener("mousemove", (event) => this.onMouseMove(event));
+        window.addEventListener("mouseup", () => this.mousePressed = false);
+        window.addEventListener("mouseleave", () => this.mousePressed = false);
+        window.addEventListener("mousemove", (event) => this.onMouseMove(event));
 
         //Prevent all multi-touch events
-        window.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
+        window.document.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
     }
 
     setOverlay(overlay: ReactElement<SVGElement>[]) {
@@ -180,9 +180,10 @@ class SvgLoader extends React.Component<{}, {
 
     render() {
         return (
-            <svg preserveAspectRatio="none" width="100%" height="100%" ref={(svg) => this.svg = svg}
-                onWheel={(event) => this.onWheel(event)}
-                onMouseDown={(event) => this.onMouseDown(event)}
+            <svg preserveAspectRatio="none" width="100%" height="100%"
+                ref={(svg) => this.svg = svg}
+                onWheel={(event) => this.onWheel(event)}                onMouseDown={(event) => this.onMouseDown(event)}
+
                 onTouchStart={(event) => this.updateTouchState(event)}
                 onTouchMove={(event) => this.onTouchMove(event)}
                 onTouchEnd={(event) => this.updateTouchState(event)}>

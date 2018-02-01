@@ -1,6 +1,7 @@
 import {EventEmitter} from "events";
 import dispatcher from "../dispatcher";
 import NavigationSelector from "../components/navigationSelector";
+import * as React from "react";
 
 class SliderStore extends EventEmitter {
 
@@ -11,7 +12,7 @@ class SliderStore extends EventEmitter {
 
         this.state = {
             visible: false,
-            components: []
+            component: React.Component
         }
     }
 
@@ -20,7 +21,7 @@ class SliderStore extends EventEmitter {
     }
 
     showNavigation() {
-        this.state.components = [new NavigationSelector({})];
+        this.state.component = new NavigationSelector({});
         this.setVisibility(true);
         this.emit("change");
     }

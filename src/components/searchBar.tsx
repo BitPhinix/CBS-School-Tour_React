@@ -77,8 +77,7 @@ class SearchBar extends React.Component<{}, {value: string}> {
                         <div className="navigationContainer iconContainer"
                             //Show navigation slider
                              onClick={() => SliderActions.showNavigation()}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"
-                                 enable-background="new 0 0 32 32">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
                                 <path id="navigate" fill="#69A6F5" d="M31.411,14.601L17.396,0.589c-0.774-0.775-2.028-0.775-2.802,0L0.578,14.601c-0.771,0.776-0.771,2.03,0,2.805l14.016,14.012  c0.774,0.776,2.028,0.776,2.802,0l14.016-14.012C32.185,16.631,32.185,15.377,31.411,14.601z M18,20.022V16h-4v4.022  c0,1.105-0.895,2.001-2,2.001c-1.106,0-2-0.896-2-2.001c0,0,0-5.701,0-6.001C10,12.915,10.905,12,12.011,12C12.312,12,18,12,18,12  V8.02l6.002,6.001L18,20.022z"/>
                             </svg>
                         </div>
