@@ -23,12 +23,21 @@ class Map extends React.Component<{}, {
     }
 
     componentDidMount() {
+        //Update state when component mounts
         this.updateState();
     }
 
-    //TODO: Rewrite
     updateState() {
+        //Load new map if floor has changed
+        if(this.state.currentFloor != navigationStore.state.currentFloor)
+            this.svgRenderer.load("./svg/" + navigationStore.state.currentFloor + ".svg");
+
+        //Get state from navigationStore
         this.setState(navigationStore.state);
+    }
+
+    componentWillUpdate() {
+        //Update overlay when map updates
         this.svgRenderer.setOverlay(this.state.overlay[this.state.currentFloor]);
     }
 
