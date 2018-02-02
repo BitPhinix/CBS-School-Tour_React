@@ -47,6 +47,7 @@
 
     display: flex; /* activating flex */
     flex-flow: row; /* so the content gets aligned in a row */
+    flex-shrink: 0;
 }
 
 .searchBar .searchBarContainer .interactContainer .iconContainer{

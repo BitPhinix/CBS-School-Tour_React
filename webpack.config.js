@@ -1,5 +1,6 @@
-
 const path = require("path");
+const WebpackShellPlugin = require('webpack-shell-plugin');
+
 
 module.exports = {
     entry: "./src/index.tsx",
@@ -40,6 +41,13 @@ module.exports = {
             }
         ]
     },
+
+    plugins: [
+        new WebpackShellPlugin({
+                onBuildStart:['css-purge -i "./src/components/autoCompleteContainer.css, ./src/components/floorSelect.css, ./src/components/map.css, ./src/components/navigationSelector.css, ./src/components/navigationSlider.css, ./src/components/searchBar.css, ./src/app.css" -o ./src/bundle.css  && echo Finished the purge! && echo You can find the bundle at: "./src/bundle.css"'],
+                //onBuildEnd:['echo Webpack End']
+        })
+    ],
 
     devServer: {
         contentBase: path.resolve(__dirname, "public"),

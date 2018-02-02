@@ -3,7 +3,7 @@ import Map from "./components/map";
 import NavigationSlider from "./components/navigationSlider";
 import SearchBar from "./components/searchBar";
 import FloorSelect from "./components/floorSelect";
-const Style = require("./app.css");
+const Style = require("./bundle.css");
 
 class App extends React.Component<{}, {}> {
     render() {
