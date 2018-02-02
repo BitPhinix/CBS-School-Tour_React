@@ -60,9 +60,11 @@ class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (ro
         }
 
         return(
-            <ul className="autoCompleteContainer" style={Style}>
-                {renderedItems}
-            </ul>
+            <div className="autoCompleteContainer">
+                <ul className="autoCompleteList" style={Style}>
+                    {renderedItems}
+                </ul>
+            </div>
         );
     }
 }
