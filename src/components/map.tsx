@@ -43,8 +43,7 @@ class Map extends React.Component<{}, {
 
     render() {
         return (
-            <div style={Style} className="mapContainer"
-                onMouseDown={() => SliderActions.hide()}>
+            <div style={Style} className="mapContainer">
                 <SvgRenderer ref={(svgRenderer) => this.svgRenderer = svgRenderer}/>
             </div>
         );
