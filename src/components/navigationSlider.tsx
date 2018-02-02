@@ -38,7 +38,7 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, component:
                         </svg>
                     </div>
                 </div>
-                {this.state.component ? this.state.component.render(): null}
+                {this.state.component && this.state.component.render ? this.state.component.render(): null}
             </div>
         );
     }

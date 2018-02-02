@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as FontAwesome from "react-fontawesome";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
 import * as SliderActions from "../actions/sliderActions";
