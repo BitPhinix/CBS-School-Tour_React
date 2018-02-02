@@ -23,6 +23,9 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
 
         //Update the container
         this.updateContainer();
+
+        //Try to navigate
+        this.tryNavigate(false);
     }
 
     componentDidMount() {
@@ -90,7 +93,6 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     }
 
     render() {
-
         return(
             <div className="navigationSelector">
 

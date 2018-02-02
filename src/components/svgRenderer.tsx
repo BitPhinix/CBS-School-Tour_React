@@ -1,5 +1,6 @@
 import * as React from "react";
 import {ReactElement} from "react";
+import {Point} from "../typings";
 
 class SvgLoader extends React.Component<{}, {
     inlineElements: string,
@@ -13,6 +14,7 @@ class SvgLoader extends React.Component<{}, {
     mousePressed: boolean;
     lastMousePos = {} as Point;
     lastTouches: TouchList;
+    mapContainer;
 
     constructor(props) {
         super(props);
@@ -27,6 +29,11 @@ class SvgLoader extends React.Component<{}, {
 
         //Prevent all multi-touch events
         window.document.addEventListener("touchstart", (event) => SvgLoader.onWindowTouch(event), false);
+    }
+
+    componentDidMount() {
+        //Load default svg
+        this.load("./svg/1.svg");
     }
 
     setOverlay(overlay: ReactElement<SVGElement>[]) {
@@ -50,11 +57,6 @@ class SvgLoader extends React.Component<{}, {
             event.preventDefault()
     }
 
-    componentDidMount() {
-        //Load default svg
-        this.load("./svg/1.svg");
-    }
-
     load(path: string) {
         //Crate new XMLHttpRequest
         const xmlRequest = new XMLHttpRequest();
@@ -67,6 +69,8 @@ class SvgLoader extends React.Component<{}, {
 
             //Set inlineElements
             this.setState({inlineElements: svgContent});
+
+            this.resetView();
         };
 
         //Make call (async)
@@ -80,6 +84,31 @@ class SvgLoader extends React.Component<{}, {
                 x: this.state.translation.x - deltaX,
                 y: this.state.translation.y - deltaY
             }});
+    }
+
+    resetView() {
+        //Get mapContainer BoundingRect
+        const boundingRect = this.mapContainer.getBoundingClientRect();
+
+        //Zoom to the center of it
+        this.zoomToPoint({
+            x: boundingRect.width / 2,
+            y: boundingRect.height / 2
+        }, 1);
+    }
+
+    zoomToPoint(point: Point, scale: number) {
+        //Move svg
+        this.setState({translation: {
+                x: this.svg.clientWidth / 2 - point.x,
+                y: this.svg.clientHeight / 2 - point.y
+            }});
+
+        //Zoom to screen center
+        this.zoomToScreenPoint({
+            x: this.svg.clientWidth / 2,
+            y: this.svg.clientHeight / 2
+        }, scale - this.state.scale);
     }
 
     zoomToScreenPoint(point: Point, scaleDelta: number) {
@@ -182,8 +211,8 @@ class SvgLoader extends React.Component<{}, {
         return (
             <svg preserveAspectRatio="none" width="100%" height="100%"
                 ref={(svg) => this.svg = svg}
-                onWheel={(event) => this.onWheel(event)}                onMouseDown={(event) => this.onMouseDown(event)}
-
+                onWheel={(event) => this.onWheel(event)}
+                onMouseDown={(event) => this.onMouseDown(event)}
                 onTouchStart={(event) => this.updateTouchState(event)}
                 onTouchMove={(event) => this.onTouchMove(event)}
                 onTouchEnd={(event) => this.updateTouchState(event)}>
@@ -192,19 +221,13 @@ class SvgLoader extends React.Component<{}, {
                     "translate(" + this.state.translation.x + ", " + this.state.translation.y + ") " +
                     "rotate(" + this.state.rotation + ")"}>
 
-                    //Svg contents
-                    <g dangerouslySetInnerHTML={{__html: this.state.inlineElements}}/>
-                    //Overlay
+                    <g dangerouslySetInnerHTML={{__html: this.state.inlineElements}}
+                        ref={(container) => this.mapContainer = container}/>
                     <g>{this.state.overlay}</g>
                 </g>
             </svg>
         );
     }
-}
-
-interface Point {
-    x: number,
-    y: number
 }
 
 export default SvgLoader;
