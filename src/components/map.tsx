@@ -3,6 +3,7 @@ import SvgRenderer from "./svgRenderer";
 import * as SliderActions from "../actions/sliderActions";
 import navigationStore from "../stores/navigationStore";
 import {ReactElement} from "react";
+const Style = require("./map.css");
 
 class Map extends React.Component<{}, {
     overlay: {[floorId: number]: ReactElement<SVGElement>[]},
@@ -42,7 +43,7 @@ class Map extends React.Component<{}, {
 
     render() {
         return (
-            <div className="mapContainer">
+            <div className="mapContainer" style={Style}>
                 <SvgRenderer ref={(svgRenderer) => this.svgRenderer = svgRenderer}/>
             </div>
         );

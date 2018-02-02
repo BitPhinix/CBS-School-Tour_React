@@ -3,6 +3,7 @@ import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
 import * as SliderActions from "../actions/sliderActions";
 import autoComplete from "../utils/autoComplete";
+const Style = require("./searchBar.css");
 
 class SearchBar extends React.Component<{}, {value: string}> {
     input;
@@ -45,7 +46,7 @@ class SearchBar extends React.Component<{}, {value: string}> {
 
     render() {
         return (
-            <div className="searchBar">
+            <div className="searchBar" style={Style}>
                 <div className="searchBarContainer">
 
                     <div className="inputContainer">

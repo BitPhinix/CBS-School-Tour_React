@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as SliderActions from "../actions/sliderActions";
 import sliderStore from "../stores/sliderStore";
+const Style = require("./navigationSlider.css");
 
 class NavigationSlider extends React.Component<{}, {visible: boolean, component: React.Component}> {
 
@@ -29,7 +30,7 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, component:
         const visible = this.state.visible ? "visible" : "closed";
 
         return (
-            <div className={"navigationSlider " + visible}>
+            <div className={"navigationSlider " + visible} style={Style}>
                 <div className="closeContainer">
                     <div className="iconContainer" onClick={() => SliderActions.hide() }>
                         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 128 128">

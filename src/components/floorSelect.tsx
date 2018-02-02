@@ -2,6 +2,7 @@ import * as React from "react";
 import {Row, Col} from "react-bootstrap";
 import navigationStore from "../stores/navigationStore";
 import * as navigationActions from "../actions/navigationActions";
+const Style = require("./floorSelect.css");
 
 class FloorSelect extends React.Component<{}, {currentFloor: number}> {
 
@@ -32,7 +33,7 @@ class FloorSelect extends React.Component<{}, {currentFloor: number}> {
 
     render() {
         return (
-            <Col className="floorSelect">
+            <Col className="floorSelect" style={Style}>
                 <Row onClick={() => navigationActions.changeFloor(2)} className={this.getSelectedState(2)}><i>2 OG</i></Row>
                 <Row onClick={() => navigationActions.changeFloor(1)} className={this.getSelectedState(1)}><i>1 OG</i></Row>
                 <Row onClick={() => navigationActions.changeFloor(0)} className={this.getSelectedState(0)}><i>EG</i></Row>
