@@ -1,11 +1,10 @@
+import "./navigationSelector.css";
 import * as React from "react";
-import "./autoCompleteContainer.css";
 import autoComplete from "../utils/autoComplete";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as navigationActions from "../actions/navigationActions";
 import * as sliderActions from "../actions/sliderActions";
 import * as Toastr from "toastr";
-const Style = require("./navigationSelector.css");
 
 class NavigationSelector extends React.Component<{start?: string, destination?: string}, {}> {
 
@@ -95,7 +94,7 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
 
     render() {
         return(
-            <div className="navigationSelector" style={Style}>
+            <div className="navigationSelector">
 
                 <div className="routingContainer">
                     <div className="leftContainer">

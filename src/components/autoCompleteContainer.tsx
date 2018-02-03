@@ -1,8 +1,7 @@
-import * as React from "react";
 import "./autoCompleteContainer.css";
+import * as React from "react";
 import autoComplete from "../utils/autoComplete";
 import {ClassRoom} from "../typings";
-const Style = require("./autoCompleteContainer.css");
 
 class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (roomNumber: number) => any}, {items: AutoCompleteContainerItem[], visible: boolean}> {
 
@@ -60,7 +59,7 @@ class AutoCompleteContainer extends React.Component<{onRecommendationClick?: (ro
         }
 
         return(
-            <div className="autoCompleteContainer" style={Style}>
+            <div className="autoCompleteContainer">
                 <ul className="autoCompleteList">
                     {renderedItems}
                 </ul>

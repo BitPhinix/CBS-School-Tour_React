@@ -4,9 +4,9 @@
   "description": "Basically google maps for our school.",
   "main": "index.js",
   "scripts": {
-    "start": "start http://localhost:8080/webpack-dev-server/index.html & webpack-dev-server --hot",
-    "build": "webpack --hot",
-    "autobuild": "webpack -w --hot"
+    "start": "start http://localhost:9000/webpack-dev-server/index.html & webpack-dev-server --hot",
+    "build": "webpack",
+    "autobuild": "webpack -w"
   },
   "author": "trecious",
   "license": "ISC",
@@ -16,10 +16,8 @@
     "@types/react-bootstrap": "^0.31.9",
     "@types/react-dom": "^16.0.3",
     "@types/toastr": "^2.1.35",
-    "extract-text-webpack-plugin": "^3.0.2",
+    "css-loader": "^0.28.9",
     "flux": "^3.1.3",
-    "glob-all": "^3.1.0",
-    "purifycss-webpack-plugin": "^2.0.3",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",
@@ -27,12 +25,10 @@
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.4.1",
-    "css-loader": "^0.28.8",
+    "extract-text-webpack-plugin": "^3.0.2",
     "json-loader": "^0.5.7",
-    "purify-css": "^1.2.5",
-    "purifycss-webpack": "^0.7.0",
     "source-map-loader": "^0.2.3",
-    "style-loader": "^0.19.1",
+    "style-loader": "^0.20.1",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.10.1"

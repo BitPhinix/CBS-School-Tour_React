@@ -1,9 +1,9 @@
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require("path");
-const extractor = require("extract-text-webpack-plugin");
-const purify = require("purifycss-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.tsx",
+
     output: {
         filename: "js/bundle.js",
         path: path.resolve(__dirname, "public")
@@ -16,9 +16,6 @@ module.exports = {
     },
 
     module: {
-        loaders: [
-            { test: /\.css$/, loader: extractor.loader("style","css") }
-        ],
         rules: [
             {
                 test: /\.tsx?$/,
@@ -26,16 +23,16 @@ module.exports = {
             },
 
             {
-                enforce: "pre",
-                test: /\.js$/, loader: "source-map-loader"
+                test: /\.css$/,
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ["css-loader"]
+                })
             },
 
             {
-                test: /\.css$/,
-                use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" }
-                ]
+                enforce: "pre",
+                test: /\.js$/, loader: "source-map-loader"
             },
 
             {
@@ -46,19 +43,14 @@ module.exports = {
     },
 
     plugins: [
-        new extractor("[name].css"),
-        new purify({
-            basePath: "./src",
-            paths: [
-                "app/views/*.html",
-                "app/layout/*.html"
-            ]
-        })
+        new ExtractTextPlugin("css/bundle.css")
     ],
 
     devServer: {
         contentBase: path.resolve(__dirname, "public"),
         inline: true,
-        compress: true
+        compress: true,
+        hot: true,
+        port: 9000
     }
 };
