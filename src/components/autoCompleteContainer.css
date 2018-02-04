@@ -14,7 +14,7 @@
 
     max-width: 400px;
     height: auto;
-    padding-left: 0px;
+    padding: 0px;
     max-height: 273px;
 }
 
@@ -76,7 +76,7 @@
 
 }
 
-.autoCompleteContainerItem img {
+.autoCompleteContainerItem svg {
 
     /* just for tweeking */
     height: 20px;
@@ -116,5 +116,4 @@
     margin-left: 6px;
     color: #919191;
     font-size: 14px;
-
 }

@@ -1,7 +1,7 @@
-.navigationSelector {
+.navigationSelector .blueContainer {
     /* tweeking */
     width: 100%;
-    height: 150px;
+    height: 152px;
     background-color: #4791f7;
 }
 
@@ -9,27 +9,60 @@
     display: flex; /* activating flex */
     flex-flow: row; /* so the content gets aligned in a row */
 
+
     /* tweeking */
     width: 100%;
-    height: 150px;
+    height: 96px;
 }
 
-.navigationSelector .hover svg path{
-    /* tweeking */
-    cursor: pointer;
-    transition: all 0.15s ease;
-}
-
-.navigationSelector .hover  svg:hover path {
-    /* tweeking */
-    fill: #ffffff;
-}
 .navigationSelector .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Firefox */
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+.navigationSelector .modeContainer{
+    display: flex;
+    height: 56px;
+    padding: 10px 10px 10px 65px;
+}
+
+.navigationSelector .modeContainer .iconContainer{
+    height: 42px;
+    width: 47px;
+    cursor: pointer;
+}
+
+.navigationSelector .modeContainer .closeContainer{
+    float: right;
+}
+
+.navigationSelector .modeContainer .iconContainer .circleContainer{
+    margin-left: 2.5px;
+    height: 42px;
+    width: 42px;
+}
+
+.navigationSelector .modeContainer .iconContainer .selected{
+    border-radius: 20px;
+    background: #4774d3;
+}
+
+.navigationSelector .modeContainer .iconContainer .circleContainer svg{
+    height: 30px;
+    width: 30px;
+}
+
+.navigationSelector .modeContainer .iconContainer .circleContainer .walk{
+    margin-top: 6px;
+    margin-left: 8px;
+}
+
+.navigationSelector .modeContainer .iconContainer .circleContainer .clock{
+    margin-top: 6px;
+    margin-left: 6px;
 }
 
 /*#region leftContainer*/
@@ -45,45 +78,47 @@
 
 .navigationSelector .leftContainer .beginningContainer{
     /* tweeking */
-    margin-bottom: -6px;
+    margin-bottom: -12px;
 }
 
 .navigationSelector .leftContainer .beginningContainer svg{
     /* quick maths */
-    margin-left: 22px;
+    margin-left: 29.5px;
 
     /* tweeking */
-    width: 26px;
-    margin-top: 11px;
+    width: 11px;
+    margin-top: 13px;
 }
 
 .navigationSelector .leftContainer .dotContainer{
     /* tweeking */
-    height: 20px;
+    height: 8px;
 }
 
 .navigationSelector .leftContainer .dotContainer svg{
-
     /* quick maths */
     margin-top: 7px;
-    margin-left: 30px;
+    margin-left: 32.5px;
 
     /* tweeking */
-    width: 10px;
+    width: 5px;
 }
 
+.navigationSelector .leftContainer .dotContainer svg path{
+    fill: rgba(255, 255, 255, 0.60);
+}
 
 .navigationSelector .leftContainer .destinationContainer{
     /* tweeking */
-    margin-top: 3px;
+    margin-top: 9px;
 }
 
 .navigationSelector .leftContainer .destinationContainer svg{
     /* quick maths */
-    margin-left: 24px;
+    margin-left: 29.5px;
 
     /* tweeking */
-    width: 22px;
+    width: 11px;
 }
 
 /*#endregion leftContainer*/
@@ -100,12 +135,20 @@
 }
 
 .navigationSelector .rightContainer svg{
+
     /* quick maths */
-    margin-left: 20px;
-    margin-top: 59px;
+    margin-left: 26.5px;
+    margin-top: 27px;
 
     /* tweeking */
-    width: 30px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    width: 17px;
+}
+
+.navigationSelector .rightContainer svg:hover path {
+    /* tweeking */
+    fill: rgba(255, 255, 255, 0.85);
 }
 
 /*#endregion rightContainer*/
@@ -116,26 +159,41 @@
     flex-shrink: 1; /* to make it shrinkable */
     flex-grow: 1; /* to make it growable */
     order: 1; /* to align it in the middle */
-    height: inherit;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    margin-bottom: 20px;
+
+    -webkit-flex-flow: column;
+    justify-content: space-around;
+
+
+    display: flex;
+    flex-direction: column;
 }
 
 .navigationSelector .group 	{
     height: fit-content;
     position: relative;
-    margin-bottom: 30px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
 }
-
-/*#region RegionName*/
 
 .navigationSelector input {
     width: 100%;
     background: transparent;
-    font-size: 18px;
-    padding: 10px 10px 10px 5px;
-    display: block;
+    font-size: 15px;
+    padding: 4px 4px 4px 0px;
+    font-weight: 200;
+
     border: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     color: white;
+
 }
 
 .navigationSelector input:focus{
@@ -143,79 +201,18 @@
 }
 
 
-.navigationSelector input:focus ~ .highlight {
-    -webkit-animation: inputHighlighter 0.3s ease;
-    -moz-animation: inputHighlighter 0.3s ease;
-    animation: inputHighlighter 0.3s ease;
-}
-
-
-.navigationSelector input:focus ~ label, input:valid ~ label {
-    top: -11px;
-    font-size: 14px;
-    color: white;
-}
-
-/*#endregion RegionName*/
-
-/*#region bar*/
-
-.navigationSelector .bar {
-    position: relative;
-    display: block;
-    width: inherit;
-}
-
-
-.navigationSelector .bar:before {
-    left: 50%;
-    left: 50%;
-}
-
-.navigationSelector .bar:after {
-    right: 50%;
-}
-
-.navigationSelector input:focus ~ .bar:before, input:focus ~ .bar:after {
-    width: 50%;
-}
-
-.navigationSelector .bar:before, .bar:after{
-    content: '';
-    height: 2px;
-    width: 0;
-    bottom: 1px;
-    position: absolute;
-    background: white;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-}
-
-/*#endregion bar*/
-
-.navigationSelector .highlight {
-    position: absolute;
-    height: 60%;
-    width: 0;
-    top: 25%;
-    left: 0;
-    pointer-events: none;
-    opacity: 0.5;
-}
-
 .navigationSelector label {
-    color: white;
-    font-size: 18px;
-    font-weight: normal;
+    color: rgba(255, 255, 255, 0.47);
+    font-size: 13px;
+    font-weight: 100;
     position: absolute;
     pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
+    left: 0px;
+    top: 7px;
 }
 
+.navigationSelector input:required:valid ~ label{
+    color: transparent;
+}
 
 /*#endregion inputContainer*/

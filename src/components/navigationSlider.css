@@ -8,6 +8,7 @@
     background-color: white;
     overflow: hidden;
     transition: transform 0.2s ease-in;
+    box-shadow: 1px 0px 15px 0px rgba(0, 0, 0, 0.2);
 }
 
 .navigationSlider.visible {
@@ -16,25 +17,5 @@
 
 .navigationSlider.closed {
     transform: translate(-200vw, 0);
-}
-
-.navigationSlider .closeContainer {
-    background-color: #4791f7;
-    height: 40px;
-}
-
-
-.navigationSlider .closeContainer .iconContainer{
-    height: 40px;
-    float: right;
-    margin-right: 10px;
-}
-
-.navigationSlider .closeContainer .iconContainer svg {
-    width: 25px;
-    height: 25px;
-    margin-top: 10px;
-    cursor: pointer;
-    fill: #ffffff;
 }
 
