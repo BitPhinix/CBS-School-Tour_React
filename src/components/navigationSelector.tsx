@@ -2,7 +2,7 @@ import "./navigationSelector.css";
 import * as React from "react";
 import autoComplete from "../utils/autoComplete";
 import AutoCompleteContainer from "./autoCompleteContainer";
-import * as navigationActions from "../actions/navigationActions";
+import * as mapActions from "../actions/mapActions";
 import * as sliderActions from "../actions/sliderActions";
 import * as Toastr from "toastr";
 
@@ -75,7 +75,7 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
 
         if(destination && start) {
             //Navigate
-            navigationActions.navigate(start, destination);
+            mapActions.navigate(start, destination);
 
             //Close navigationSlider
             sliderActions.hide();

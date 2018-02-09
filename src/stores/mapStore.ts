@@ -5,7 +5,7 @@ import {ClassRoom} from "../typings";
 import {ReactElement} from "react";
 import SvgDraw from "../utils/svgDraw";
 
-class NavigationStore extends EventEmitter {
+class MapStore extends EventEmitter {
 
     state: {
         overlay: {[floorId: number]: ReactElement<SVGElement>[]},
@@ -32,13 +32,16 @@ class NavigationStore extends EventEmitter {
         this.emit("change");
     }
 
-    zoomTo(number: number) {
-
+    zoomTo(room: ClassRoom) {
+        //Emit zoomToRoom
+        this.emit("zoomToRoom", {room: room});
     }
 
     changeFloor(floorId: number) {
-        //Update currentFloor and emit change
+        //Update currentFloor
         this.state.currentFloor = floorId;
+
+        //Emit change
         this.emit("change");
     }
 
@@ -59,10 +62,10 @@ class NavigationStore extends EventEmitter {
     }
 }
 
-//Initialize new navigationStore
-const navigationStore = new NavigationStore();
+//Initialize new MapStore
+const mapStore = new MapStore();
 
-//Register navigationStore to dispatcher
-dispatcher.register(navigationStore.handleActions.bind(navigationStore));
+//Register mapStore to dispatcher
+dispatcher.register(mapStore.handleActions.bind(mapStore));
 
-export default navigationStore;
+export default mapStore;

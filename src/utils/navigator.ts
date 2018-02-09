@@ -1,4 +1,5 @@
 import {ClassRoom, Point} from "../typings";
+import mapUtils from "./mapUtils";
 const NavigationData = require("../../navData/data.json");
 
 interface NavigationMap {
@@ -22,8 +23,8 @@ class Navigator {
 
     navigateGlobal(start: ClassRoom, destination: ClassRoom): NavigationResult {
         //Get the floors of the start, destination
-        const startFloor = Navigator.getFloorId(start.number);
-        const destinationFloor = Navigator.getFloorId(destination.number);
+        const startFloor = mapUtils.getFloorId(start.number);
+        const destinationFloor = mapUtils.getFloorId(destination.number);
 
         //Calculate the difference of floors
         const floorDiv = Math.abs(startFloor - destinationFloor);
@@ -73,7 +74,7 @@ class Navigator {
         //For each staircase in the viable Staircases
         for (let stairCaseId of stairCaseIds) {
             //Get the cost it takes to get there
-            let cost = Navigator.getPathLength(floor[stairCaseId], floor[currentNodeId]);
+            let cost = mapUtils.getPathLength(floor[stairCaseId], floor[currentNodeId]);
 
             //Check if it is cheaper than the cheapest one checked or if result was not initialized
             if(!result || cost < lowestCost) {
@@ -110,7 +111,7 @@ class Navigator {
             //For each connected node
             for (let connectedId of floor[currentNodeId].connectedTo) {
                 //Calculate distance over our current cheapest node
-                let distance = navigationMap[currentNodeId].distance + Navigator.getPathLength(floor[currentNodeId], floor[connectedId]);
+                let distance = navigationMap[currentNodeId].distance + mapUtils.getPathLength(floor[currentNodeId], floor[connectedId]);
 
                 //If the distance over our current cheapest is higher than the old one
                 if (navigationMap[connectedId].distance <= distance)
@@ -154,16 +155,6 @@ class Navigator {
 
            //lowest is undefined at the beginning
         }, undefined);
-    }
-
-    static getFloorId(roomId: number) {
-        //Rooms from 0-99 are in the first floor, 100-199 in the second etc.
-        return Math.floor(roomId / 100);
-    }
-
-    static getPathLength(room1: ClassRoom, room2: ClassRoom) {
-        //Thanks Pythagoras ^^
-        return Math.sqrt(Math.pow(room1.location.x - room2.location.x, 2) + Math.pow(room2.location.x + room1.location.x, 2));
     }
 }
 

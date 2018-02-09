@@ -2,6 +2,7 @@ import "./searchBar.css";
 import * as React from "react";
 import AutoCompleteContainer from "./autoCompleteContainer";
 import * as Toastr from "toastr";
+import * as mapActions from "../actions/mapActions";
 import * as SliderActions from "../actions/sliderActions";
 import autoComplete from "../utils/autoComplete";
 
@@ -40,8 +41,8 @@ class SearchBar extends React.Component<{}, {value: string}> {
             //Alert
             Toastr.error("Ort konnte nicht gefunden werden oder ist nicht eindeutig!");
         else
-            //TODO zoom to target
-            return;
+            //Zoom target
+            mapActions.zoomTo(target);
     }
 
     render() {
