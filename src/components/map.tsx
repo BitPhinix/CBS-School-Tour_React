@@ -1,8 +1,7 @@
 import "./map.css";
 import * as React from "react";
 import SvgRenderer from "./svgRenderer";
-import navigationStore from "../stores/navigationStore";
-import * as SliderActions from "../actions/sliderActions"
+import mapStore from "../stores/mapStore";
 import {ReactElement} from "react";
 
 class Map extends React.Component<{}, {
@@ -19,7 +18,7 @@ class Map extends React.Component<{}, {
         this.state = {overlay: {}, currentFloor: 1};
 
         //Hook up change event
-        navigationStore.on("change", () => this.updateState());
+        mapStore.on("change", () => this.updateState());
     }
 
     componentDidMount() {
@@ -29,11 +28,11 @@ class Map extends React.Component<{}, {
 
     updateState() {
         //Load new map if floor has changed
-        if(this.state.currentFloor != navigationStore.state.currentFloor)
-            this.svgRenderer.load("./svg/" + navigationStore.state.currentFloor + ".svg");
+        if(this.state.currentFloor != mapStore.state.currentFloor)
+            this.svgRenderer.load("./svg/" + mapStore.state.currentFloor + ".svg");
 
-        //Get state from navigationStore
-        this.setState(navigationStore.state);
+        //Get state from mapStore
+        this.setState(mapStore.state);
     }
 
     componentDidUpdate() {
@@ -43,8 +42,7 @@ class Map extends React.Component<{}, {
 
     render() {
         return (
-            <div className="mapContainer"
-                 onClick={() => SliderActions.hide()}>
+            <div className="mapContainer">
                 <SvgRenderer ref={(svgRenderer) => this.svgRenderer = svgRenderer}/>
             </div>
         );

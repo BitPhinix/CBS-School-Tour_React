@@ -48,10 +48,10 @@ class SliderStore extends EventEmitter {
     }
 }
 
-//Initialize new sliderStore
+//Initialize new SliderStore
 const sliderStore = new SliderStore();
 
-//Register navigationStore to dispatcher
+//Register sliderStore to dispatcher
 dispatcher.register(sliderStore.handleActions.bind(sliderStore));
 
 export default sliderStore;
