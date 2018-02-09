@@ -2,6 +2,7 @@ import "./map.css";
 import * as React from "react";
 import SvgRenderer from "./svgRenderer";
 import navigationStore from "../stores/navigationStore";
+import * as SliderActions from "../actions/sliderActions"
 import {ReactElement} from "react";
 
 class Map extends React.Component<{}, {
@@ -42,7 +43,8 @@ class Map extends React.Component<{}, {
 
     render() {
         return (
-            <div className="mapContainer">
+            <div className="mapContainer"
+                 onClick={() => SliderActions.hide()}>
                 <SvgRenderer ref={(svgRenderer) => this.svgRenderer = svgRenderer}/>
             </div>
         );

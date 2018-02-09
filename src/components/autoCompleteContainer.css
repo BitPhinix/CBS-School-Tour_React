@@ -33,7 +33,7 @@
 
 .navigationSelector .autoCompleteContainer {
     height: auto;
-    max-height: calc(100vh - 150px - 40px);
+    max-height: calc(100vh - 152px);
     width: 100vw;
     max-width: 420px;
 }
