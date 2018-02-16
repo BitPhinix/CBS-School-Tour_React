@@ -5,7 +5,18 @@
     background-color: ghostwhite;
 }
 
-.navLine {
+svg .navLine {
     stroke: rgb(255,0,0);
     stroke-width: 10px;
+}
+
+svg text{
+    -webkit-user-select:none;
+    font-family: 'Roboto' !important;
+}
+
+
+svg rect[fill="#e5e5e5"]:hover{
+    fill: darkgrey;
+    stroke: red;
 }
