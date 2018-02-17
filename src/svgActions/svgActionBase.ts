@@ -1,4 +1,4 @@
-import NewSvgRenderer from "../components/newSvgRenderer";
+import NewSvgRenderer from "../components/svgRenderer";
 
 abstract class SvgActionBase {
     abstract initialize(svgRenderer: NewSvgRenderer);

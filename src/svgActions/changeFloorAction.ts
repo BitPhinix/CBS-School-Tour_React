@@ -1,5 +1,5 @@
 import SvgActionBase from "./svgActionBase";
-import NewSvgRenderer from "../components/newSvgRenderer";
+import NewSvgRenderer from "../components/svgRenderer";
 import {ReactElement} from "react";
 
 class ChangeFloorAction implements SvgActionBase {
@@ -9,18 +9,18 @@ class ChangeFloorAction implements SvgActionBase {
     runInstant: boolean = true;
 
     svgContent: string;
-    svgPath: string;
+    floor: number;
     overlay: ReactElement<SVGElement>[];
     center: boolean;
 
-    constructor(svgPath: string, center?: boolean, overlay?: ReactElement<SVGElement>[]) {
-        this.svgPath = svgPath;
+    constructor(floor: number, center?: boolean, overlay?: ReactElement<SVGElement>[]) {
+        this.floor = floor;
         this.overlay = overlay;
         this.center = center;
     }
 
     initialize(svgRenderer: NewSvgRenderer) {
-        this.load(this.svgPath);
+        this.load("./svg/" + this.floor + ".svg");
     }
 
     update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
@@ -47,7 +47,7 @@ class ChangeFloorAction implements SvgActionBase {
 
         //Make call (async)
         xmlRequest.open("GET", path, true);
-        xmlRequest.send(null);
+        xmlRequest.send();
     }
 }
 

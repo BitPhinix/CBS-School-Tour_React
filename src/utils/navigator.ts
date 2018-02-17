@@ -97,11 +97,11 @@ class Navigator {
 
         //For each node in the floor
         for (let roomId of Object.keys(NavigationData.floors[floorId]))
-            //Set distance to Infinity and predecessorId to null (since we don´t know it yet)
-            navigationMap[roomId] = {distance: Infinity, predecessorId: null, processed: false};
+            //Set distance to Infinity and predecessorId to undefined (since we don´t know it yet)
+            navigationMap[roomId] = {distance: Infinity, predecessorId: undefined, processed: false};
 
-        //Set the distance from the start node to 0 (it takes us nothing to stand still ^^) and predecessorId to null since it has none
-        navigationMap[startId] = {processed: false, distance: 0, predecessorId: null};
+        //Set the distance from the start node to 0 (it takes us nothing to stand still ^^) and predecessorId to undefined since it has none
+        navigationMap[startId] = {processed: false, distance: 0, predecessorId: undefined};
 
         let currentNodeId;
 

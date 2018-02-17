@@ -1,13 +1,12 @@
 import SvgActionBase from "./svgActionBase";
-import NewSvgRenderer from "../components/newSvgRenderer";
+import NewSvgRenderer from "../components/svgRenderer";
 import {ReactElement} from "react";
 import {Point} from "../typings";
 
-class ZoomToScreenPointAction implements SvgActionBase {
+class ZoomToPointAction implements SvgActionBase {
 
     blockUserInput: boolean = false;
     skipAble: boolean = false;
-    targetScale: number;
     point: Point;
     runInstant: boolean;
     isScreenPoint: boolean;
@@ -18,8 +17,8 @@ class ZoomToScreenPointAction implements SvgActionBase {
     private xDifference: number;
     private yDifference: number;
 
-    constructor(targetScale: number, point: Point, isScreenPoint: boolean, animationDuration?: number, runInstant: boolean = false) {
-        this.targetScale = targetScale;
+    constructor(scaleDifference: number, point: Point, isScreenPoint: boolean, animationDuration?: number, runInstant: boolean = false) {
+        this.scaleDifference = scaleDifference;
         this.point = point;
         this.runInstant = runInstant;
         this.animationDuration = animationDuration;
@@ -31,14 +30,14 @@ class ZoomToScreenPointAction implements SvgActionBase {
             this.yDifference = (svgRenderer.svg.clientHeight / 2 - this.point.y) - svgRenderer.state.translation.y;
         }
         else {
-            this.xDifference = (this.point.x / svgRenderer.state.scale) * (1 - svgRenderer.state.scale) - (this.point.x / this.targetScale) * (1 - this.targetScale);
-            this.yDifference = (this.point.y / svgRenderer.state.scale) * (1 - svgRenderer.state.scale) - (this.point.y / this.targetScale) * (1 - this.targetScale);
+            //TODO remove targetScale, simplify formula
+            const targetScale = svgRenderer.state.scale + this.scaleDifference;
+            this.xDifference = (this.point.x / svgRenderer.state.scale) * (1 - svgRenderer.state.scale) - (this.point.x / targetScale) * (1 - targetScale);
+            this.yDifference = (this.point.y / svgRenderer.state.scale) * (1 - svgRenderer.state.scale) - (this.point.y / targetScale) * (1 - targetScale);
         }
 
-        this.scaleDifference = this.targetScale - svgRenderer.state.scale;
-
         if(!this.animationDuration)
-            this.animationDuration = this.scaleDifference * 1000;
+            this.animationDuration = Math.abs(this.scaleDifference) * 1000;
     }
 
     update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
@@ -63,4 +62,4 @@ class ZoomToScreenPointAction implements SvgActionBase {
     }
 }
 
-export default ZoomToScreenPointAction;
+export default ZoomToPointAction;

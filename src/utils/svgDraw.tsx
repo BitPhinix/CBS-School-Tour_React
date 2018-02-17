@@ -1,7 +1,6 @@
 import {Point} from "../typings";
 import * as React from "react";
 import {ReactElement} from "react";
-import {posix} from "path";
 
 class SvgDraw {
 
@@ -15,11 +14,11 @@ class SvgDraw {
             return result;
 
         let lineStart = path[0];
-        let linePitch = null;
+        let linePitch = undefined;
 
         //Iterate over all path nodes
         for (let i = 0; i < path.length; i++) {
-            //If linePitch is null
+            //If linePitch is undefined
             if(!linePitch)
                 //Calculate it
                 linePitch = SvgDraw.getPitch(lineStart, path[i]);
@@ -34,9 +33,9 @@ class SvgDraw {
                     //Draw a corner piece
                     result.push(SvgDraw.getNavigationCorner(path[i]));
 
-                //Set lineStart to current node and linePitch to null since we don´t know it yet
+                //Set lineStart to current node and linePitch to undefined since we don´t know it yet
                 lineStart = path[i];
-                linePitch = null;
+                linePitch = undefined;
             }
         }
 

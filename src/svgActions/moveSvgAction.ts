@@ -1,49 +1,44 @@
 import SvgActionBase from "./svgActionBase";
-import NewSvgRenderer from "../components/newSvgRenderer";
-import {Point} from "../typings";
+import NewSvgRenderer from "../components/svgRenderer";
 
 class MoveSvgAction implements SvgActionBase {
-    runInstant: boolean = false;
-    blockUserInput: boolean = false;
-    skipAble: boolean = true;
+	runInstant: boolean = false;
+	blockUserInput: boolean = false;
+	skipAble: boolean = true;
 
-    targetPosition: Point;
-    animationDuration: number;
+	private animationDuration: number;
+	private timePassed: number = 0;
+	private xDifference: number;
+	private yDifference: number;
+	private considerScale: boolean;
 
-    private timePassed: number = 0;
-    private xDifference: number;
-    private yDifference: number;
+	constructor(xDifference: number, yDifference: number, considerScale: boolean = false, animationDuration?: number) {
+		this.xDifference = xDifference;
+		this.yDifference = yDifference;
+		this.animationDuration = animationDuration;
+		this.considerScale = considerScale;
+	}
 
-    constructor(targetPosition: Point, animationDuration: number) {
-        this.targetPosition = targetPosition;
-        this.animationDuration = animationDuration;
-    }
+	initialize(svgRenderer: NewSvgRenderer) {
+		if(!this.animationDuration)
+			this.animationDuration = Math.sqrt(Math.pow(this.xDifference, 2) + Math.pow(this.yDifference, 2)) / 4;
+	}
 
-    initialize(svgRenderer: NewSvgRenderer) {
-        this.xDifference = svgRenderer.state.translation.x - this.targetPosition.x;
-        this.xDifference = svgRenderer.state.translation.y - this.targetPosition.y;
+	update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
+		if (deltaTime > this.animationDuration - this.timePassed)
+			deltaTime = this.animationDuration - this.timePassed;
 
-        //TODO calculate animationDuration
-    }
+		this.timePassed += deltaTime;
 
-    update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
-        if(deltaTime > this.animationDuration - this.timePassed)
-            deltaTime = this.animationDuration - this.timePassed;
+		svgRenderer.setState({
+			translation: {
+				x: (this.xDifference / this.animationDuration * deltaTime) / (this.considerScale ? svgRenderer.state.scale : 1) + svgRenderer.state.translation.x,
+				y: (this.yDifference / this.animationDuration * deltaTime) / (this.considerScale ? svgRenderer.state.scale : 1) + svgRenderer.state.translation.y
+			}
+		});
 
-        this.timePassed += deltaTime;
-
-        const newY = this.yDifference / this.animationDuration * deltaTime + svgRenderer.state.translation.y;
-        const newX = this.xDifference / this.animationDuration * deltaTime + svgRenderer.state.translation.x;
-
-        svgRenderer.setState({
-            translation: {
-                x: newX,
-                y: newY
-            }
-        });
-
-        return this.timePassed < this.animationDuration;
-    }
+		return this.timePassed < this.animationDuration;
+	}
 }
 
 export default MoveSvgAction;
