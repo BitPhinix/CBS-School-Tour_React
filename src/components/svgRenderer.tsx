@@ -63,12 +63,12 @@ class SvgLoader extends React.Component<{}, {
     setOverlay(overlay: ReactElement<SVGElement>[]) {
         //If overlay is undefined
         if(!overlay)
-            //Set overlay to an empty array
+        //Set overlay to an empty array
             this.setState({
                 overlay: []
             });
         else
-            //Set overlay to overlay
+        //Set overlay to overlay
             this.setState({
                 overlay
             });
@@ -77,7 +77,7 @@ class SvgLoader extends React.Component<{}, {
     static onWindowTouch(event){
         //If the the event is multi-touch
         if(event.touches.length > 1)
-            //Prevent the default behavior
+        //Prevent the default behavior
             event.preventDefault()
     }
 
@@ -228,18 +228,18 @@ class SvgLoader extends React.Component<{}, {
     render() {
         return (
             <svg preserveAspectRatio="none" width="100%" height="100%"
-                ref={(svg) => this.svg = svg}
-                onWheel={(event) => this.onWheel(event)}
-                onMouseDown={(event) => this.onMouseDown(event)}
-                onTouchStart={(event) => this.updateTouchState(event)}
-                onTouchMove={(event) => this.onTouchMove(event)}
-                onTouchEnd={(event) => this.updateTouchState(event)}>
+                 ref={(svg) => this.svg = svg}
+                 onWheel={(event) => this.onWheel(event)}
+                 onMouseDown={(event) => this.onMouseDown(event)}
+                 onTouchStart={(event) => this.updateTouchState(event)}
+                 onTouchMove={(event) => this.onTouchMove(event)}
+                 onTouchEnd={(event) => this.updateTouchState(event)}>
                 <g transform={
                     "scale(" + this.state.scale + ") " +
                     "translate(" + this.state.translation.x + ", " + this.state.translation.y + ") "}>
 
                     <g dangerouslySetInnerHTML={{__html: this.state.inlineElements}}
-                        ref={(container) => this.mapContainer = container}/>
+                       ref={(container) => this.mapContainer = container}/>
                     <g>{this.state.overlay}</g>
                 </g>
             </svg>
