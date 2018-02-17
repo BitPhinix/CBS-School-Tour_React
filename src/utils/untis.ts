@@ -3,37 +3,37 @@ import {stringify} from "querystring";
 
 class Untis
 {
-    private static _id: string = String(Math.floor(Math.random() * 100000000));
-    private static _authenticator: UntisAuthenticationParams;
+    private static id: string = String(Math.floor(Math.random() * 100000000));
+    private static authenticator: UntisAuthenticationParams = null;
 
-    private static _server: string = "https://arche.webuntis.com";
-    private static _school: string = "CBS-Mannheim";
+    private static server: string;
+    private static school: string;
 
-    private static _loggedIn: boolean = false;
+    public static login(user: string = "", password: string = "", client: string = "", server: string = "https://arche.webuntis.com", school: string = "CBS-Mannheim") {
+        this.server = server;
+        this.school = school
 
-    public static Login(user: string = "", password: string = "", client: string = "") {
+        const newAuthenticator = new UntisAuthenticationParams(user, password, client);
 
-        this._authenticator = new UntisAuthenticationParams(user, password, client)
-
-        this.Request(UntisMethod.Authenticate, this._authenticator, function (response: UntisResponse){
-            Untis._loggedIn = true
+        this.request(UntisMethod.Authenticate, this.authenticator, function (response: UntisResponse){
+            Untis.authenticator = newAuthenticator;
         });
     }
 
-    private static Logout(){
-        this.Request(UntisMethod.Logout, null, function (){ Untis._loggedIn = false})
+    private static logout(){
+        this.request(UntisMethod.Logout, null, function (){ Untis.authenticator = null})
     }
 
-    private static async Request(method: UntisMethod, params: object, callback: Function){
-        var xhttp = new XMLHttpRequest();
+    private static async request(method: UntisMethod, params: object, callback: Function){
+        const xHttp = new XMLHttpRequest();
 
-        xhttp.open("POST", this._server + "/WebUntis/jsonrpc.do?school=" + this._school, true);
-        xhttp.setRequestHeader("Content-type", "application/json");
-        xhttp.send(JSON.stringify(new UntisRequest(this._id, method, params)));
+        xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
+        xHttp.setRequestHeader("Content-type", "application/json");
+        xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
 
-        xhttp.onreadystatechange = function() {
+        xHttp.onreadystatechange = function() {
             if (this.readyState == 4) {
-                var response = JSON.parse(this.responseText) as UntisResult;
+                const response = JSON.parse(this.responseText) as UntisResult;
                 if(Untis.CheckResponse(response, method))
                     callback(response);
             }
@@ -41,7 +41,7 @@ class Untis
     }
     private static CheckResponse(response: object, responseOf: UntisMethod){
         if("error" in response){
-            var error = response as UntisError;
+            const error = response as UntisError;
             console.error("%cAttempted request: " + responseOf + "\nError: " + error.error.message + "\nResponse: ", 'color: red', response);
             return false;
         }else if(response == null){

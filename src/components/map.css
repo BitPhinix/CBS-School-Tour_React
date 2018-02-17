@@ -6,17 +6,27 @@
 }
 
 svg .navLine {
-    stroke: rgb(255,0,0);
+    stroke: red;
     stroke-width: 10px;
 }
 
 svg text{
     -webkit-user-select:none;
     font-family: 'Roboto' !important;
+    pointer-events: none;
 }
 
-
 svg rect[fill="#e5e5e5"]:hover{
-    fill: darkgrey;
-    stroke: red;
+    fill: #b7b7b7;
+    stroke: #000000;
+    cursor:  pointer;
+}
+
+svg rect[fill="#515151"]:hover{
+    fill: #818181;
+    stroke: #818181;
+}
+
+svg path[fill="#000000"]{
+    pointer-events: none;
 }
