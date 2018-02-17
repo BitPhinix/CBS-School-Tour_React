@@ -49,8 +49,8 @@ class NavigationHelper {
             //Return result
             return searchResults[0];
 
-        //Nothing was found, return null
-        return null;
+        //Nothing was found, return undefined
+        return undefined;
     }
 
     private static getNumber(text: string) {

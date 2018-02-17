@@ -1,6 +1,5 @@
 import "./navigationSlider.css";
 import * as React from "react";
-import * as SliderActions from "../actions/sliderActions";
 import sliderStore from "../stores/sliderStore";
 
 class NavigationSlider extends React.Component<{}, {visible: boolean, component: React.Component}> {
@@ -12,7 +11,7 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, component:
         sliderStore.on("change", () => this.updateState());
 
         //Default state
-        this.state = {visible: false, component: null};
+        this.state = {visible: false, component: undefined};
     }
 
     componentDidMount() {
@@ -31,7 +30,7 @@ class NavigationSlider extends React.Component<{}, {visible: boolean, component:
 
         return (
             <div className={"navigationSlider " + visible}>
-                {this.state.component && this.state.component.render ? this.state.component.render(): null}
+                {this.state.component && this.state.component.render ? this.state.component.render(): undefined}
             </div>
         );
     }
