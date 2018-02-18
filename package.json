@@ -16,6 +16,7 @@
     "@types/react-bootstrap": "^0.31.9",
     "@types/react-dom": "^16.0.3",
     "@types/toastr": "^2.1.35",
+    "es-cookie": "^1.1.1",
     "flux": "^3.1.3",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
