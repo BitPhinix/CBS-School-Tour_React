@@ -11,22 +11,29 @@ import * as Cookie from "./utils/cookie";
 
 
 class App extends React.Component<{}, {}> {
-    render() {
+
+    componentDidMount() {
+        //If user has no cbs-main cookie (New user)
         if(!Cookies.get("cbs-main")){
+            //Create new cookie
             const cookie = new Cookie.CbsCookie;
             cookie.visited = true;
-            Cookies.set("cbs-main", JSON.stringify(cookie))
 
+            //Save cookie
+            Cookies.set("cbs-main", JSON.stringify(cookie));
+
+            //Show ppinfo
             Toastr.info(
                 "<div style='font-size: 12px'><div>Wir verwenden Cookies, um Inhalte und Anzeigen zu personalisieren und die Zugriffe auf unsere Website zu analysieren.</div>" +
-                "<u><a href=\"./ppstatement.html\">Datenschutzerklärung</a></u><div></div>"
-                , null, {
-                    timeOut: 0,
+                "<u><a href=\"./ppstatement.html\">Datenschutzerklärung</a></u><div></div>", null, {
+                    timeOut: 200000,
                     closeOnHover: false
                 }
             );
         }
+    }
 
+    render() {
         return(
             <div className="App" onClick={() => Untis.login()}>
                 <FloorSelect/>
