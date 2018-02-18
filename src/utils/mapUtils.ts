@@ -9,8 +9,7 @@ class MapUtils {
     }
 
     getPathLength(room1: ClassRoom, room2: ClassRoom) {
-        //Thanks Pythagoras ^^
-        return Math.sqrt(Math.pow(room1.location.x - room2.location.x, 2) + Math.pow(room2.location.x + room1.location.x, 2));
+        return Math.sqrt(Math.pow(room1.location.x - room2.location.x, 2) + Math.pow(room2.location.y - room1.location.y, 2));
     }
 }
 
