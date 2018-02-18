@@ -7,7 +7,6 @@ import FloorSelect from "./components/floorSelect";
 import Untis from "./utils/untis";
 import * as Toastr from "toastr";
 import * as Cookies from 'es-cookie';
-import * as Cookie from "./utils/cookie";
 
 
 class App extends React.Component<{}, {}> {

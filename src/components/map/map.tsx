@@ -1,4 +1,4 @@
-import "../map.css";
+import "./map.css";
 import * as React from "react";
 import SvgRenderer from "./svgRenderer";
 import mapStore from "../../stores/mapStore";
