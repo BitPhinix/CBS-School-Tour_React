@@ -13,7 +13,6 @@ interface NavigationResult {
 }
 
 class Navigator {
-
     toPointArray(navigationResult: NavigationResult, floorId): Point[] {
         return Object.keys(navigationResult[floorId]).map((roomKey) => {
             //Yeah, I know it´s ugly :(
@@ -55,11 +54,13 @@ class Navigator {
         //Navigate from staircase to destination
         result[destinationFloor] = this.navigateFloor(currentPos.number, destination.number, destinationFloor);
 
-        //Return result
+		console.log(result[destinationFloor]);
+
+		//Return result
         return result;
     }
 
-    private findStaircase (currentNodeId: number, floorId: number, leadTo: number): ClassRoom {
+    private findStaircase(currentNodeId: number, floorId: number, leadTo: number): ClassRoom {
         //Get the floor
         const floor = NavigationData.floors[floorId];
         

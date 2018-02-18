@@ -29,8 +29,6 @@ class UserZoomBehaviour implements IBehaviourBase {
 	update(svgRenderer: SvgRenderer, deltaTime: number): boolean {
 		const newScale = svgRenderer.state.scale + this.zoomSpeed * svgRenderer.state.scale * deltaTime / 50;
 
-		console.log(this.zoomPoint);
-
 		svgRenderer.setState({
 			scale: newScale,
 			translation: {
@@ -40,9 +38,9 @@ class UserZoomBehaviour implements IBehaviourBase {
 		});
 
 		//TODO: Use delta time in speed update
-		this.zoomSpeed *= 0.8;
+		this.zoomSpeed = this.zoomSpeed * 0.9;
 
-		return Math.abs(this.zoomSpeed) > 0.001;
+		return Math.abs(this.zoomSpeed) > 0.0001;
 	}
 }
 
