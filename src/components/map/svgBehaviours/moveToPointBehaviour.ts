@@ -1,7 +1,10 @@
-import SvgActionBase from "./svgActionBase";
-import NewSvgRenderer from "../components/svgRenderer";
+import SvgBehaviourBase from "./iBehaviourBase";
+import SvgRenderer from "../svgRenderer";
+import {Point} from "../../../typings";
 
-class MoveSvgAction implements SvgActionBase {
+//TODO: Rewrite
+class MoveToPointBehaviour implements SvgBehaviourBase {
+
 	runInstant: boolean = false;
 	blockUserInput: boolean = false;
 	skipAble: boolean = true;
@@ -19,12 +22,16 @@ class MoveSvgAction implements SvgActionBase {
 		this.considerScale = considerScale;
 	}
 
-	initialize(svgRenderer: NewSvgRenderer) {
+	initialize(svgRenderer: SvgRenderer) {
 		if(!this.animationDuration)
 			this.animationDuration = Math.sqrt(Math.pow(this.xDifference, 2) + Math.pow(this.yDifference, 2)) / 4;
 	}
 
-	update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
+	onUserPan(xDifference: number, yDifference: number): void {}
+	onUserZoom(zoomDifference: number, screenPoint: Point): void {}
+	onUserPanStop(): void {}
+
+	update(svgRenderer: SvgRenderer, deltaTime: number): boolean {
 		if (deltaTime > this.animationDuration - this.timePassed)
 			deltaTime = this.animationDuration - this.timePassed;
 
@@ -41,4 +48,4 @@ class MoveSvgAction implements SvgActionBase {
 	}
 }
 
-export default MoveSvgAction;
+export default MoveToPointBehaviour;

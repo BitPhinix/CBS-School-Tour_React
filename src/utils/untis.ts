@@ -27,9 +27,9 @@ class Untis
     private static async request(method: UntisMethod, params: object, callback: Function){
         const xHttp = new XMLHttpRequest();
 
-        xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
-        xHttp.setRequestHeader("Content-type", "application/json");
-        xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
+        //xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
+        //xHttp.setRequestHeader("Content-type", "application/json");
+        //xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
 
         xHttp.onreadystatechange = function() {
             if (this.readyState == 4) {

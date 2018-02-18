@@ -1,12 +1,13 @@
-import SvgActionBase from "./svgActionBase";
-import NewSvgRenderer from "../components/svgRenderer";
-import {ReactElement} from "react";
-import {Point} from "../typings";
+import SvgBehaviourBase from "./iBehaviourBase";
+import SvgRenderer from "../svgRenderer";
+import {Point} from "../../../typings";
 
-class ZoomToPointAction implements SvgActionBase {
-
+//TODO: Rewrite
+class ZoomToPointBehaviour implements SvgBehaviourBase {
+	
     blockUserInput: boolean = false;
     skipAble: boolean = false;
+    
     point: Point;
     runInstant: boolean;
     isScreenPoint: boolean;
@@ -24,7 +25,7 @@ class ZoomToPointAction implements SvgActionBase {
         this.animationDuration = animationDuration;
     }
 
-    initialize(svgRenderer: NewSvgRenderer) {
+    initialize(svgRenderer: SvgRenderer) {
         if(this.isScreenPoint) {
             this.xDifference = (svgRenderer.svg.clientWidth / 2 - this.point.x) - svgRenderer.state.translation.x;
             this.yDifference = (svgRenderer.svg.clientHeight / 2 - this.point.y) - svgRenderer.state.translation.y;
@@ -40,7 +41,11 @@ class ZoomToPointAction implements SvgActionBase {
             this.animationDuration = Math.abs(this.scaleDifference) * 1000;
     }
 
-    update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
+	onUserPan(xDifference: number, yDifference: number): void {}
+	onUserZoom(zoomDifference: number, screenPoint: Point): void {}
+	onUserPanStop(): void {}
+
+    update(svgRenderer: SvgRenderer, deltaTime: number): boolean {
         if(deltaTime > this.animationDuration - this.timePassed)
             deltaTime = this.animationDuration - this.timePassed;
 
@@ -62,4 +67,4 @@ class ZoomToPointAction implements SvgActionBase {
     }
 }
 
-export default ZoomToPointAction;
+export default ZoomToPointBehaviour;

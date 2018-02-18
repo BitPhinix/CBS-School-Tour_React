@@ -1,6 +1,6 @@
 import "./app.css";
 import * as React from "react";
-import Map from "./components/map";
+import Map from "./components/map/map";
 import NavigationSlider from "./components/navigationSlider";
 import SearchBar from "./components/searchBar";
 import FloorSelect from "./components/floorSelect";

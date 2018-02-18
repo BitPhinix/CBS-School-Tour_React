@@ -1,9 +1,9 @@
-import "./map.css";
+import "../map.css";
 import * as React from "react";
 import SvgRenderer from "./svgRenderer";
-import mapStore from "../stores/mapStore";
+import mapStore from "../../stores/mapStore";
 import {ReactElement} from "react";
-import ChangeFloorAction from "../svgActions/changeFloorAction";
+import ChangeFloorBehaviour from "./svgBehaviours/changeFloorBehaviour";
 
 class Map extends React.Component<{}, {
     overlay: {[floorId: number]: ReactElement<SVGElement>[]},
@@ -30,7 +30,7 @@ class Map extends React.Component<{}, {
     updateState() {
         //Load new map if floor has changed
         if(this.state.currentFloor != mapStore.state.currentFloor)
-            this.svgRenderer.processAction(new ChangeFloorAction(mapStore.state.currentFloor, true, mapStore.state.overlay[mapStore.state.currentFloor]));
+            this.svgRenderer.processBehaviour(new ChangeFloorBehaviour(mapStore.state.currentFloor, true, mapStore.state.overlay[mapStore.state.currentFloor]));
 
         //Get state from mapStore
         this.setState(mapStore.state);

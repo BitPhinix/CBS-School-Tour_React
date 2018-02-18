@@ -1,8 +1,9 @@
-import SvgActionBase from "./svgActionBase";
-import NewSvgRenderer from "../components/svgRenderer";
+import SvgBehaviourBase from "./iBehaviourBase";
+import SvgRenderer from "../svgRenderer";
 import {ReactElement} from "react";
+import {Point} from "../../../typings";
 
-class ChangeFloorAction implements SvgActionBase {
+class ChangeFloorBehaviour implements SvgBehaviourBase {
 
     skipAble: boolean = false;
     blockUserInput: boolean = false;
@@ -19,11 +20,11 @@ class ChangeFloorAction implements SvgActionBase {
         this.center = center;
     }
 
-    initialize(svgRenderer: NewSvgRenderer) {
+    initialize(svgRenderer: SvgRenderer) {
         this.load("./svg/" + this.floor + ".svg");
     }
 
-    update(svgRenderer: NewSvgRenderer, deltaTime: number): boolean {
+    update(svgRenderer: SvgRenderer, deltaTime: number): boolean {
         if(!this.svgContent)
             return true;
 
@@ -34,6 +35,10 @@ class ChangeFloorAction implements SvgActionBase {
 
         return false;
     }
+
+	onUserPan(xDifference: number, yDifference: number): void {}
+	onUserZoom(zoomDifference: number, screenPoint: Point): void {}
+	onUserPanStop(): void {}
 
     private load(path: string) {
         //Crate new XMLHttpRequest
@@ -51,4 +56,4 @@ class ChangeFloorAction implements SvgActionBase {
     }
 }
 
-export default ChangeFloorAction;
+export default ChangeFloorBehaviour;

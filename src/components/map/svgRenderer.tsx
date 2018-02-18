@@ -1,9 +1,9 @@
 import * as React from "react";
-import {Point} from "../typings";
+import {Point} from "../../typings";
 import {ReactElement} from "react";
-import SvgActionBase from "../svgActions/svgActionBase";
-import ZoomToPointAction from "../svgActions/zoomToPointAction";
-import MoveSvgAction from "../svgActions/moveSvgAction";
+import BehaviourBase from "./svgBehaviours/iBehaviourBase";
+import UserZoomBehaviour from "./svgBehaviours/userZoomBehaviour";
+import UserPanBehaviour from "./svgBehaviours/userPanBehaviour";
 
 class NewSvgRenderer extends React.Component<{}, {
     inlineElements: string,
@@ -14,8 +14,8 @@ class NewSvgRenderer extends React.Component<{}, {
     svg: SVGSVGElement;
 
     private lastUpdate: number = Date.now();
-    private actionQue: SvgActionBase[] = [];
-    private currentAction: SvgActionBase;
+    private behaviourQue: BehaviourBase[] = [];
+    private currentBehaviour: BehaviourBase;
 	private mousePressed: boolean;
 	private lastMousePos: Point;
 	private lastTouches: TouchList;
@@ -27,8 +27,8 @@ class NewSvgRenderer extends React.Component<{}, {
 		this.state = {inlineElements: "", scale: 1, translation: {x: 0, y: 0}, overlay: []};
 
 		//Add event listener
-		window.addEventListener("mouseup", () => this.mousePressed = false);
-		window.addEventListener("mouseleave", () => this.mousePressed = false);
+		window.addEventListener("mouseup", () => this.onMouseUp());
+		window.addEventListener("mouseleave", () => this.onMouseUp());
 		window.addEventListener("mousemove", (event) => this.onMouseMove(event));
 
 		//Prevent all multi-touch events
@@ -41,35 +41,35 @@ class NewSvgRenderer extends React.Component<{}, {
 	setOverlay(overlay: ReactElement<SVGElement>[]) {
 		//If overlay is undefined
 		if(!overlay)
-		//Set overlay to an empty array
+			//Set overlay to an empty array
 			this.setState({
 				overlay: []
 			});
 		else
-		//Set overlay to overlay
+			//Set overlay to overlay
 			this.setState({
 				overlay
 			});
 	}
 
-	processAction(action: SvgActionBase) {
+	processBehaviour(action: BehaviourBase) {
         //If action does not need to be run instantly
         if(!action.runInstant) {
             //Add action to que
-            this.actionQue.push(action);
+            this.behaviourQue.push(action);
 
             //return
             return;
         }
 
         //Clear que
-        this.actionQue = [];
+        this.behaviourQue = [];
 
         //Set currentAction to action
-        this.currentAction = action;
+        this.currentBehaviour = action;
 
         //Call initialize
-        this.currentAction.initialize(this);
+        this.currentBehaviour.initialize(this);
     }
 
     private update() {
@@ -83,9 +83,9 @@ class NewSvgRenderer extends React.Component<{}, {
         this.lastUpdate = currentTime;
 
         //If currentAction is undefined or currentAction.update() returns false or currentAction is skip-able and the que isn´t empty
-        if(!this.currentAction || !this.currentAction.update(this, deltaTime) || this.currentAction.skipAble && this.actionQue.length > 0)
+        if(!this.currentBehaviour || !this.currentBehaviour.update(this, deltaTime) || this.currentBehaviour.skipAble && this.behaviourQue.length > 0)
             //Get next action from que
-            this.currentAction = this.getNextAction();
+            this.currentBehaviour = this.getNextAction();
 
         //Request a new AnimationFrame
         window.requestAnimationFrame(() => this.update());
@@ -93,12 +93,12 @@ class NewSvgRenderer extends React.Component<{}, {
 
     private getNextAction() {
         //If que is empty
-        if(this.actionQue.length == 0)
+        if(this.behaviourQue.length == 0)
             //Return nothing
             return;
 
         //Get next element in que
-        const nextElement = this.actionQue.pop();
+        const nextElement = this.behaviourQue.pop();
 
         //Call initialize
         nextElement.initialize(this);
@@ -107,12 +107,47 @@ class NewSvgRenderer extends React.Component<{}, {
         return nextElement;
     }
 
+    private processUserZoom(zoomDifference: number, screenPoint: Point) {
+    	if(this.currentBehaviour && this.currentBehaviour.blockUserInput)
+    		return;
+
+    	if(!(this.currentBehaviour instanceof UserZoomBehaviour))
+    		this.processBehaviour(new UserZoomBehaviour(zoomDifference, screenPoint));
+    	else if(this.currentBehaviour)
+    		this.currentBehaviour.onUserZoom(zoomDifference, screenPoint);
+	}
+
+	private processUserPan(xDifference: number, yDifference: number) {
+		if(this.currentBehaviour && this.currentBehaviour.blockUserInput)
+			return;
+
+		if(!(this.currentBehaviour instanceof UserPanBehaviour))
+			this.processBehaviour(new UserPanBehaviour(xDifference, yDifference));
+		else if(this.currentBehaviour)
+			this.currentBehaviour.onUserPan(xDifference, yDifference);
+	}
+
+	private processUserPanStop() {
+		if(this.currentBehaviour && this.currentBehaviour.blockUserInput)
+			return;
+
+		if(this.currentBehaviour)
+			this.currentBehaviour.onUserPanStop();
+	}
+
 	//region EventHandlers
+	private onMouseUp() {
+    	if(this.mousePressed)
+			this.processUserPanStop();
+
+    	this.mousePressed = false;
+	}
+
 	private onWheel(event) {
-		this.processAction(new ZoomToPointAction(event.deltaY / -400, {
+    	this.processUserZoom(event.deltaY / -400, {
 			x: event.pageX - this.svg.getBoundingClientRect().left,
 			y: event.pageY - this.svg.getBoundingClientRect().top
-		}, true));
+		});
 	}
 
 	private onMouseDown(event) {
@@ -127,6 +162,9 @@ class NewSvgRenderer extends React.Component<{}, {
 	}
 
 	private updateTouchState(event) {
+    	if(this.lastTouches.length == 1 && event.touches.length != 1)
+    		this.processUserPanStop();
+
 		//Save current touch-state as lastTouches
 		this.lastTouches = event.touches;
 	}
@@ -139,16 +177,16 @@ class NewSvgRenderer extends React.Component<{}, {
 			const newDistance = this.getDistance(event.touches[0], event.touches[1]);
 
 			//Zoom to the center-point
-			this.processAction(new ZoomToPointAction((newDistance - oldDistance) / 300, {
+			this.processUserZoom((newDistance - oldDistance) / 300, {
 				x: (event.touches[0].screenX + event.touches[1].screenX) / 2,
 				y: (event.touches[0].screenY + event.touches[1].screenY) / 2
-			}, true));
+			});
 		}
 
 		//Pan (1 finger input)
 		else if(this.lastTouches.length == 1)
 			//Calculate the difference between the old and the new input and move appropriately
-			this.processAction(new MoveSvgAction(this.lastTouches[0].screenX - event.touches[0].screenX, this.lastTouches[0].screenY - event.touches[0].screenY, true));
+			this.processUserPan(this.lastTouches[0].screenX - event.touches[0].screenX, this.lastTouches[0].screenY - event.touches[0].screenY);
 
 		//Save current touch-state
 		this.updateTouchState(event);
@@ -160,7 +198,7 @@ class NewSvgRenderer extends React.Component<{}, {
 			return;
 
 		//Calculate movement deltas under consideration of the scale and move appropriately
-		this.processAction(new MoveSvgAction(-this.lastMousePos.x + event.screenX, -this.lastMousePos.y + event.screenY, true));
+		this.processUserPan(event.screenX - this.lastMousePos.x, event.screenY - this.lastMousePos.y);
 
 		//Set lastMouseXPos, lastMouseYPos for delta calculations
 		this.lastMousePos.x = event.screenX;
