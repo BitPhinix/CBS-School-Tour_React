@@ -1,19 +1,19 @@
 class Untis
 {
     private static id: string = String(Math.floor(Math.random() * 100000000));
-    private static authenticator: UntisAuthenticationParams = null;
+    private static authenticator: UntisAuthenticationResult = null;
 
     private static server: string;
     private static school: string;
 
-    public static login(user: string = "", password: string = "", client: string = "", server: string = "https://arche.webuntis.com", school: string = "CBS-Mannheim") {
+    public static login(user: string = "", password: string = "", client: string = "ANDROID", server: string = "https://arche.webuntis.com", school: string = "CBS-Mannheim") {
         this.server = server;
         this.school = school
 
-        const newAuthenticator = new UntisAuthenticationParams(user, password, client);
+        const authenticator = new UntisAuthenticationParams(user, password, client);
 
-        this.request(UntisMethod.Authenticate, this.authenticator, function (response: UntisResponse){
-            Untis.authenticator = newAuthenticator;
+        this.request(UntisMethod.Authenticate, authenticator, function (response: UntisResponse){
+            Untis.authenticator = response.result as UntisAuthenticationResult;
         });
     }
 
@@ -22,29 +22,36 @@ class Untis
     }
 
     private static async request(method: UntisMethod, params: object, callback: Function){
-        const xHttp = new XMLHttpRequest();
+        if(this.IsLoggedIn() && method != UntisMethod.Authenticate){
+            const xHttp = new XMLHttpRequest();
 
-        xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
-        xHttp.setRequestHeader("Content-type", "application/json");
-        xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
-        xHttp.onreadystatechange = function() {
-            if (this.readyState == 4) {
-                const response = JSON.parse(this.responseText) as UntisResult;
-                if(Untis.CheckResponse(response, method))
-                    callback(response);
-            }
-        };
+            xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
+            xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
+            xHttp.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    const response = JSON.parse(this.responseText) as UntisResult;
+                    if(Untis.CheckResponse(response, method))
+                        callback(response);
+                }
+            };
+        }else{
+            console.warn("You are not logged in!");
+        }
     }
     private static CheckResponse(response: object, responseOf: UntisMethod){
         if("error" in response){
             const error = response as UntisError;
-            console.error("%cAttempted request: " + responseOf + "\nError: " + error.error.message + "\nResponse: ", 'color: red', response);
+            console.warn("%cAttempted request: " + responseOf + "\nError: " + error.error.message + "\nResponse: ", '', response);
             return false;
         }else if(response == null){
-            console.error("%cResponse is null!", 'color: red');
+            console.warn("%cResponse was null!");
             return false;
         }
         return true;
+    }
+
+    public static IsLoggedIn(){
+        return UntisAuthenticationResult == null? false : true;
     }
 }
 
@@ -94,9 +101,15 @@ class UntisResponse extends UntisMessage{
     result: UntisResult;
 }
 //#region Results
-class UntisResult extends UntisMessage{
+class UntisResult{
 
 }
+class UntisAuthenticationResult extends UntisResult{
+    sessionId: string;
+    personType: number;
+    personId: number
+}
+
 //#endregion
 
 export default Untis;
