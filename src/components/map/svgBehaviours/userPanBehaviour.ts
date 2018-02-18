@@ -49,14 +49,10 @@ class UserPanBehaviour implements IBehaviourBase {
 		this.xDifference = 0;
 		this.yDifference = 0;
 
-		if(!this.isPanning) {
-			console.log(this.yVelocity);
-			console.log(this.xVelocity);
-		}
-
 		this.xVelocity *= 0.6;
 		this.yVelocity *= 0.6;
 
+		//TODO
 		return true;
 	}
 }
