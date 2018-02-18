@@ -8,7 +8,7 @@ class Untis
 
     public static login(user: string = "", password: string = "", client: string = "ANDROID", server: string = "https://arche.webuntis.com", school: string = "CBS-Mannheim") {
         this.server = server;
-        this.school = school
+        this.school = school;
 
         const authenticator = new UntisAuthenticationParams(user, password, client);
 

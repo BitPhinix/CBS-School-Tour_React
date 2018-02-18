@@ -108,42 +108,57 @@ class NewSvgRenderer extends React.Component<{}, {
     }
 
     private processUserZoom(zoomDifference: number, screenPoint: Point) {
+    	//If we have a currentBehaviour and it blocks the input
     	if(this.currentBehaviour && this.currentBehaviour.blockUserInput)
     		return;
 
+    	//If current behaviour isn´t a UserZoomBehaviour
     	if(!(this.currentBehaviour instanceof UserZoomBehaviour))
+    		//Add one to the que
     		this.processBehaviour(new UserZoomBehaviour(zoomDifference, screenPoint));
-    	else if(this.currentBehaviour)
+    	else
+    		//Pass UserZoomBehaviour the zoom-data
     		this.currentBehaviour.onUserZoom(zoomDifference, screenPoint);
 	}
 
 	private processUserPan(xDifference: number, yDifference: number) {
+        //If we have a currentBehaviour and it blocks the input
 		if(this.currentBehaviour && this.currentBehaviour.blockUserInput)
 			return;
 
+        //If current behaviour isn´t a UserPanBehaviour
 		if(!(this.currentBehaviour instanceof UserPanBehaviour))
+        //Add one to the que
 			this.processBehaviour(new UserPanBehaviour(xDifference, yDifference));
 		else if(this.currentBehaviour)
+        	//Pass UserPanBehaviour the pan-data
 			this.currentBehaviour.onUserPan(xDifference, yDifference);
 	}
 
 	private processUserPanStop() {
+        //If we have a currentBehaviour and it blocks the input
 		if(this.currentBehaviour && this.currentBehaviour.blockUserInput)
 			return;
 
+		//If we have a currentBehaviour
 		if(this.currentBehaviour)
+			//Pass it onUserPanStop
 			this.currentBehaviour.onUserPanStop();
 	}
 
 	//region EventHandlers
 	private onMouseUp() {
+    	//If the mouse was pressed before
     	if(this.mousePressed)
+    		//Call processUserPanStop
 			this.processUserPanStop();
 
+    	//Set mousePressed to false
     	this.mousePressed = false;
 	}
 
 	private onWheel(event) {
+    	//mousePressed and calculate mouse coordinates
     	this.processUserZoom(event.deltaY / -400, {
 			x: event.pageX - this.svg.getBoundingClientRect().left,
 			y: event.pageY - this.svg.getBoundingClientRect().top
@@ -162,7 +177,9 @@ class NewSvgRenderer extends React.Component<{}, {
 	}
 
 	private updateTouchState(event) {
+    	//If lastTouches has only 1 touch and the next one hasn´t
     	if(this.lastTouches.length == 1 && event.touches.length != 1)
+    		//Call mousePressed
     		this.processUserPanStop();
 
 		//Save current touch-state as lastTouches

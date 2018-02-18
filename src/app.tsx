@@ -7,10 +7,12 @@ import FloorSelect from "./components/floorSelect";
 import Untis from "./utils/untis";
 import * as Toastr from "toastr";
 import * as Cookies from 'es-cookie';
+import * as Cookie from "./utils/cookie";
 
 
 class App extends React.Component<{}, {}> {
-    render() {
+
+    componentDidMount() {
         //If cookie "cbs-main" doesn't exist
         if(!Cookies.get("cbs-main")){
             //Create cookie "cbs-main" and set "visited" to true
@@ -26,9 +28,11 @@ class App extends React.Component<{}, {}> {
                 }
             );
         }
+    }
 
+    render() {
         return(
-            <div className="App">
+            <div className="App" onClick={() => Untis.login()}>
                 <FloorSelect/>
                 <SearchBar/>
                 <NavigationSlider/>

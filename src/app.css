@@ -10,3 +10,7 @@ body {
     z-index: 2;
     font-family: 'Roboto', serif !important;
 }
+
+.toast {
+    opacity: 0.95 !important;
+}
