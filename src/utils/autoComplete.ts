@@ -1,19 +1,19 @@
-import {ClassRoom} from "../typings";
+import {Node} from "../typings";
 const NavigationData = require("../../navData/data.json");
 
 class NavigationHelper {
 
-    getResults(text: string): ClassRoom[] {
+    getResults(text: string): Node[] {
         const result = [];
         const searchNumber = NavigationHelper.getNumber(text);
         const searchString = NavigationHelper.getQueryString(text);
 
-        NavigationHelper.iterateRooms((room) => {
-            //If room.description includes searchString or room number starts with searchNumber
-            if(!room.hidden && searchString && room.description && room.description.toLowerCase().includes(searchString) ||
-                searchNumber && room.number && room.number.toString().startsWith(searchNumber))
-                //Add room to result
-                result.push(room);
+        NavigationHelper.iterateNodes((node) => {
+            //If node.description includes searchString or node number starts with searchNumber
+            if(!node.hidden && searchString && node.description && node.description.toLowerCase().includes(searchString) ||
+                searchNumber && node.number && node.number.toString().startsWith(searchNumber))
+                //Add node to result
+                result.push(node);
 
             //Continue
             return true;
@@ -22,14 +22,14 @@ class NavigationHelper {
         return result;
     }
 
-    getRoom(text: string): ClassRoom {
+    getNode(text: string): Node {
         let result;
         const searchNumber = NavigationHelper.getNumber(text);
 
         if(searchNumber) {
-            NavigationHelper.iterateRooms((room) => {
-                if(searchNumber && room.number == parseInt(searchNumber))
-                    result = room;
+            NavigationHelper.iterateNodes((node) => {
+                if(searchNumber && node.number == parseInt(searchNumber))
+                    result = node;
 
                 //Only continue when no result was found
                 return !result;
@@ -50,7 +50,7 @@ class NavigationHelper {
             return searchResults[0];
 
         //Nothing was found, return undefined
-        return undefined;
+        return;
     }
 
     private static getNumber(text: string) {
@@ -63,16 +63,15 @@ class NavigationHelper {
         return text.replace(/[0-9]*/, "").toLowerCase().trim();
     }
 
-    private static iterateRooms(delegate: (room: ClassRoom) => boolean) {
+    private static iterateNodes(delegate: (node: Node) => boolean) {
         //For each floorId in floors
         for (let floorId of Object.keys(NavigationData.floors)) {
             let floor = NavigationData.floors[floorId];
 
-            //For each room in the floor
-            for (let roomId of Object.keys(floor)) {
-
+			//For each node in the floor
+            for (let roomId of Object.keys(floor.nodes)) {
                 //If result is false
-                if(!delegate(floor[roomId]))
+                if(!delegate(floor.nodes[roomId]))
                     //Break
                     return;
             }

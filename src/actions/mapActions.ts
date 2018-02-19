@@ -1,7 +1,7 @@
 import dispatcher from "../dispatcher";
-import {ClassRoom} from "../typings";
+import {Node} from "../typings";
 
-export function navigate(start: ClassRoom, destination: ClassRoom) {
+export function navigate(start: Node, destination: Node) {
     dispatcher.dispatch({
        type: "NAVIGATE",
        start,
@@ -9,10 +9,10 @@ export function navigate(start: ClassRoom, destination: ClassRoom) {
     });
 }
 
-export function zoomTo(room: ClassRoom) {
+export function zoomTo(node: Node) {
     dispatcher.dispatch({
         type: "ZOOM_TO",
-        room
+        node
     });
 }
 

@@ -1,4 +1,4 @@
-import {ClassRoom, Point} from "../typings";
+import {Node, Point} from "../typings";
 import mapUtils from "./mapUtils";
 const NavigationData = require("../../navData/data.json");
 
@@ -16,11 +16,11 @@ class Navigator {
     toPointArray(navigationResult: NavigationResult, floorId): Point[] {
         return Object.keys(navigationResult[floorId]).map((roomKey) => {
             //Yeah, I know it´s ugly :(
-            return NavigationData.floors[floorId][navigationResult[floorId][roomKey]].location;
+            return NavigationData.floors[floorId].nodes[navigationResult[floorId][roomKey]].location;
         });
     }
 
-    navigateGlobal(start: ClassRoom, destination: ClassRoom): NavigationResult {
+    navigateGlobal(start: Node, destination: Node): NavigationResult {
         //Get the floors of the start, destination
         const startFloor = mapUtils.getFloorId(start.number);
         const destinationFloor = mapUtils.getFloorId(destination.number);
@@ -54,13 +54,11 @@ class Navigator {
         //Navigate from staircase to destination
         result[destinationFloor] = this.navigateFloor(currentPos.number, destination.number, destinationFloor);
 
-		console.log(result[destinationFloor]);
-
 		//Return result
         return result;
     }
 
-    private findStaircase(currentNodeId: number, floorId: number, leadTo: number): ClassRoom {
+    private findStaircase(currentNodeId: number, floorId: number, leadTo: number): Node {
         //Get the floor
         const floor = NavigationData.floors[floorId];
         
@@ -97,9 +95,9 @@ class Navigator {
         const floor = NavigationData.floors[floorId];
 
         //For each node in the floor
-        for (let roomId of Object.keys(NavigationData.floors[floorId]))
+        for (let nodeId of Object.keys(NavigationData.floors[floorId].nodes))
             //Set distance to Infinity and predecessorId to undefined (since we don´t know it yet)
-            navigationMap[roomId] = {distance: Infinity, predecessorId: undefined, processed: false};
+            navigationMap[nodeId] = {distance: Infinity, predecessorId: undefined, processed: false};
 
         //Set the distance from the start node to 0 (it takes us nothing to stand still ^^) and predecessorId to undefined since it has none
         navigationMap[startId] = {processed: false, distance: 0, predecessorId: undefined};
@@ -110,11 +108,11 @@ class Navigator {
         while(currentNodeId = this.getCheapestNode(navigationMap)) {
 
             //For each connected node
-            for (let connectedId of floor[currentNodeId].connectedTo) {
+            for (let connectedId of floor.nodes[currentNodeId].connectedTo) {
                 //Calculate distance over our current cheapest node
-                let distance = navigationMap[currentNodeId].distance + mapUtils.getPathLength(floor[currentNodeId], floor[connectedId]);
+				let distance = navigationMap[currentNodeId].distance + mapUtils.getPathLength(floor.nodes[currentNodeId], floor.nodes[connectedId]);
 
-                //If the distance over our current cheapest is higher than the old one
+				//If the distance over our current cheapest is higher than the old one
                 if (navigationMap[connectedId].distance <= distance)
                     continue;
 

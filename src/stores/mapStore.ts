@@ -1,7 +1,7 @@
 import {EventEmitter} from "events";
 import dispatcher from "../dispatcher";
 import navigator from "../utils/navigator";
-import {ClassRoom} from "../typings";
+import {Node} from "../typings";
 import {ReactElement} from "react";
 import SvgDraw from "../utils/svgDraw";
 
@@ -19,7 +19,7 @@ class MapStore extends EventEmitter {
         this.state = {overlay: {}, currentFloor: 1};
     }
 
-    navigate(start: ClassRoom, destination: ClassRoom) {
+    navigate(start: Node, destination: Node) {
         //Calculate path
         const paths = navigator.navigateGlobal(start, destination);
 
@@ -32,9 +32,9 @@ class MapStore extends EventEmitter {
         this.emit("change");
     }
 
-    zoomTo(room: ClassRoom) {
+    zoomTo(node: Node) {
         //Emit zoomToRoom
-        this.emit("zoomToRoom", {room: room});
+        this.emit("zoomToRoom", {node});
     }
 
     changeFloor(floorId: number) {
@@ -52,7 +52,7 @@ class MapStore extends EventEmitter {
                 break;
 
             case "ZOOM_TO":
-                this.zoomTo(action.room);
+                this.zoomTo(action.node);
                 break;
 
             case "CHANGE_FLOOR":

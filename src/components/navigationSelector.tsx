@@ -6,7 +6,6 @@ import * as mapActions from "../actions/mapActions";
 import * as sliderActions from "../actions/sliderActions";
 import * as Toastr from "toastr";
 import Untis from "../utils/untis";
-import {HTMLAttributes} from "react";
 
 class NavigationSelector extends React.Component<{start?: string, destination?: string}, {}> {
 
@@ -66,14 +65,14 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
     }
 
     tryNavigate(showErrors: boolean) {
-        //Try to get start and destination room
-        const start = autoComplete.getRoom(this.startInput.value);
-        const destination = autoComplete.getRoom(this.destinationInput.value);
+        //Try to get start and destination node
+        const start = autoComplete.getNode(this.startInput.value);
+        const destination = autoComplete.getNode(this.destinationInput.value);
 
         if(!start && showErrors)
-            Toastr.error("Start wurde nicht gefunden oder ist nicht eindeutig!");
+            Toastr.error("Der Startpunkt wurde nicht gefunden oder ist nicht eindeutig!");
         if(!destination && showErrors)
-            Toastr.error("Ziel wurde nicht gefunden oder ist nicht eindeutig!");
+            Toastr.error("Der Zielpunkt wurde nicht gefunden oder ist nicht eindeutig!");
 
         if(destination && start) {
             //Navigate

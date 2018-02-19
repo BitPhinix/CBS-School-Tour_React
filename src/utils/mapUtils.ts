@@ -1,4 +1,4 @@
-import {ClassRoom, Point} from "../typings";
+import {Node, Point} from "../typings";
 const NavigationData = require("../../navData/data.json");
 
 
@@ -8,8 +8,17 @@ class MapUtils {
         return Math.floor(roomId / 100);
     }
 
-    getPathLength(room1: ClassRoom, room2: ClassRoom) {
-        return Math.sqrt(Math.pow(room1.location.x - room2.location.x, 2) + Math.pow(room2.location.y - room1.location.y, 2));
+    getPathLength(node1: Node, node2: Node) {
+        return Math.sqrt(Math.pow(node1.location.x - node2.location.x, 2) + Math.pow(node1.location.y - node2.location.y, 2));
+    }
+
+    getFloorCenter(floorId: number): Point {
+        //TODO Remove when navdata is complete
+        if(!NavigationData.floors[floorId])
+            return {x: 0, y: 0};
+
+        //Return center of floor
+        return NavigationData.floors[floorId].center;
     }
 }
 
