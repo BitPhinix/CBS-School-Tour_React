@@ -8,5 +8,9 @@ body {
 
 * {
     z-index: 2;
-    font-family: 'Roboto', serif !important;
+    font-family: 'Roboto', Arial !important;
+}
+
+.toast {
+    opacity: 0.95 !important;
 }

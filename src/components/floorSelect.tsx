@@ -34,10 +34,10 @@ class FloorSelect extends React.Component<{}, {currentFloor: number}> {
     render() {
         return (
             <Col className="floorSelect">
-                <Row onClick={() => mapActions.changeFloor(2)} className={this.getSelectedState(2)}><i>2 OG</i></Row>
-                <Row onClick={() => mapActions.changeFloor(1)} className={this.getSelectedState(1)}><i>1 OG</i></Row>
+                <Row onClick={() => mapActions.changeFloor(2)} className={this.getSelectedState(2)}><i>2</i></Row>
+                <Row onClick={() => mapActions.changeFloor(1)} className={this.getSelectedState(1)}><i>1</i></Row>
                 <Row onClick={() => mapActions.changeFloor(0)} className={this.getSelectedState(0)}><i>EG</i></Row>
-                <Row onClick={() => mapActions.changeFloor(-1)} className={this.getSelectedState(-1)}><i>1 UG</i></Row>
+                <Row onClick={() => mapActions.changeFloor(-1)} className={this.getSelectedState(-1)}><i>UG</i></Row>
             </Col>
         );
     }

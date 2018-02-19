@@ -1,4 +1,4 @@
-import "../map.css";
+import "./map.css";
 import * as React from "react";
 import SvgRenderer from "./svgRenderer";
 import mapStore from "../../stores/mapStore";
@@ -16,7 +16,7 @@ class Map extends React.Component<{}, {
         super(props);
 
         //Default state
-        this.state = {overlay: {}, currentFloor: -100};
+        this.state = {overlay: {}, currentFloor: undefined};
 
         //Hook up change event
         mapStore.on("change", () => this.updateState());

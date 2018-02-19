@@ -2,10 +2,10 @@
     /* tweeking */
     width: 100%;
     height: 152px;
-    background-color: #4791f7;
+    background-color: #4285F4 !important;
 }
 
-.navigationSelector .routingContainer {
+.navigationSelector .baseContainer {
     display: flex; /* activating flex */
     flex-flow: row; /* so the content gets aligned in a row */
 
@@ -23,46 +23,73 @@
     user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
-.navigationSelector .modeContainer{
-    display: flex;
+.navigationSelector .topContainer{
+    display: flex; /* activating flex */
+    flex-flow: row; /* so the content gets aligned in a row */
+
+
+    /* tweeking */
+    width: 100%;
     height: 56px;
-    padding: 10px 10px 10px 65px;
+}
+
+
+
+.navigationSelector .topContainer .topRightContainer {
+    height: 24px !important;
+    width: 70px !important;
+    height: 66px !important;
+}
+
+.navigationSelector .topContainer .topRightContainer .closeContainer{
+    margin-left: 23px;
+    margin-top: 21px;
+    height: 24px;
+    width: 24px;
+    cursor: pointer;
+}
+
+.navigationSelector .topContainer .topRightContainer .closeContainer svg{
+    margin-left: 3px;
+    margin-top: 3px;
+    height: 18px;
+    width: 18px;
+}
+
+
+.navigationSelector .topContainer .modeContainer {
+    display: flex;
+    width: calc(100% - 65px - 70px);
+    margin-left: 65px;
+    margin-top: 10px;
 }
 
 .navigationSelector .modeContainer .iconContainer{
     height: 42px;
     width: 47px;
-    cursor: pointer;
-}
-
-.navigationSelector .modeContainer .closeContainer{
-    float: right;
 }
 
 .navigationSelector .modeContainer .iconContainer .circleContainer{
-    margin-left: 2.5px;
-    height: 42px;
-    width: 42px;
+    margin-left: 5px;
+    margin-top: 2.5px;
+    height: 37px;
+    width: 37px;
+    cursor: pointer;
 }
 
 .navigationSelector .modeContainer .iconContainer .selected{
     border-radius: 20px;
-    background: #4774d3;
+    background: #3367D6;
+}
+
+.navigationSelector .modeContainer .iconContainer .circleContainer svg {
+    height: 26px;
+    width: 26px;
 }
 
 .navigationSelector .modeContainer .iconContainer .circleContainer svg{
-    height: 30px;
-    width: 30px;
-}
-
-.navigationSelector .modeContainer .iconContainer .circleContainer .walk{
-    margin-top: 6px;
-    margin-left: 8px;
-}
-
-.navigationSelector .modeContainer .iconContainer .circleContainer .clock{
-    margin-top: 6px;
-    margin-left: 6px;
+    margin-top: 5.5px;
+    margin-left: 5.5px;
 }
 
 /*#region leftContainer*/
@@ -78,7 +105,8 @@
 
 .navigationSelector .leftContainer .beginningContainer{
     /* tweeking */
-    margin-bottom: -12px;
+    margin-top: 2px;
+    margin-bottom: -17px;
 }
 
 .navigationSelector .leftContainer .beginningContainer svg{

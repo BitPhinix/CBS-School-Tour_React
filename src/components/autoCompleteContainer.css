@@ -1,4 +1,4 @@
-.autoCompleteContainer {
+.autoCompleteContainer{
     /* just for tweeking */
     list-style: none;
     background-color: transparent;
@@ -15,16 +15,16 @@
     max-width: 400px;
     height: auto;
     padding: 0px;
-    max-height: 273px;
 }
 
 .autoCompleteList{
     padding-left: 0px;
-    margin-bottom: 2px !important; /* doesnt work without it!!!!!?????? */
+    margin-top: 0px !important;
+    margin-bottom: 8px !important;
 }
 
 .searchBar .autoCompleteList{
-    max-height: 273px;
+    max-height: 270px;
 }
 
 .navigationSelector .autoCompleteList{
