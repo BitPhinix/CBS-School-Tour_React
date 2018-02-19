@@ -18,11 +18,14 @@ class Untis
     }
 
     private static logout(){
-        this.request(UntisMethod.Logout, null, function (){ Untis.authenticator = null})
+        this.request(UntisMethod.Logout, null, function (){
+            Untis.authenticator = null;
+            Untis.id = String(Math.floor(Math.random() * 100000000));
+        });
     }
 
     private static async request(method: UntisMethod, params: object, callback: Function){
-        if(this.IsLoggedIn() && method != UntisMethod.Authenticate){
+        if(!this.IsLoggedIn() && method == UntisMethod.Authenticate || this.IsLoggedIn && method != UntisMethod.Authenticate){
             const xHttp = new XMLHttpRequest();
 
             xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
@@ -34,8 +37,12 @@ class Untis
                         callback(response);
                 }
             };
-        }else{
-            console.warn("You are not logged in!");
+        }else if(this.IsLoggedIn() && method == UntisMethod.Authenticate){
+            this.logout();
+            //make it with callback!!!!!!!!!
+            setTimeout(function() {
+                this.request(method, params, callback);
+            }, 1000);
         }
     }
     private static CheckResponse(response: object, responseOf: UntisMethod){
@@ -51,7 +58,7 @@ class Untis
     }
 
     public static IsLoggedIn(){
-        return UntisAuthenticationResult == null? false : true;
+        return this.authenticator == null? false : true;
     }
 }
 

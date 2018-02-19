@@ -32,7 +32,7 @@ class App extends React.Component<{}, {}> {
 
     render() {
         return(
-            <div className="App" onClick={() => Untis.login()}>
+            <div className="App">
                 <FloorSelect/>
                 <SearchBar/>
                 <NavigationSlider/>
