@@ -55,9 +55,14 @@ class NewSvgRenderer extends React.Component<{}, {
 
 	processBehaviour(action: BehaviourBase) {
 		//If action need to be run instantly
-    	if(action.runInstant)
-    		//Clear que
+    	if(action.runInstant) {
+			//Clear que
 			this.behaviourQue = [];
+
+			//Clear currentBehaviour
+			this.currentBehaviour = null;
+		}
+
 
     	//Add action to que
 		this.behaviourQue.push(action);
