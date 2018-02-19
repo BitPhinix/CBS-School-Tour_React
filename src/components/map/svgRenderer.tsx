@@ -12,6 +12,7 @@ class NewSvgRenderer extends React.Component<{}, {
     overlay: ReactElement<SVGElement>[]
 }> {
     svg: SVGSVGElement;
+    mapContainer;
 
     private lastUpdate: number = Date.now();
     private behaviourQue: BehaviourBase[] = [];
@@ -53,27 +54,17 @@ class NewSvgRenderer extends React.Component<{}, {
 	}
 
 	processBehaviour(action: BehaviourBase) {
-        //If action does not need to be run instantly
-        if(!action.runInstant) {
-            //Add action to que
-            this.behaviourQue.push(action);
+		//If action need to be run instantly
+    	if(action.runInstant)
+    		//Clear que
+			this.behaviourQue = [];
 
-            //return
-            return;
-        }
-
-        //Clear que
-        this.behaviourQue = [];
-
-        //Set currentAction to action
-        this.currentBehaviour = action;
-
-        //Call initialize
-        this.currentBehaviour.initialize(this);
+    	//Add action to que
+		this.behaviourQue.push(action);
     }
 
     private update() {
-        //Get current time
+		//Get current time
         const currentTime = Date.now();
 
         //Calculate deltaTime
@@ -87,7 +78,7 @@ class NewSvgRenderer extends React.Component<{}, {
             //Get next action from que
             this.currentBehaviour = this.getNextAction();
 
-        //Request a new AnimationFrame
+		//Request a new AnimationFrame
         window.requestAnimationFrame(() => this.update());
     }
 
@@ -228,7 +219,8 @@ class NewSvgRenderer extends React.Component<{}, {
 				 onTouchEnd={(event) => this.updateTouchState(event)}>
                 <g transform={
                     "scale(" + this.state.scale + ") " +
-                    "translate(" + this.state.translation.x + ", " + this.state.translation.y + ") "}>
+                    "translate(" + this.state.translation.x + ", " + this.state.translation.y + ") "}
+					ref={(mapContainer) => this.mapContainer = mapContainer}>
                     <g dangerouslySetInnerHTML={{__html: this.state.inlineElements}}/>
                     <g>{this.state.overlay}</g>
                 </g>

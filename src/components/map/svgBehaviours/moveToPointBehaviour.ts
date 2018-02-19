@@ -13,18 +13,19 @@ class MoveToPointBehaviour implements SvgBehaviourBase {
 	private timePassed: number = 0;
 	private xDifference: number;
 	private yDifference: number;
-	private considerScale: boolean;
+	private targetPoint: Point;
 
-	constructor(xDifference: number, yDifference: number, considerScale: boolean = false, animationDuration?: number) {
-		this.xDifference = xDifference;
-		this.yDifference = yDifference;
+	constructor(targetPoint: Point, animationDuration?: number) {
 		this.animationDuration = animationDuration;
-		this.considerScale = considerScale;
+		this.targetPoint = targetPoint;
 	}
 
 	initialize(svgRenderer: SvgRenderer) {
 		if(!this.animationDuration)
 			this.animationDuration = Math.sqrt(Math.pow(this.xDifference, 2) + Math.pow(this.yDifference, 2)) / 4;
+
+		this.xDifference = svgRenderer.state.translation.x - this.targetPoint.x;
+		this.yDifference = svgRenderer.state.translation.y - this.targetPoint.y;
 	}
 
 	onUserPan(xDifference: number, yDifference: number): void {}
@@ -39,8 +40,8 @@ class MoveToPointBehaviour implements SvgBehaviourBase {
 
 		svgRenderer.setState({
 			translation: {
-				x: (this.xDifference / this.animationDuration * deltaTime) / (this.considerScale ? svgRenderer.state.scale : 1) + svgRenderer.state.translation.x,
-				y: (this.yDifference / this.animationDuration * deltaTime) / (this.considerScale ? svgRenderer.state.scale : 1) + svgRenderer.state.translation.y
+				x: this.xDifference / this.animationDuration * deltaTime + svgRenderer.state.translation.x,
+				y: this.yDifference / this.animationDuration * deltaTime + svgRenderer.state.translation.y
 			}
 		});
 

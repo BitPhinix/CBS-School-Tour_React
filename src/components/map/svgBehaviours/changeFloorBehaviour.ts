@@ -2,6 +2,7 @@ import SvgBehaviourBase from "./iBehaviourBase";
 import SvgRenderer from "../svgRenderer";
 import {ReactElement} from "react";
 import {Point} from "../../../typings";
+import ZoomToPointBehaviour from "./zoomToPointBehaviour";
 
 class ChangeFloorBehaviour implements SvgBehaviourBase {
 
@@ -32,6 +33,19 @@ class ChangeFloorBehaviour implements SvgBehaviourBase {
             inlineElements: this.svgContent,
             overlay: this.overlay ? this.overlay : []
         });
+
+        if(!this.center)
+            return false;
+
+        //TODO change :( IDK how to get the svg width without rendering it before
+
+		//Get mapContainer BoundingRect
+		const boundingRect = svgRenderer.mapContainer.getBoundingClientRect();
+
+		svgRenderer.processBehaviour(new ZoomToPointBehaviour(1, {
+			x: boundingRect.width / 2,
+			y: boundingRect.height / 2
+		}, false, 0.0001));
 
         return false;
     }
