@@ -2,12 +2,12 @@
     position: absolute;
     right: 10px;
     bottom: 10px;
-    width: 42px;
+    width: 30px;
 }
 
 .floorSelect div {
     text-align: center;
-    width: 42px;
+    width: 100%;
     border-bottom: 1px solid gray;
 }
 

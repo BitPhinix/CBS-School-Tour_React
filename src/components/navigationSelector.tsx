@@ -6,6 +6,7 @@ import * as mapActions from "../actions/mapActions";
 import * as sliderActions from "../actions/sliderActions";
 import * as Toastr from "toastr";
 import Untis from "../utils/untis";
+import {HTMLAttributes} from "react";
 
 class NavigationSelector extends React.Component<{start?: string, destination?: string}, {}> {
 
@@ -102,8 +103,9 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                     <div className="topContainer">
 
                         <div className="modeContainer">
+
                             <div className="iconContainer">
-                                <div className="circleContainer selected">
+                                <div className="circleContainer">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                         <path fill="rgba(255, 255, 255, 0.85)" d="M288,112c22.223,0,39.997-17.776,39.997-40c0-22.225-17.774-40-39.997-40s-40.003,17.775-40.003,40   C247.997,94.224,265.777,112,288,112z"/>
                                         <path fill="rgba(255, 255, 255, 0.85)" d="M288,232h104v-40h-72l-44.802-69.333c-7.698-11.667-18.136-18.136-30.933-18.136c-3.198,0-8.828,0.531-12.799,1.747   L120,144v112h40v-80l40.531-16L120,480h40l56.698-164.271L267,384v96h38V352l-57.031-96l19.745-61.864L288,232z"/>
@@ -111,8 +113,8 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                                 </div>
                             </div>
 
-                            <div className="iconContainer" onClick={() => Untis.login()}>
-                                <div className="circleContainer selected">
+                            <div className="iconContainer" onClick={(event) => Untis.login()} >
+                                <div className="circleContainer">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                                         <path fill="rgba(255, 255, 255, 0.85)" stroke="#231F20" strokeWidth="3.3461" strokeMiterlimit="10" d="M64.014,74.898"/>
                                         <path fill="rgba(255, 255, 255, 0.85)" d="M50,6.507C26.934,6.507,8.233,25.982,8.233,50c0,24.021,18.701,43.492,41.767,43.492  c23.073,0,41.767-19.471,41.767-43.492C91.767,25.982,73.072,6.507,50,6.507z M50,83.979c-17.992,0-32.63-15.24-32.63-33.979  c0-18.736,14.638-33.979,32.63-33.979c17.99,0,32.626,15.243,32.626,33.979C82.626,68.738,67.989,83.979,50,83.979z"/>
@@ -123,7 +125,10 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
                         </div>
 
                         <div className="topRightContainer">
-                            <div className="closeContainer" onClick={() => sliderActions.hide()}>
+                            <div className="closeContainer" onClick={() => {
+                                sliderActions.hide();
+                                this.container.setVisibility(false);
+                            } }>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
                                     <polygon fill="#ffffff" points="95,15.588 84.412,5 50,39.412 15.588,5 5,15.588 39.412,50 5,84.412 15.588,95 50,60.588 84.412,95 95,84.412 60.588,50    "/>
                                 </svg>
@@ -132,7 +137,7 @@ class NavigationSelector extends React.Component<{start?: string, destination?: 
 
                     </div>
 
-                    <div className="routingContainer">
+                    <div className="baseContainer">
                         <div className="leftContainer">
 
                             <div className="beginningContainer">
