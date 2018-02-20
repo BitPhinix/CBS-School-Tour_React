@@ -100,7 +100,7 @@ class Navigator {
             navigationMap[nodeId] = {distance: Infinity, predecessorId: undefined, processed: false};
 
         //Set the distance from the start node to 0 (it takes us nothing to stand still ^^) and predecessorId to undefined since it has none
-        navigationMap[startId] = {processed: false, distance: 0, predecessorId: undefined};
+        navigationMap[startId] = {distance: 0, predecessorId: undefined, processed: false};
 
         let currentNodeId;
 
@@ -109,8 +109,10 @@ class Navigator {
 
             //For each connected node
             for (let connectedId of floor.nodes[currentNodeId].connectedTo) {
-                //Calculate distance over our current cheapest node
-				let distance = navigationMap[currentNodeId].distance + mapUtils.getPathLength(floor.nodes[currentNodeId], floor.nodes[connectedId]);
+                //Calculate distance over our current cheapest node and include corner penalty if necessary
+				let distance = navigationMap[currentNodeId].distance
+					+ mapUtils.getPathLength(floor.nodes[currentNodeId], floor.nodes[connectedId])
+					+ (mapUtils.isCorner(floor.nodes[navigationMap[currentNodeId].predecessorId], floor.nodes[currentNodeId], floor.nodes[connectedId]) ? 30 : 0);
 
 				//If the distance over our current cheapest is higher than the old one
                 if (navigationMap[connectedId].distance <= distance)

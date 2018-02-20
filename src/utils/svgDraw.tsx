@@ -1,6 +1,7 @@
 import {Point} from "../typings";
 import * as React from "react";
 import {ReactElement} from "react";
+import MapUtils from "./mapUtils";
 
 class SvgDraw {
 
@@ -21,10 +22,10 @@ class SvgDraw {
             //If linePitch is undefined
             if(!linePitch)
                 //Calculate it
-                linePitch = SvgDraw.getPitch(lineStart, path[i]);
+                linePitch = MapUtils.getPitch(lineStart, path[i]);
 
             //If our current node isn´t the first one and it has another pitch than the last node or it is the last node
-            if(i != 0 && (i == path.length - 1 || linePitch != SvgDraw.getPitch(lineStart, path[i + 1]))) {
+            if(i != 0 && (i == path.length - 1 || linePitch != MapUtils.getPitch(lineStart, path[i + 1]))) {
                 //Draw line from lineStart to current node
                 result.push(SvgDraw.getNavigationLine(lineStart, path[i], i));
 
@@ -43,11 +44,6 @@ class SvgDraw {
         result.push(SvgDraw.getNavEnd(path[path.length - 1]));
 
         return result;
-    }
-
-    static getPitch(p1: Point, p2: Point) {
-        //Calculated the pitch between the two points and return it (|delta y| / |delta x|)
-        return Math.abs(p1.y - p2.y) / Math.abs(p1.x - p2.x);
     }
 
     static getNavStart(position: Point) {

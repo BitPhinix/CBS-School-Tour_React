@@ -20,6 +20,18 @@ class MapUtils {
         //Return center of floor
         return NavigationData.floors[floorId].center;
     }
+
+    isCorner(node1: Node, node2: Node, node3: Node) {
+    	if(!node1 || !node2 || !node3)
+    		return false;
+
+    	return Math.abs(this.getPitch(node1.location, node2.location) - this.getPitch(node2.location, node3.location)) > 10;
+	}
+
+	getPitch(p1: Point, p2: Point) {
+		//Calculated the pitch between the two points and return it (|delta y| / |delta x|)
+		return Math.abs(p1.y - p2.y) / Math.abs(p1.x - p2.x);
+	}
 }
 
 //Export initialized navigator
