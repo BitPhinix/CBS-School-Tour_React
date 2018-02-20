@@ -4,6 +4,7 @@ import navigator from "../utils/navigator";
 import {Node} from "../typings";
 import {ReactElement} from "react";
 import SvgDraw from "../utils/svgDraw";
+import {zoomTo} from "../actions/mapActions";
 
 class MapStore extends EventEmitter {
 
@@ -34,7 +35,7 @@ class MapStore extends EventEmitter {
 
     zoomTo(node: Node) {
         //Emit zoomToRoom
-        this.emit("zoomToRoom", {node});
+        this.emit("zoomToNode", {node});
     }
 
     changeFloor(floorId: number) {

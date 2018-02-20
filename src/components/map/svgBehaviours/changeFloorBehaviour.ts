@@ -14,12 +14,14 @@ class ChangeFloorBehaviour implements SvgBehaviourBase {
     svgContent: string;
     floor: number;
     overlay: ReactElement<SVGElement>[];
-    center: boolean;
+	initialTransform: Point;
+	initialScale: number;
 
-    constructor(floor: number, center?: boolean, overlay?: ReactElement<SVGElement>[]) {
+    constructor(floor: number, initialTransform: Point, initialScale: number, overlay?: ReactElement<SVGElement>[]) {
         this.floor = floor;
         this.overlay = overlay;
-        this.center = center;
+        this.initialTransform = initialTransform;
+        this.initialScale = initialScale;
     }
 
     initialize(svgRenderer: SvgRenderer) {
@@ -30,22 +32,11 @@ class ChangeFloorBehaviour implements SvgBehaviourBase {
         if(!this.svgContent)
             return true;
 
-        let translation = svgRenderer.state.translation;
-        let scale = svgRenderer.state.scale;
-
-        if(this.center) {
-            const center = mapUtils.getFloorCenter(this.floor);
-
-            scale = 1;
-            translation.x = (svgRenderer.svg.clientWidth / 2 - center.x);
-            translation.y = (svgRenderer.svg.clientHeight / 2 - center.y);
-        }
-
         svgRenderer.setState({
             inlineElements: this.svgContent,
             overlay: this.overlay ? this.overlay : [],
-            translation,
-            scale
+            translation: this.initialTransform,
+            scale: this.initialScale
         });
 
         return false;
