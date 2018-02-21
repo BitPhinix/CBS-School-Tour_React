@@ -1,500 +1,506 @@
 {
   "floors": {
     "1": {
-      "145": {
-        "description": "Damen Toiletten",
-        "number": 145,
-        "connectedTo": [
-          140,
-          146
-        ],
-        "location": {
-          "x": 430,
-          "y": 310
-        }
+      "center": {
+        "x": 493.5,
+        "y": 280.5
       },
-      "146": {
-        "description": "Herren Toiletten",
-        "number": 146,
-        "connectedTo": [
-          145,
-          143
-        ],
-        "location": {
-          "x": 430,
-          "y": 310
-        }
-      },
-      "1": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          101,
-          105
-        ],
-        "location": {
-          "x": 96,
-          "y": 119
-        }
-      },
-      "2": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          104,
-          131,
-          4
-        ],
-        "location": {
-          "x": 327,
-          "y": 119
-        }
-      },
-      "3": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          106,
-          117
-        ],
-        "location": {
-          "x": 96,
-          "y": 310
-        }
-      },
-      "4": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          128,
-          140,
-          2
-        ],
-        "location": {
-          "x": 327,
-          "y": 310
-        }
-      },
-      "5": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          6,
-          154,
-          142
-        ],
-        "location": {
-          "x": 640,
-          "y": 119
-        }
-      },
-      "6": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          5,
-          143,
-          159
-        ],
-        "location": {
-          "x": 640,
-          "y": 310
-        }
-      },
-      "7": {
-        "description": "Schlüsselpunkt",
-        "hidden": true,
-        "connectedTo": [
-          167,
-          165
-        ],
-        "location": {
-          "x": 917,
-          "y": 499
-        }
-      },
-      "101": {
-        "description": "Klassenzimmer",
-        "number": 101,
-        "connectedTo": [
-          1,
-          102
-        ],
-        "location": {
-          "x": 125,
-          "y": 119
-        }
-      },
-      "102": {
-        "description": "Klassenzimmer",
-        "number": 102,
-        "connectedTo": [
-          101,
-          103
-        ],
-        "location": {
-          "x": 181,
-          "y": 119
-        }
-      },
-      "103": {
-        "description": "Klassenzimmer",
-        "number": 103,
-        "connectedTo": [
-          102,
-          111
-        ],
-        "location": {
-          "x": 241,
-          "y": 119
-        }
-      },
-      "104": {
-        "description": "Klassenzimmer",
-        "number": 104,
-        "connectedTo": [
-          111,
-          2
-        ],
-        "location": {
-          "x": 297,
-          "y": 119
-        }
-      },
-      "105": {
-        "description": "Klassenzimmer",
-        "number": 105,
-        "connectedTo": [
-          1,
-          106
-        ],
-        "location": {
-          "x": 96,
-          "y": 140
-        }
-      },
-      "106": {
-        "description": "Klassenarbeitsraum",
-        "number": 106,
-        "connectedTo": [
-          105,
-          3
-        ],
-        "location": {
-          "x": 96,
-          "y": 184
-        }
-      },
-      "111": {
-        "description": "Computerraum",
-        "number": 111,
-        "connectedTo": [
-          103,
-          104
-        ],
-        "location": {
-          "x": 257,
-          "y": 119
-        }
-      },
-      "117": {
-        "description": "Lehrerzimmer",
-        "number": 117,
-        "connectedTo": [
-          3,
-          126
-        ],
-        "location": {
-          "x": 180,
-          "y": 310
-        }
-      },
-      "126": {
-        "description": "Direktorat",
-        "number": 126,
-        "connectedTo": [
-          117,
-          128
-        ],
-        "location": {
-          "x": 239,
-          "y": 310
-        }
-      },
-      "128": {
-        "description": "Sekretariat",
-        "number": 128,
-        "connectedTo": [
-          126,
-          4
-        ],
-        "location": {
-          "x": 273,
-          "y": 310
-        }
-      },
-      "131": {
-        "description": "Physikraum",
-        "number": 131,
-        "connectedTo": [
-          2,
-          136
-        ],
-        "location": {
-          "x": 398,
-          "y": 119
-        }
-      },
-      "136": {
-        "description": "Physikraum",
-        "number": 136,
-        "connectedTo": [
-          131,
-          137
-        ],
-        "location": {
-          "x": 465,
-          "y": 119
-        }
-      },
-      "137": {
-        "description": "Physikraum",
-        "number": 137,
-        "connectedTo": [
-          136,
-          138
-        ],
-        "location": {
-          "x": 513,
-          "y": 119
-        }
-      },
-      "138": {
-        "description": "Physikraum",
-        "number": 138,
-        "connectedTo": [
-          137,
-          142
-        ],
-        "location": {
-          "x": 573,
-          "y": 119
-        }
-      },
-      "140": {
-        "description": "Computerraum",
-        "number": 140,
-        "connectedTo": [
-          4,
-          0
-        ],
-        "location": {
-          "x": 385,
-          "y": 310
-        }
-      },
-      "142": {
-        "description": "Physikraum",
-        "number": 142,
-        "connectedTo": [
-          138,
-          5
-        ],
-        "location": {
-          "x": 573,
-          "y": 119
-        }
-      },
-      "143": {
-        "description": "Computerraum",
-        "number": 143,
-        "connectedTo": [
-          0,
-          6
-        ],
-        "location": {
-          "x": 612,
-          "y": 310
-        }
-      },
-      "150": {
-        "description": "Klassenzimmer",
-        "number": 150,
-        "connectedTo": [
-          154,
-          151
-        ],
-        "location": {
-          "x": 733,
-          "y": 119
-        }
-      },
-      "151": {
-        "description": "Klassenzimmer",
-        "number": 151,
-        "connectedTo": [
-          150,
-          152
-        ],
-        "location": {
-          "x": 796,
-          "y": 119
-        }
-      },
-      "152": {
-        "description": "Klassenzimmer",
-        "number": 152,
-        "connectedTo": [
-          151,
-          153
-        ],
-        "location": {
-          "x": 860,
-          "y": 119
-        }
-      },
-      "153": {
-        "description": "Klassenzimmer",
-        "number": 153,
-        "connectedTo": [
-          152,
-          172
-        ],
-        "location": {
-          "x": 917,
-          "y": 119
-        }
-      },
-      "154": {
-        "description": "Klassenarbeitsraum",
-        "number": 154,
-        "connectedTo": [
-          5,
-          150
-        ],
-        "location": {
-          "x": 699,
-          "y": 119
-        }
-      },
-      "159": {
-        "description": "Computerraum",
-        "number": 159,
-        "connectedTo": [
-          6,
-          170
-        ],
-        "location": {
-          "x": 695,
-          "y": 310
-        }
-      },
-      "162": {
-        "description": "Klassenzimmer",
-        "number": 162,
-        "connectedTo": [
-          164,
-          165
-        ],
-        "location": {
-          "x": 855,
-          "y": 499
-        }
-      },
-      "164": {
-        "description": "Klassenzimmer",
-        "number": 164,
-        "connectedTo": [
-          "162"
-        ],
-        "location": {
-          "x": 847,
-          "y": 499
-        }
-      },
-      "165": {
-        "description": "Klassenzimmer",
-        "number": 165,
-        "connectedTo": [
-          7,
-          166,
-          162
-        ],
-        "location": {
-          "x": 880,
-          "y": 499
-        }
-      },
-      "166": {
-        "description": "Computerraum",
-        "number": 166,
-        "connectedTo": [
-          165
-        ],
-        "location": {
-          "x": 880,
-          "y": 499
-        }
-      },
-      "167": {
-        "description": "Computerraum",
-        "number": 167,
-        "connectedTo": [
-          169,
-          7
-        ],
-        "location": {
-          "x": 917,
-          "y": 457
-        }
-      },
-      "169": {
-        "description": "Klassenzimmer",
-        "number": 169,
-        "connectedTo": [
-          170,
-          167
-        ],
-        "location": {
-          "x": 917,
-          "y": 370
-        }
-      },
-      "170": {
-        "description": "Klassenzimmer",
-        "number": 170,
-        "connectedTo": [
-          159,
-          171,
-          169
-        ],
-        "location": {
-          "x": 917,
-          "y": 310
-        }
-      },
-      "171": {
-        "description": "Klassenzimmer",
-        "number": 171,
-        "connectedTo": [
-          172,
-          170
-        ],
-        "location": {
-          "x": 917,
-          "y": 239
-        }
-      },
-      "172": {
-        "description": "Klassenzimmer",
-        "number": 172,
-        "connectedTo": [
-          153,
-          171
-        ],
-        "location": {
-          "x": 917,
-          "y": 166
+      "nodes": {
+        "145": {
+          "description": "Damen Toiletten",
+          "number": 145,
+          "connectedTo": [
+            140,
+            146
+          ],
+          "location": {
+            "x": 430,
+            "y": 310
+          }
+        },
+        "146": {
+          "description": "Herren Toiletten",
+          "number": 146,
+          "connectedTo": [
+            145,
+            143
+          ],
+          "location": {
+            "x": 430,
+            "y": 310
+          }
+        },
+        "1": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            101,
+            105
+          ],
+          "location": {
+            "x": 96,
+            "y": 119
+          }
+        },
+        "2": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            104,
+            131,
+            4
+          ],
+          "location": {
+            "x": 327,
+            "y": 119
+          }
+        },
+        "3": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            106,
+            117
+          ],
+          "location": {
+            "x": 96,
+            "y": 310
+          }
+        },
+        "4": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            128,
+            140,
+            2
+          ],
+          "location": {
+            "x": 327,
+            "y": 310
+          }
+        },
+        "5": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            6,
+            154,
+            142
+          ],
+          "location": {
+            "x": 640,
+            "y": 119
+          }
+        },
+        "6": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            5,
+            143,
+            159
+          ],
+          "location": {
+            "x": 640,
+            "y": 310
+          }
+        },
+        "7": {
+          "description": "Schlüsselpunkt",
+          "hidden": true,
+          "connectedTo": [
+            167,
+            165
+          ],
+          "location": {
+            "x": 917,
+            "y": 499
+          }
+        },
+        "101": {
+          "description": "Klassenzimmer",
+          "number": 101,
+          "connectedTo": [
+            1,
+            102
+          ],
+          "location": {
+            "x": 125,
+            "y": 119
+          }
+        },
+        "102": {
+          "description": "Klassenzimmer",
+          "number": 102,
+          "connectedTo": [
+            101,
+            103
+          ],
+          "location": {
+            "x": 181,
+            "y": 119
+          }
+        },
+        "103": {
+          "description": "Klassenzimmer",
+          "number": 103,
+          "connectedTo": [
+            102,
+            111
+          ],
+          "location": {
+            "x": 241,
+            "y": 119
+          }
+        },
+        "104": {
+          "description": "Klassenzimmer",
+          "number": 104,
+          "connectedTo": [
+            111,
+            2
+          ],
+          "location": {
+            "x": 297,
+            "y": 119
+          }
+        },
+        "105": {
+          "description": "Klassenzimmer",
+          "number": 105,
+          "connectedTo": [
+            1,
+            106
+          ],
+          "location": {
+            "x": 96,
+            "y": 140
+          }
+        },
+        "106": {
+          "description": "Klassenarbeitsraum",
+          "number": 106,
+          "connectedTo": [
+            105,
+            3
+          ],
+          "location": {
+            "x": 96,
+            "y": 184
+          }
+        },
+        "111": {
+          "description": "Computerraum",
+          "number": 111,
+          "connectedTo": [
+            103,
+            104
+          ],
+          "location": {
+            "x": 257,
+            "y": 119
+          }
+        },
+        "117": {
+          "description": "Lehrerzimmer",
+          "number": 117,
+          "connectedTo": [
+            3,
+            126
+          ],
+          "location": {
+            "x": 180,
+            "y": 310
+          }
+        },
+        "126": {
+          "description": "Direktorat",
+          "number": 126,
+          "connectedTo": [
+            117,
+            128
+          ],
+          "location": {
+            "x": 239,
+            "y": 310
+          }
+        },
+        "128": {
+          "description": "Sekretariat",
+          "number": 128,
+          "connectedTo": [
+            126,
+            4
+          ],
+          "location": {
+            "x": 273,
+            "y": 310
+          }
+        },
+        "131": {
+          "description": "Physikraum",
+          "number": 131,
+          "connectedTo": [
+            2,
+            136
+          ],
+          "location": {
+            "x": 398,
+            "y": 119
+          }
+        },
+        "136": {
+          "description": "Physikraum",
+          "number": 136,
+          "connectedTo": [
+            131,
+            137
+          ],
+          "location": {
+            "x": 465,
+            "y": 119
+          }
+        },
+        "137": {
+          "description": "Physikraum",
+          "number": 137,
+          "connectedTo": [
+            136,
+            138
+          ],
+          "location": {
+            "x": 513,
+            "y": 119
+          }
+        },
+        "138": {
+          "description": "Physikraum",
+          "number": 138,
+          "connectedTo": [
+            137,
+            142
+          ],
+          "location": {
+            "x": 573,
+            "y": 119
+          }
+        },
+        "140": {
+          "description": "Computerraum",
+          "number": 140,
+          "connectedTo": [
+            4,
+            145
+          ],
+          "location": {
+            "x": 385,
+            "y": 310
+          }
+        },
+        "142": {
+          "description": "Physikraum",
+          "number": 142,
+          "connectedTo": [
+            138,
+            5
+          ],
+          "location": {
+            "x": 573,
+            "y": 119
+          }
+        },
+        "143": {
+          "description": "Computerraum",
+          "number": 143,
+          "connectedTo": [
+            146,
+            6
+          ],
+          "location": {
+            "x": 612,
+            "y": 310
+          }
+        },
+        "150": {
+          "description": "Klassenzimmer",
+          "number": 150,
+          "connectedTo": [
+            154,
+            151
+          ],
+          "location": {
+            "x": 733,
+            "y": 119
+          }
+        },
+        "151": {
+          "description": "Klassenzimmer",
+          "number": 151,
+          "connectedTo": [
+            150,
+            152
+          ],
+          "location": {
+            "x": 796,
+            "y": 119
+          }
+        },
+        "152": {
+          "description": "Klassenzimmer",
+          "number": 152,
+          "connectedTo": [
+            151,
+            153
+          ],
+          "location": {
+            "x": 860,
+            "y": 119
+          }
+        },
+        "153": {
+          "description": "Klassenzimmer",
+          "number": 153,
+          "connectedTo": [
+            152,
+            172
+          ],
+          "location": {
+            "x": 917,
+            "y": 119
+          }
+        },
+        "154": {
+          "description": "Klassenarbeitsraum",
+          "number": 154,
+          "connectedTo": [
+            5,
+            150
+          ],
+          "location": {
+            "x": 699,
+            "y": 119
+          }
+        },
+        "159": {
+          "description": "Computerraum",
+          "number": 159,
+          "connectedTo": [
+            6,
+            170
+          ],
+          "location": {
+            "x": 695,
+            "y": 310
+          }
+        },
+        "162": {
+          "description": "Klassenzimmer",
+          "number": 162,
+          "connectedTo": [
+            164,
+            165
+          ],
+          "location": {
+            "x": 855,
+            "y": 499
+          }
+        },
+        "164": {
+          "description": "Klassenzimmer",
+          "number": 164,
+          "connectedTo": [
+            "162"
+          ],
+          "location": {
+            "x": 847,
+            "y": 499
+          }
+        },
+        "165": {
+          "description": "Klassenzimmer",
+          "number": 165,
+          "connectedTo": [
+            7,
+            166,
+            162
+          ],
+          "location": {
+            "x": 880,
+            "y": 499
+          }
+        },
+        "166": {
+          "description": "Computerraum",
+          "number": 166,
+          "connectedTo": [
+            165
+          ],
+          "location": {
+            "x": 880,
+            "y": 499
+          }
+        },
+        "167": {
+          "description": "Computerraum",
+          "number": 167,
+          "connectedTo": [
+            169,
+            7
+          ],
+          "location": {
+            "x": 917,
+            "y": 457
+          }
+        },
+        "169": {
+          "description": "Klassenzimmer",
+          "number": 169,
+          "connectedTo": [
+            170,
+            167
+          ],
+          "location": {
+            "x": 917,
+            "y": 370
+          }
+        },
+        "170": {
+          "description": "Klassenzimmer",
+          "number": 170,
+          "connectedTo": [
+            159,
+            171,
+            169
+          ],
+          "location": {
+            "x": 917,
+            "y": 310
+          }
+        },
+        "171": {
+          "description": "Klassenzimmer",
+          "number": 171,
+          "connectedTo": [
+            172,
+            170
+          ],
+          "location": {
+            "x": 917,
+            "y": 239
+          }
+        },
+        "172": {
+          "description": "Klassenzimmer",
+          "number": 172,
+          "connectedTo": [
+            153,
+            171
+          ],
+          "location": {
+            "x": 917,
+            "y": 166
+          }
         }
       }
     }
