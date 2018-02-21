@@ -34,7 +34,7 @@ class SearchBar extends React.Component<{}, {value: string}> {
 
     zoomToTarget() {
         //Try to get target
-        const target = autoComplete.getRoom(this.input.value);
+        const target = autoComplete.getNode(this.input.value);
 
         //If no target was found
         if(!target)

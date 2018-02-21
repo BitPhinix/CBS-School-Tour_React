@@ -1,5 +1,4 @@
 import dispatcher from "../dispatcher";
-import {ClassRoom} from "../typings";
 
 export function toggle() {
     dispatcher.dispatch({

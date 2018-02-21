@@ -2,6 +2,8 @@ import SvgBehaviourBase from "./iBehaviourBase";
 import SvgRenderer from "../svgRenderer";
 import {ReactElement} from "react";
 import {Point} from "../../../typings";
+import ZoomToPointBehaviour from "./zoomToPointBehaviour";
+import mapUtils from "../../../utils/mapUtils";
 
 class ChangeFloorBehaviour implements SvgBehaviourBase {
 
@@ -12,12 +14,14 @@ class ChangeFloorBehaviour implements SvgBehaviourBase {
     svgContent: string;
     floor: number;
     overlay: ReactElement<SVGElement>[];
-    center: boolean;
+	initialTransform: Point;
+	initialScale: number;
 
-    constructor(floor: number, center?: boolean, overlay?: ReactElement<SVGElement>[]) {
+    constructor(floor: number, initialTransform: Point, initialScale: number, overlay?: ReactElement<SVGElement>[]) {
         this.floor = floor;
         this.overlay = overlay;
-        this.center = center;
+        this.initialTransform = initialTransform;
+        this.initialScale = initialScale;
     }
 
     initialize(svgRenderer: SvgRenderer) {
@@ -30,7 +34,9 @@ class ChangeFloorBehaviour implements SvgBehaviourBase {
 
         svgRenderer.setState({
             inlineElements: this.svgContent,
-            overlay: this.overlay ? this.overlay : []
+            overlay: this.overlay ? this.overlay : [],
+            translation: this.initialTransform,
+            scale: this.initialScale
         });
 
         return false;

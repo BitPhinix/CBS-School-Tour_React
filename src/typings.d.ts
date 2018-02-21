@@ -8,10 +8,11 @@ declare interface NavData {
 }
 
 export declare interface Floor {
-    [id: number]: ClassRoom;
+    center: Point;
+    nodes: {[id: number]: Node};
 }
 
-export declare interface ClassRoom {
+export declare interface Node {
     description?: string;
     connectedTo: number[];
     location: Point;

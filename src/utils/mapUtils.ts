@@ -1,4 +1,4 @@
-import {ClassRoom, Point} from "../typings";
+import {Node, Point} from "../typings";
 const NavigationData = require("../../navData/data.json");
 
 
@@ -8,9 +8,30 @@ class MapUtils {
         return Math.floor(roomId / 100);
     }
 
-    getPathLength(room1: ClassRoom, room2: ClassRoom) {
-        return Math.sqrt(Math.pow(room1.location.x - room2.location.x, 2) + Math.pow(room2.location.y - room1.location.y, 2));
+    getPathLength(node1: Node, node2: Node) {
+        return Math.sqrt(Math.pow(node1.location.x - node2.location.x, 2) + Math.pow(node1.location.y - node2.location.y, 2));
     }
+
+    getFloorCenter(floorId: number): Point {
+        //TODO Remove when navdata is complete
+        if(!NavigationData.floors[floorId])
+            return {x: 0, y: 0};
+
+        //Return center of floor
+        return NavigationData.floors[floorId].center;
+    }
+
+    isCorner(node1: Node, node2: Node, node3: Node) {
+    	if(!node1 || !node2 || !node3)
+    		return false;
+
+    	return Math.abs(this.getPitch(node1.location, node2.location) - this.getPitch(node2.location, node3.location)) > 10;
+	}
+
+	getPitch(p1: Point, p2: Point) {
+		//Calculated the pitch between the two points and return it (|delta y| / |delta x|)
+		return Math.abs(p1.y - p2.y) / Math.abs(p1.x - p2.x);
+	}
 }
 
 //Export initialized navigator
