@@ -25,24 +25,28 @@ class Untis
     }
 
     private static async request(method: UntisMethod, params: object, callback: Function){
-        if(!this.IsLoggedIn() && method == UntisMethod.Authenticate || this.IsLoggedIn && method != UntisMethod.Authenticate){
-            const xHttp = new XMLHttpRequest();
+        if(navigator.onLine){
+            if(!this.IsLoggedIn() && method == UntisMethod.Authenticate || this.IsLoggedIn && method != UntisMethod.Authenticate){
+                const xHttp = new XMLHttpRequest();
 
-            xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
-            xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
-            xHttp.onreadystatechange = function() {
-                if (this.readyState == 4) {
-                    const response = JSON.parse(this.responseText) as UntisResult;
-                    if(Untis.CheckResponse(response, method))
-                        callback(response);
-                }
-            };
-        }else if(this.IsLoggedIn() && method == UntisMethod.Authenticate){
-            this.logout();
-            //make it with callback!!!!!!!!!
-            setTimeout(function() {
-                this.request(method, params, callback);
-            }, 1000);
+                xHttp.open("POST", this.server + "/WebUntis/jsonrpc.do?school=" + this.school, true);
+                xHttp.send(JSON.stringify(new UntisRequest(this.id, method, params)));
+                xHttp.onreadystatechange = function() {
+                    if (this.readyState == 4) {
+                        const response = JSON.parse(this.responseText) as UntisResult;
+                        if(Untis.CheckResponse(response, method))
+                            callback(response);
+                    }
+                };
+            }else if(this.IsLoggedIn() && method == UntisMethod.Authenticate){
+                this.logout();
+                //make it with callback!!!!!!!!!
+                setTimeout(function() {
+                    this.request(method, params, callback);
+                }, 1000);
+            }
+        }else{
+            console.warn("You are currently offline!");
         }
     }
     private static CheckResponse(response: object, responseOf: UntisMethod){

@@ -15,7 +15,7 @@ class App extends React.Component<{}, {}> {
         //If cookie "cbs-main" doesn't exist
         if(!Cookies.get("cbs-main")){
             //Create cookie "cbs-main" and set "visited" to true
-            Cookies.set("cbs-main", JSON.stringify({visited: true}), { expires: 30})
+            Cookies.set("cbs-main", JSON.stringify({}), { expires: 30})
 
             //Show privacy policy statement in toast if it's the first time visiting the website
             Toastr.info(

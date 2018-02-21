@@ -1,10 +1,23 @@
 {
   "floors": {
     "1": {
-      "0": {
-        "description": "WC",
+      "145": {
+        "description": "Damen Toiletten",
+        "number": 145,
         "connectedTo": [
           140,
+          146
+        ],
+        "location": {
+          "x": 430,
+          "y": 310
+        }
+      },
+      "146": {
+        "description": "Herren Toiletten",
+        "number": 146,
+        "connectedTo": [
+          145,
           143
         ],
         "location": {
